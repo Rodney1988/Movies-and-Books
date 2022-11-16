@@ -1,6 +1,8 @@
 import { Button, TextField } from "@mui/material"
 import { useState } from "react"
 import { MoviesField } from "./MoviesField"
+import styled from "@emotion/styled"
+
 export const MovieSearchResults = () => {
     const [searchInputVal, setSearchInputVal] = useState("")
     const [onChangeVal, setOnChangeVal] = useState("")
@@ -26,12 +28,20 @@ export const MovieSearchResults = () => {
                     />
                 </div>
                 <div>
-                    <Button variant="contained" onClick={handleClick}>
+                    <StyledButton variant="contained" onClick={handleClick}>
                         Search
-                    </Button>
+                    </StyledButton>
                 </div>
             </form>
             {searchField && <MoviesField searchValue={searchInputVal} />}
         </>
     )
 }
+
+const StyledButton = styled(Button)`
+    margin-top: 15px;
+    background-color: #78ba00;
+    :hover {
+        background-color: #adba00;
+    }
+`

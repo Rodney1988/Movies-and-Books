@@ -13,7 +13,12 @@ function App() {
     return (
         <div>
             <QueryClientProvider client={queryClient}>
-                <Typography variant="h3">Movies or Books Explorer</Typography>
+                <Typography
+                    variant="h3"
+                    sx={{ color: "#494947", fontFamily: "Open Sans" }}
+                >
+                    Movies - Books Explorer
+                </Typography>
                 <SearchObjects />
             </QueryClientProvider>
         </div>
