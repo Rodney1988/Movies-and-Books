@@ -1,44 +1,9 @@
 import { useQueries } from "../hooks/useQueries"
 import CircularProgress from "@mui/material/CircularProgress"
+import { Link } from "react-router-dom"
 import styled from "@emotion/styled"
-
-export interface UserRating {
-    numeric_description_only: number
-    description: string
-    rating: string
-    numeric_rating_only: number
-}
-
-export interface ReleaseDate {
-    URL: string
-    NAME: string
-}
-
-export interface Summary {
-    "Full Cast": string
-    plot: string
-}
-
-export interface Movie {
-    UserRating: UserRating
-    awards: []
-    episodes: []
-    genres: []
-    jsonnob?: undefined
-    p_g_rating: string
-    poster: string
-    release_date: ReleaseDate
-    short_imdb_description?: string
-    small_poster: string
-    sum_mary?: undefined
-    summary: Summary
-    title?: string
-    titleType: string
-    trailer: string
-    trailer_vid_id: string
-    tt_url: string
-    upscaled_poster: string
-}
+import { ImageProps, Movie } from "../types/types"
+import { last } from "lodash"
 
 export const MoviesField = ({ searchValue }: any) => {
     const [searchMovies] = useQueries(searchValue)
@@ -52,11 +17,11 @@ export const MoviesField = ({ searchValue }: any) => {
     const moviesData = searchMovies.data?.data
     delete moviesData["0"]
     const moviesDataArray: Movie[] = Object.values(moviesData)
-
     return (
         <StyledWrapperDiv>
             {moviesDataArray.map((movie, key) => {
                 if (movie.title) {
+                    const id = last(movie.tt_url.split("/"))
                     return (
                         <div className="example-2 card" key={key}>
                             <div className="wrapper">
@@ -77,9 +42,12 @@ export const MoviesField = ({ searchValue }: any) => {
                                         <p className="text">
                                             {movie.short_imdb_description}
                                         </p>
-                                        <a href="#/" className="button">
+                                        <Link
+                                            to={`movies/${searchValue}/${id}`}
+                                            className="button"
+                                        >
                                             See more
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +60,7 @@ export const MoviesField = ({ searchValue }: any) => {
     )
 }
 
-const StyledCircularProgress = styled(CircularProgress)`
+export const StyledCircularProgress = styled(CircularProgress)`
     margin-top: 100px;
 `
 
@@ -103,9 +71,7 @@ const StyledWrapperDiv = styled.div`
     flex-wrap: wrap;
     margin: 15px 15px 0 15px;
 `
-type ImageProps = {
-    src: string
-}
+
 const StyledImageDiv = styled.div<ImageProps>`
     background: linear-gradient(rgb(0 0 0 / 17%), rgba(0, 0, 0, 0.7)),
         url(${(props) =>

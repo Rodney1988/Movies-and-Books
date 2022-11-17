@@ -21,13 +21,13 @@ export const MovieSearchResults = () => {
             return false
         }
     }
+
     const valueIsEmpty = onChangeVal === ""
     return (
         <>
             <form>
                 <div>
-                    <TextField
-                        sx={{ width: "200px" }}
+                    <StyledInputField
                         type="text"
                         placeholder="Search a phrase or name..."
                         name="search"
@@ -60,5 +60,15 @@ const StyledButton = styled(Button)`
     background-color: #78ba00;
     :hover {
         background-color: #adba00;
+    }
+`
+
+const StyledInputField = styled(TextField)`
+    width: 200px;
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
     }
 `
