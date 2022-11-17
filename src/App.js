@@ -1,4 +1,4 @@
-import { SearchObjects } from "./SearchObjects.tsx"
+import { SearchObjects } from "./pages/SearchObjects.tsx"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { Typography } from "@mui/material"
 

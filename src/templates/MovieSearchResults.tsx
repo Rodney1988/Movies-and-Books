@@ -4,14 +4,24 @@ import { MoviesField } from "./MoviesField"
 import styled from "@emotion/styled"
 
 export const MovieSearchResults = () => {
-    const [searchInputVal, setSearchInputVal] = useState("")
+    const [finalSearchInputVal, setFinalSearchInputVal] = useState("")
     const [onChangeVal, setOnChangeVal] = useState("")
-    const [searchField, setSearchField] = useState(false)
+    const [searchFieldIsActive, setSearchFieldIsActive] = useState(false)
 
     const handleClick = () => {
-        setSearchInputVal(onChangeVal)
-        setSearchField(true)
+        setFinalSearchInputVal(onChangeVal)
+        setSearchFieldIsActive(true)
     }
+    const handleChange = (e: any) => {
+        setOnChangeVal(e.target.value)
+    }
+    const handleKeyDown = (e: any) => {
+        if (e.keyCode === 13) {
+            e.preventDefault()
+            return false
+        }
+    }
+    const valueIsEmpty = onChangeVal === ""
     return (
         <>
             <form>
@@ -23,17 +33,24 @@ export const MovieSearchResults = () => {
                         name="search"
                         id="searchId"
                         variant="standard"
-                        onChange={(e: any) => setOnChangeVal(e.target.value)}
+                        onChange={(e: any) => handleChange(e)}
                         required
+                        onKeyDown={(e: any) => handleKeyDown(e)}
                     />
                 </div>
                 <div>
-                    <StyledButton variant="contained" onClick={handleClick}>
+                    <StyledButton
+                        variant="contained"
+                        onClick={handleClick}
+                        disabled={valueIsEmpty}
+                    >
                         Search
                     </StyledButton>
                 </div>
             </form>
-            {searchField && <MoviesField searchValue={searchInputVal} />}
+            {searchFieldIsActive && (
+                <MoviesField searchValue={finalSearchInputVal} />
+            )}
         </>
     )
 }

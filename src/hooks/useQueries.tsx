@@ -1,5 +1,5 @@
 import { useQuery } from "react-query"
-import { moviesSearch } from "../Api"
+import { moviesSearch } from "../api/Api"
 
 export const useQueries = (searchInput: string) => {
     const searchMovies = useQuery(["postMovies", searchInput], () => {
