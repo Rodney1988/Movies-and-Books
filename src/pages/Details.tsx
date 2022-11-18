@@ -128,7 +128,7 @@ export const Details = () => {
         const foundDoc = bookDocsDataArray.find(
             (movie) => bookKey === movie.key
         )
-        console.log(foundDoc, "fd")
+
         return (
             <>
                 <StyledDetailTitle variant="h5">
