@@ -1,12 +1,18 @@
-import { useQueries } from "../hooks/useQueries"
 import CircularProgress from "@mui/material/CircularProgress"
 import { Link } from "react-router-dom"
 import styled from "@emotion/styled"
 import { ImageProps, Movie } from "../types/types"
 import { last } from "lodash"
+import { useQuery } from "react-query"
+import { moviesSearch } from "../api/Api"
 
 export const MoviesField = ({ searchValue }: any) => {
-    const [searchMovies] = useQueries(searchValue)
+    const searchMovies = useQuery(["postMovies", searchValue], () => {
+        const formElement = document.querySelector("form")
+        const formData = new FormData(formElement || ({} as HTMLFormElement))
+        formData.append("q", searchValue)
+        return moviesSearch(formData)
+    })
     if (searchMovies.isLoading) {
         return (
             <div style={{ display: "flex", justifyContent: "center" }}>
@@ -14,11 +20,12 @@ export const MoviesField = ({ searchValue }: any) => {
             </div>
         )
     }
+
     const moviesData = searchMovies.data?.data
     delete moviesData["0"]
     const moviesDataArray: Movie[] = Object.values(moviesData)
     return (
-        <StyledWrapperDiv>
+        <StyledFieldWrapperDiv>
             {moviesDataArray.map((movie, key) => {
                 if (movie.title) {
                     const id = last(movie.tt_url.split("/"))
@@ -56,7 +63,7 @@ export const MoviesField = ({ searchValue }: any) => {
                 }
                 return null
             })}
-        </StyledWrapperDiv>
+        </StyledFieldWrapperDiv>
     )
 }
 
@@ -64,7 +71,7 @@ export const StyledCircularProgress = styled(CircularProgress)`
     margin-top: 100px;
 `
 
-const StyledWrapperDiv = styled.div`
+export const StyledFieldWrapperDiv = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;

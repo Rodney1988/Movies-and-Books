@@ -1,12 +1,13 @@
 import { Button, TextField } from "@mui/material"
 import { useState } from "react"
-import { MoviesField } from "./MoviesField"
 import styled from "@emotion/styled"
+import { BooksField } from "./BooksField"
 
-export const MovieSearchResults = () => {
-    const [finalSearchInputVal, setFinalSearchInputVal] = useState("")
-    const [onChangeVal, setOnChangeVal] = useState("")
-    const [searchFieldIsActive, setSearchFieldIsActive] = useState(false)
+export const BookSearchResults = () => {
+    const [finalSearchInputVal, setFinalSearchInputVal] = useState<string>("")
+    const [onChangeVal, setOnChangeVal] = useState<string>("")
+    const [searchFieldIsActive, setSearchFieldIsActive] =
+        useState<boolean>(false)
 
     const handleClick = () => {
         setFinalSearchInputVal(onChangeVal)
@@ -29,7 +30,7 @@ export const MovieSearchResults = () => {
                 <div>
                     <StyledInputField
                         type="text"
-                        placeholder="Search a phrase or movie name..."
+                        placeholder="Search for a book title..."
                         name="search"
                         id="searchId"
                         variant="standard"
@@ -49,7 +50,7 @@ export const MovieSearchResults = () => {
                 </div>
             </form>
             {searchFieldIsActive && (
-                <MoviesField searchValue={finalSearchInputVal} />
+                <BooksField searchValue={finalSearchInputVal} />
             )}
         </SearchResultsWrapper>
     )
@@ -64,7 +65,7 @@ const StyledButton = styled(Button)`
 `
 
 const StyledInputField = styled(TextField)`
-    width: 250px;
+    width: 200px;
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,

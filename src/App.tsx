@@ -33,6 +33,10 @@ function App() {
                             path="/movies/:searchQuery/:id"
                             element={<Details />}
                         />
+                        <Route
+                            path="/books/:searchQuery/:id"
+                            element={<Details />}
+                        />
                     </Routes>
                 </QueryClientProvider>
             </BrowserRouter>
