@@ -3,6 +3,11 @@ import { useState } from "react"
 import { MoviesField } from "./MoviesField"
 import styled from "@emotion/styled"
 
+/*
+The component below sets up the 'movie title' search input and renders a table component based on that input
+It is similar to the 'BookSearchResults' component
+*/
+
 export const MovieSearchResults = () => {
     const [finalSearchInputVal, setFinalSearchInputVal] = useState("")
     const [onChangeVal, setOnChangeVal] = useState("")

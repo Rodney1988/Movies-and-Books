@@ -6,6 +6,11 @@ import { last } from "lodash"
 import { useQuery } from "react-query"
 import { moviesSearch } from "../api/Api"
 
+/*
+This component renders multiple cards (as opposed to a table) 
+for the movies based on the 'searchValue' prop passed by the parent.
+*/
+
 export const MoviesField = ({ searchValue }: any) => {
     const searchMovies = useQuery(["postMovies", searchValue], () => {
         const formElement = document.querySelector("form")

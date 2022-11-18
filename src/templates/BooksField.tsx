@@ -18,6 +18,10 @@ import { capitalize, last } from "lodash"
 import { useState } from "react"
 import { TablePaginationActions } from "./TablePaginationActions"
 
+/*
+This component renders a table for the books based on the 'searchValue' prop passed by the parent.
+*/
+
 export const BooksField = ({ searchValue }: any) => {
     const navigate = useNavigate()
     // States used for the pagination
@@ -62,7 +66,6 @@ export const BooksField = ({ searchValue }: any) => {
         page * rowsPerPage + rowsPerPage
     )
 
-    console.log(slicedDocs)
     return (
         <StyledTableWrapper>
             <StyledCount>{bookData?.numFound} books found</StyledCount>

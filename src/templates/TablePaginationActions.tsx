@@ -15,6 +15,10 @@ export interface TablePaginationActionsProps {
     ) => void
 }
 
+/*
+The component below is just configuration to help run the Table's pagination
+*/
+
 export function TablePaginationActions(props: TablePaginationActionsProps) {
     const theme = useTheme()
     const { count, page, rowsPerPage, onPageChange } = props

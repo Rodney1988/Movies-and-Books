@@ -7,6 +7,10 @@ import { getBooksByTitles, moviesSearch } from "../api/Api"
 import { StyledCircularProgress } from "../templates/MoviesField"
 import { ImageProps, Movie } from "../types/types"
 
+/*
+The component below runs the details page of an object when clicking on books or movies. 
+*/
+
 export const Details = () => {
     const { pathname } = useLocation()
     let searchValue = pathname.split("/")[2]

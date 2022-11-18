@@ -3,6 +3,11 @@ import { MovieSearchResults } from "../templates/MovieSearchResults"
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material"
 import { BookSearchResults } from "../templates/BookSearchResults"
 
+/*
+The component below is just just acts as a fork to split between movies and books depending on the user's 
+selected dropdown.
+*/
+
 export const SearchObjects = () => {
     const [searchType, setSearchType] = useState("")
     return (
