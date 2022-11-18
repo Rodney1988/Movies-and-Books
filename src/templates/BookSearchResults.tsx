@@ -4,7 +4,7 @@ import styled from "@emotion/styled"
 import { BooksField } from "./BooksField"
 
 /*
-The component below sets up the 'book title' search input and renders a table component based on that input
+The component below sets up the 'book' search input and renders cards based on that input.
 */
 
 export const BookSearchResults = () => {
