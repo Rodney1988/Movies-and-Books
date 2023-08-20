@@ -23,8 +23,7 @@ export const SearchObjects = () => {
                     <MenuItem value={"books"}>Books</MenuItem>
                 </Select>
             </FormControl>
-            {searchType === "movies" && <MovieSearchResults />}
-            {searchType === "books" && <BookSearchResults />}
+            {searchType === "movies" ? <MovieSearchResults /> : <BookSearchResults />}
         </>
     )
 }
