@@ -19,11 +19,10 @@ export const Details = () => {
         searchValue = searchValue.replaceAll("%20", " ")
     }
     const searchMovies = useQuery(["postMovies", searchValue], () => {
-        const formElement = document.querySelector("form")
-        const formData = new FormData(formElement || ({} as HTMLFormElement))
-        formData.append("q", searchValue)
-        return moviesSearch(formData)
-    })
+        const formData = new FormData();
+        formData.append("q", searchValue);
+        return moviesSearch(formData);
+    });
 
     const searchBookTitles = useQuery(["getBookTitles", searchValue], () =>
         getBooksByTitles(searchValue)
