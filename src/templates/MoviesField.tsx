@@ -1,5 +1,4 @@
 import CircularProgress from "@mui/material/CircularProgress"
-import { Link } from "react-router-dom"
 import styled from "@emotion/styled"
 import { ImageProps, Movie } from "../types/types"
 import React from "react"
@@ -16,7 +15,6 @@ interface MoviesFieldProps {
 
 export const MoviesField: React.FC<MoviesFieldProps> = ({searchedMovies, searchValue}) => {
     console.log('searchedMovies::::', searchedMovies)
-    // return <></>;
 
     return (
         <StyledFieldWrapperDiv>
@@ -46,6 +44,12 @@ export const MoviesField: React.FC<MoviesFieldProps> = ({searchedMovies, searchV
                                         <p className="text">
                                             {`Actors: ${movie["#ACTORS"]}`}
                                         </p>
+                                        {/* <Link
+                                            to={`movies/${searchValue}/${id}`}
+                                            className="button"
+                                        >
+                                            See more
+                                        </Link> */}
                                     </div>
                                 </div>
                             </div>
@@ -79,3 +83,4 @@ const StyledImageDiv = styled.div<ImageProps>`
             center/cover no-repeat;
     height: 525px;
 `
+
