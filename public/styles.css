@@ -78,6 +78,7 @@ a {
   }
   .card .data .content {
     padding: 1em;
+    padding-top: -10em;
     position: relative;
     z-index: 1;
   }
@@ -86,6 +87,9 @@ a {
   }
   .card .title {
     margin-top: 10px;
+  }
+  .title {
+    font-weight: bold;
   }
   .card .text {
     height: 20px;
@@ -98,7 +102,6 @@ a {
     -webkit-transform: translateY(-60px);
     transform: translateY(-60px);
   }
-  
   .example-2 .wrapper:hover .menu-content span {
     -webkit-transform: translate(-50%, -10px);
     transform: translate(-50%, -10px);

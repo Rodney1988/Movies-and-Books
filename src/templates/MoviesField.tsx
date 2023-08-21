@@ -36,7 +36,7 @@ export const MoviesField: React.FC<MoviesFieldProps> = ({searchedMovies, searchV
                                 <div className="data">
                                     <div className="content">
                                         <h1 className="title">
-                                            <a href="#/">{movie.title}</a>
+                                            {movie.title}
                                         </h1>
                                         <p className="text">
                                             {`It is rated ${movie.popularity} in popularity`}
