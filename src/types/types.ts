@@ -15,7 +15,7 @@ export interface Summary {
     plot: string
 }
 
-export interface Movie {
+export interface MovieOlderVersion {
     UserRating: UserRating
     awards: []
     episodes: []
@@ -35,6 +35,20 @@ export interface Movie {
     tt_url: string
     upscaled_poster: string
 }
+
+export interface Movie {
+    "#TITLE": string
+    "#YEAR": number
+    "#IMDB_ID": string
+    "#RANK": number
+    "#ACTORS": string
+    "#AKA": string
+    "#IMDB_URL": string
+    "#IMDB_IV": string
+    "#IMG_POSTER": string
+    photo_width: number
+    photo_height: number
+  }
 
 export type ImageProps = {
     src: string

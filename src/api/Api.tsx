@@ -1,16 +1,10 @@
 import axios from "axios"
 import { BookTitle } from "../types/types"
 
-export const moviesSearch = async (formXMLObj: FormData) => {
-    let response = null
-    if (formXMLObj) {
-        response = await axios({
-            method: "post",
-            url: "https://i-m-d-b.herokuapp.com/",
-            data: formXMLObj,
-        })
-    }
-    return response
+export const moviesSearch = async (searchValue: string) => {
+    const url = `https://search.imdbot.workers.dev/?q=${searchValue}`;
+    const response = await axios.get(url);
+    return response.data;
 }
 
 export const getBooksByTitles = async (title: string) => {

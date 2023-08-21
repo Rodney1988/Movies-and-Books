@@ -2,46 +2,35 @@ import CircularProgress from "@mui/material/CircularProgress"
 import { Link } from "react-router-dom"
 import styled from "@emotion/styled"
 import { ImageProps, Movie } from "../types/types"
-import { last } from "lodash"
-import { useQuery } from "react-query"
-import { moviesSearch } from "../api/Api"
+import React from "react"
 
 /*
 This component renders multiple cards (as opposed to a table) 
-for the movies based on the 'searchValue' prop passed by the parent.
+for the movies based on the 'searchedMovies' prop passed by the parent.
 */
 
-export const MoviesField = ({ searchValue }: any) => {
-    const searchMovies = useQuery(["postMovies", searchValue], () => {
-        const formElement = document.querySelector("form")
-        const formData = new FormData(formElement || ({} as HTMLFormElement))
-        formData.append("q", searchValue)
-        return moviesSearch(formData)
-    })
-    if (searchMovies.isLoading) {
-        return (
-            <div style={{ display: "flex", justifyContent: "center" }}>
-                <StyledCircularProgress />
-            </div>
-        )
-    }
+interface MoviesFieldProps {
+    searchedMovies: Movie[];
+    searchValue: string;
+}
 
-    const moviesData = searchMovies.data?.data
-    delete moviesData["0"]
-    const moviesDataArray: Movie[] = Object.values(moviesData)
+export const MoviesField: React.FC<MoviesFieldProps> = ({searchedMovies, searchValue}) => {
+    console.log('searchedMovies::::', searchedMovies)
+    // return <></>;
+
     return (
         <StyledFieldWrapperDiv>
-            {moviesDataArray.map((movie, key) => {
-                if (movie.title) {
-                    const id = last(movie.tt_url.split("/"))
+            {searchedMovies.map((movie, key) => {
+                if (movie["#TITLE"]) {
+                    const id = movie["#IMDB_ID"]
                     return (
                         <div className="example-2 card" key={key}>
                             <div className="wrapper">
                                 <div className="header">
-                                    <StyledImageDiv src={movie.small_poster}>
+                                    <StyledImageDiv src={movie["#IMG_POSTER"]}>
                                         <div className="date">
                                             <span className="release-date">
-                                                {movie.release_date.NAME}
+                                                {movie["#YEAR"]}
                                             </span>
                                         </div>
                                     </StyledImageDiv>
@@ -49,17 +38,14 @@ export const MoviesField = ({ searchValue }: any) => {
                                 <div className="data">
                                     <div className="content">
                                         <h1 className="title">
-                                            <a href="#/">{movie.title}</a>
+                                            <a href="#/">{movie["#TITLE"]}</a>
                                         </h1>
                                         <p className="text">
-                                            {movie.short_imdb_description}
+                                            {`Ranked ${movie["#RANK"]} on IMDB`}
                                         </p>
-                                        <Link
-                                            to={`movies/${searchValue}/${id}`}
-                                            className="button"
-                                        >
-                                            See more
-                                        </Link>
+                                        <p className="text">
+                                            {`Actors: ${movie["#ACTORS"]}`}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
