@@ -3,6 +3,7 @@ import styled from "@emotion/styled"
 import { ImageProps, TMDBSearchResult } from "../types/types"
 import React from "react"
 import { Link } from "react-router-dom"
+import { truncate } from "lodash"
 
 /*
 This component renders multiple cards (as opposed to a table) 
@@ -40,10 +41,7 @@ export const MoviesField: React.FC<MoviesFieldProps> = ({searchedMovies, searchV
                                             {movie.title}
                                         </h1>
                                         <p className="text">
-                                            {`The film has a ${movie.popularity} in popularity`}
-                                        </p>
-                                        <p className="text">
-                                            {movie.overview}
+                                            {movie.overview ? truncate(movie.overview, {length: 200}) : 'Unfortunately this movie has no description...'}
                                         </p>
                                         <Link 
                                             to={`movies/${searchValue}/${id}`}
