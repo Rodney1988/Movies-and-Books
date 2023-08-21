@@ -2,6 +2,7 @@ import CircularProgress from "@mui/material/CircularProgress"
 import styled from "@emotion/styled"
 import { ImageProps, TMDBSearchResult } from "../types/types"
 import React from "react"
+import { Link } from "react-router-dom"
 
 /*
 This component renders multiple cards (as opposed to a table) 
@@ -39,17 +40,17 @@ export const MoviesField: React.FC<MoviesFieldProps> = ({searchedMovies, searchV
                                             {movie.title}
                                         </h1>
                                         <p className="text">
-                                            {`It is rated ${movie.popularity} in popularity`}
+                                            {`The film has a ${movie.popularity} in popularity`}
                                         </p>
                                         <p className="text">
-                                            {`Genres: ${movie.genre_ids}`}
+                                            {movie.overview}
                                         </p>
-                                        {/* <Link
+                                        <Link 
                                             to={`movies/${searchValue}/${id}`}
                                             className="button"
                                         >
                                             See more
-                                        </Link> */}
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
