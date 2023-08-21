@@ -32,7 +32,7 @@ export interface TMDBSearchResult {
   }  
 
 export type ImageProps = {
-    src: string
+    src?: string
 }
 
 export interface BookTitle {

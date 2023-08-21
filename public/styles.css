@@ -77,8 +77,9 @@ a {
     transition: transform 0.3s, -webkit-transform 0.3s;
   }
   .card .data .content {
-    padding: 1em;
-    padding-top: -10em;
+    padding-left: 1em;
+    padding-top: -2em;
+    margin-bottom: 5px;
     position: relative;
     z-index: 1;
   }

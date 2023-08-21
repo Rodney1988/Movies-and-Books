@@ -25,7 +25,7 @@ export const MoviesField: React.FC<MoviesFieldProps> = ({searchedMovies, searchV
                         <div className="example-2 card" key={id}>
                             <div className="wrapper">
                                 <div className="header">
-                                    <StyledImageDiv src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}>
+                                    <StyledImageDiv src={movie.poster_path ? `https://image.tmdb.org/t/p/original/${movie.poster_path}` : ''}>
                                         <div className="date">
                                             <span className="release-date">
                                                {movie.release_date}
