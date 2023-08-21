@@ -1,6 +1,6 @@
 import CircularProgress from "@mui/material/CircularProgress"
 import styled from "@emotion/styled"
-import { ImageProps, Movie } from "../types/types"
+import { ImageProps, TMDBSearchResult } from "../types/types"
 import React from "react"
 
 /*
@@ -9,7 +9,7 @@ for the movies based on the 'searchedMovies' prop passed by the parent.
 */
 
 interface MoviesFieldProps {
-    searchedMovies: Movie[];
+    searchedMovies: TMDBSearchResult[];
     searchValue: string;
 }
 
@@ -18,17 +18,17 @@ export const MoviesField: React.FC<MoviesFieldProps> = ({searchedMovies, searchV
 
     return (
         <StyledFieldWrapperDiv>
-            {searchedMovies.map((movie, key) => {
-                if (movie["#TITLE"]) {
-                    const id = movie["#IMDB_ID"]
+            {searchedMovies.map((movie) => {
+                if (movie.title) {
+                    const id = movie.id
                     return (
-                        <div className="example-2 card" key={key}>
+                        <div className="example-2 card" key={id}>
                             <div className="wrapper">
                                 <div className="header">
-                                    <StyledImageDiv src={movie["#IMG_POSTER"]}>
+                                    <StyledImageDiv src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}>
                                         <div className="date">
                                             <span className="release-date">
-                                                {movie["#YEAR"]}
+                                               {movie.release_date}
                                             </span>
                                         </div>
                                     </StyledImageDiv>
@@ -36,13 +36,13 @@ export const MoviesField: React.FC<MoviesFieldProps> = ({searchedMovies, searchV
                                 <div className="data">
                                     <div className="content">
                                         <h1 className="title">
-                                            <a href="#/">{movie["#TITLE"]}</a>
+                                            <a href="#/">{movie.title}</a>
                                         </h1>
                                         <p className="text">
-                                            {`Ranked ${movie["#RANK"]} on IMDB`}
+                                            {`It is rated ${movie.popularity} in popularity`}
                                         </p>
                                         <p className="text">
-                                            {`Actors: ${movie["#ACTORS"]}`}
+                                            {`Genres: ${movie.genre_ids}`}
                                         </p>
                                         {/* <Link
                                             to={`movies/${searchValue}/${id}`}

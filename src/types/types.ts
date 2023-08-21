@@ -14,41 +14,22 @@ export interface Summary {
     "Full Cast": string
     plot: string
 }
-
-export interface MovieOlderVersion {
-    UserRating: UserRating
-    awards: []
-    episodes: []
-    genres: []
-    jsonnob?: undefined
-    p_g_rating: string
-    poster: string
-    release_date: ReleaseDate
-    short_imdb_description?: string
-    small_poster: string
-    sum_mary?: undefined
-    summary: Summary
-    title?: string
-    titleType: string
-    trailer: string
-    trailer_vid_id: string
-    tt_url: string
-    upscaled_poster: string
-}
-
-export interface Movie {
-    "#TITLE": string
-    "#YEAR": number
-    "#IMDB_ID": string
-    "#RANK": number
-    "#ACTORS": string
-    "#AKA": string
-    "#IMDB_URL": string
-    "#IMDB_IV": string
-    "#IMG_POSTER": string
-    photo_width: number
-    photo_height: number
-  }
+export interface TMDBSearchResult {
+    adult: boolean
+    backdrop_path?: string
+    genre_ids: number[]
+    id: number
+    original_language: string
+    original_title: string
+    overview: string
+    popularity: number
+    poster_path?: string
+    release_date: string
+    title: string
+    video: boolean
+    vote_average: number
+    vote_count: number
+  }  
 
 export type ImageProps = {
     src: string

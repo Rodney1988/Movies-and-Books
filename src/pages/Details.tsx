@@ -5,7 +5,7 @@ import { useQuery } from "react-query"
 import { useLocation } from "react-router-dom"
 import { getBooksByTitles, moviesSearch } from "../api/Api"
 import { StyledCircularProgress } from "../templates/MoviesField"
-import { ImageProps, Movie } from "../types/types"
+import { ImageProps, TMDBSearchResult } from "../types/types"
 
 /*
 The component below runs the details page of an object when clicking on books or movies. 

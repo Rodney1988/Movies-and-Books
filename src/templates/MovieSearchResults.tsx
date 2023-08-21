@@ -49,7 +49,6 @@ export const MovieSearchResults = () => {
             return false
         }
     }
-
     const valueIsEmpty = onChangeVal === ""
     return (
         <SearchResultsWrapper>
@@ -77,7 +76,7 @@ export const MovieSearchResults = () => {
                 </div>
             </form>
             {searchFieldIsActive && data && (
-                <MoviesField searchedMovies={data.description} searchValue={finalSearchInputVal} />
+                <MoviesField searchedMovies={data} searchValue={finalSearchInputVal} />
             )}
         </SearchResultsWrapper>
     )
