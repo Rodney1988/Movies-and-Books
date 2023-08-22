@@ -5,6 +5,9 @@ import {
   StyledButton,
   StyledInputField,
 } from './BookForm.styles';
+import { getBooksByTitles } from '../../api/Api';
+import { CircularProgress } from '@mui/material';
+import { useQuery } from 'react-query';
 
 /*
 The component below sets up the 'book' search input form and renders cards based on that input.
@@ -15,25 +18,47 @@ export const BookForm = () => {
   const [onChangeVal, setOnChangeVal] = useState<string>('');
   const [searchFieldIsActive, setSearchFieldIsActive] =
     useState<boolean>(false);
+  const { data, isLoading, isError, error } = useQuery(
+    ['moviesQuery', finalSearchInputVal],
+    () => getBooksByTitles(finalSearchInputVal),
+    {
+      enabled: searchFieldIsActive, // Only runs the query when searchFieldIsActive is true
+    }
+  );
 
-  const handleClick = () => {
+  if (isLoading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (isError) {
+    const issue: Error | null = error as Error;
+    return <pre>Error with fetching the books query: {issue.message}</pre>;
+  }
+
+  const handleSubmit = () => {
     setFinalSearchInputVal(onChangeVal);
     setSearchFieldIsActive(true);
   };
-  const handleChange = (e: any) => {
-    setOnChangeVal(e.target.value);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOnChangeVal(event.target.value);
   };
-  const handleKeyDown = (e: any) => {
-    if (e.keyCode === 13) {
-      e.preventDefault();
-      return false;
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      setFinalSearchInputVal(onChangeVal);
+      setSearchFieldIsActive(true);
     }
   };
 
   const valueIsEmpty = onChangeVal === '';
+
   return (
     <SearchResultsWrapper>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <StyledInputField
             type="text"
@@ -49,14 +74,16 @@ export const BookForm = () => {
         <div>
           <StyledButton
             variant="contained"
-            onClick={handleClick}
+            type="submit"
             disabled={valueIsEmpty}
           >
             Search
           </StyledButton>
         </div>
       </form>
-      {searchFieldIsActive && <BooksTable searchValue={finalSearchInputVal} />}
+      {searchFieldIsActive && data && (
+        <BooksTable searchedBooks={data} searchValue={finalSearchInputVal} />
+      )}
     </SearchResultsWrapper>
   );
 };

@@ -36,7 +36,7 @@ export type ImageProps = {
   fallBack: string;
 };
 
-export interface BookTitle {
+export interface ByBookTitle {
   numFound: number;
   start: number;
   numFoundExact: boolean;

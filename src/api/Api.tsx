@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BookTitle, TMDBSearchResult } from '../types/types';
+import { ByBookTitle, TMDBSearchResult } from '../types/types';
 
 export const moviesSearch = async (searchValue: string) => {
   const API_KEY = process.env.REACT_APP_TMDB_KEY;
@@ -17,5 +17,5 @@ export const getBooksByTitles = async (title: string) => {
   const response = await axios.get('http://openlibrary.org/search.json', {
     params: { title: titleSpaceReplaced },
   });
-  return response.data as BookTitle;
+  return response.data as ByBookTitle;
 };

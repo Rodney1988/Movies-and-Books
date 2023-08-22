@@ -13,12 +13,12 @@ import {
   Title,
 } from './MovieCards.styles';
 
-interface MoviesFieldProps {
+interface MovieCardsProps {
   searchedMovies: TMDBSearchResult[];
   searchValue: string;
 }
 
-export const MovieCards: React.FC<MoviesFieldProps> = ({
+export const MovieCards: React.FC<MovieCardsProps> = ({
   searchedMovies,
   searchValue,
 }) => {

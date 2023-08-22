@@ -12,7 +12,7 @@ import {
 import { capitalize, last } from 'lodash';
 import { useState } from 'react';
 
-import { Doc } from '../../types/types';
+import { ByBookTitle, Doc } from '../../types/types';
 import { pluralize } from '../../helpers/pluralize';
 import {
   AdditionalCell,
@@ -27,8 +27,15 @@ import { EnhancedTableHead } from '../../organisms/EnhancedTableHead/EnhancedTab
 /*
 This component renders a table for the books based on the 'searchValue' prop passed by the parent.
 */
+interface BooksTableProps {
+  searchedBooks: ByBookTitle;
+  searchValue: string;
+}
 
-export const BooksTable = ({ searchValue }: any) => {
+export const BooksTable: React.FC<BooksTableProps> = ({
+  searchedBooks,
+  searchValue,
+}) => {
   // States used for the pagination
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
@@ -37,24 +44,7 @@ export const BooksTable = ({ searchValue }: any) => {
   const [orderBy, setOrderBy] = useState('title');
   // Navigate used to jump to 'Details' component on click
   const navigate = useNavigate();
-
-  const searchBookTitles = useQuery(['getBookTitles', searchValue], () =>
-    getBooksByTitles(searchValue)
-  );
-  if (searchBookTitles.isLoading) {
-    return (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <StyledCircularProgress />
-      </div>
-    );
-  }
-  if (searchBookTitles.isError) {
-    return (
-      <span>
-        <i>Error loading Books by title</i>
-      </span>
-    );
-  }
+  console.log('child searchedbooks', searchedBooks);
 
   function descendingComparator(a: any, b: any, orderBy: any) {
     if (b[orderBy] < a[orderBy]) {
@@ -102,9 +92,7 @@ export const BooksTable = ({ searchValue }: any) => {
     setPage(0);
   };
 
-  const bookData = searchBookTitles.data;
-
-  const bookDocsArray = searchBookTitles.data?.docs || [];
+  const bookDocsArray = searchedBooks.docs || [];
 
   const bookDocsArraySorteable = stableSort(
     bookDocsArray,
@@ -148,7 +136,8 @@ export const BooksTable = ({ searchValue }: any) => {
   const finalBookData = (
     <>
       <StyledCount>
-        {bookData?.numFound} {pluralize('book', bookData?.numFound)} found
+        {searchedBooks.numFound} {pluralize('book', searchedBooks.numFound)}{' '}
+        found
       </StyledCount>
       <Paper>
         <TableContainer>
@@ -187,7 +176,7 @@ export const BooksTable = ({ searchValue }: any) => {
 
   return (
     <div>
-      {bookData?.numFound ? finalBookData : <pre>No book data found</pre>}
+      {searchedBooks.numFound ? finalBookData : <pre>No book data found</pre>}
     </div>
   );
 };
