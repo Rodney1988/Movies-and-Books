@@ -18,7 +18,7 @@ export const Details = () => {
     searchValue = searchValue.replaceAll('%20', ' ');
   }
   const bookRowData = locState?.rowData as Doc;
-  console.log('location state', locState?.rowData as Doc);
+
   if (detailType === 'books') {
     return <BookDetails rowState={bookRowData} />;
   } else if (detailType === 'movies') {
