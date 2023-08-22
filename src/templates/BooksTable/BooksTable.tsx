@@ -42,7 +42,6 @@ export const BooksTable: React.FC<BooksTableProps> = ({
   const [orderBy, setOrderBy] = useState('title');
   // Navigate used to jump to 'Details' component on click
   const navigate = useNavigate();
-  console.log('child searchedbooks', searchedBooks);
 
   function descendingComparator(a: any, b: any, orderBy: any) {
     if (b[orderBy] < a[orderBy]) {
