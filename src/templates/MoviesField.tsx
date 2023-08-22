@@ -64,7 +64,6 @@ const DateSpan = styled.span`
 
 const Content = styled.div`
   padding: 1em;
-  border: 1px solid blue;
   height: 175px;
   transition: transform 0.3s ease-in-out;
 `;
@@ -75,7 +74,6 @@ const Title = styled.h1`
 `;
 
 const SubContent = styled.div`
-  border: 1px dotted yellow;
   transform: translateY(200px);
   transition: transform 0.3s ease-in-out;
 `;
@@ -84,7 +82,6 @@ export const MoviesField: React.FC<MoviesFieldProps> = ({
   searchedMovies,
   searchValue,
 }) => {
-  console.log('searchedMovies::::', searchedMovies);
   const fallbackImage =
     'https://media.istockphoto.com/id/540201480/photo/mysterious-unknown-person-in-the-hood-danger-in-darkness.jpg?s=170667a&w=0&k=20&c=SRa6I_Rb_BuTw6vo3OGG6PoSuKJtmaO-CViDjWj-Qkk=';
   return (
@@ -120,9 +117,9 @@ export const MoviesField: React.FC<MoviesFieldProps> = ({
                         ? truncate(movie.overview, { length: 200 })
                         : 'Unfortunately this movie has no description...'}
                     </p>
-                    <Link to={`movies/${searchValue}/${id}`} className="button">
+                    <SeeMoreButton to={`movies/${searchValue}/${id}`}>
                       See more
-                    </Link>
+                    </SeeMoreButton>
                   </SubContent>
                 </Content>
               </OverlayDiv>
@@ -137,4 +134,32 @@ export const MoviesField: React.FC<MoviesFieldProps> = ({
 
 export const StyledCircularProgress = styled(CircularProgress)`
   margin-top: 100px;
+`;
+
+const SeeMoreButton = styled(Link)`
+  display: block;
+  width: 100px;
+  margin: 2em auto 1em;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
+  line-height: 1;
+  position: relative;
+  font-weight: 700;
+  transition: transform 0.3s;
+
+  ::after {
+    content: '\\2192';
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    transition: all 0.3s;
+  }
+
+  :hover::after {
+    transform: translate(5px, -50%);
+    opacity: 1;
+  }
 `;
