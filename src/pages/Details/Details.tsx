@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { getBooksByTitles, moviesSearch } from '../../api/Api';
 
 import { ImageProps, TMDBSearchResult } from '../../types/types';
-import { StyledCircularProgress } from '../../templates/MoviesField/MoviesField.styles';
+import { StyledCircularProgress } from '../../templates/MovieCards/MovieCards.styles';
 
 /*
 The component below runs the details page of an object when clicking on books or movies. 

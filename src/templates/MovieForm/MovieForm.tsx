@@ -3,19 +3,18 @@ import { useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useQuery } from 'react-query';
 import { moviesSearch } from '../../api/Api';
-import { MoviesField } from '../MoviesField/MoviesField';
+import { MovieCards } from '../MovieCards/MovieCards';
 import {
   SearchResultsWrapper,
   StyledButton,
   StyledInputField,
-} from './MovieSearchResults.styles';
+} from './MovieForm.styles';
 
 /*
-The component below sets up the 'movie title' search input and renders a table component based on that input
-It is similar to the 'BookSearchResults' component
+The component below sets up the 'movie title' search input and renders a list of cards based on that input
 */
 
-export const MovieSearchResults = () => {
+export const MovieForm = () => {
   const [finalSearchInputVal, setFinalSearchInputVal] = useState('');
   const [onChangeVal, setOnChangeVal] = useState('');
   const [searchFieldIsActive, setSearchFieldIsActive] = useState(false);
@@ -23,7 +22,7 @@ export const MovieSearchResults = () => {
     ['moviesQuery', finalSearchInputVal],
     () => moviesSearch(finalSearchInputVal),
     {
-      enabled: searchFieldIsActive, // Only run the query when searchFieldIsActive is true
+      enabled: searchFieldIsActive, // Only runs the query when searchFieldIsActive is true
     }
   );
 
@@ -82,7 +81,7 @@ export const MovieSearchResults = () => {
         </div>
       </form>
       {searchFieldIsActive && data && (
-        <MoviesField searchedMovies={data} searchValue={finalSearchInputVal} />
+        <MovieCards searchedMovies={data} searchValue={finalSearchInputVal} />
       )}
     </SearchResultsWrapper>
   );

@@ -11,14 +11,14 @@ import {
   StyledFieldWrapperDiv,
   SubContent,
   Title,
-} from './MoviesField.styles';
+} from './MovieCards.styles';
 
 interface MoviesFieldProps {
   searchedMovies: TMDBSearchResult[];
   searchValue: string;
 }
 
-export const MoviesField: React.FC<MoviesFieldProps> = ({
+export const MovieCards: React.FC<MoviesFieldProps> = ({
   searchedMovies,
   searchValue,
 }) => {

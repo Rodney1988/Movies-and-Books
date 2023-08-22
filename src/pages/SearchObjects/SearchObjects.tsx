@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { MovieSearchResults } from '../../templates/MovieSearchResults/MovieSearchResults';
+import { MovieForm } from '../../templates/MovieForm/MovieForm';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { BookSearchResults } from '../../templates/BookSearchResults/BookSearchResults';
+import { BookForm } from '../../templates/BookForm/BookForm';
 
 /*
 The component below is just just acts as a fork to split between movies and books depending on the user's 
@@ -23,7 +23,7 @@ export const SearchObjects = () => {
           <MenuItem value={'books'}>Books</MenuItem>
         </Select>
       </FormControl>
-      {searchType === 'movies' ? <MovieSearchResults /> : <BookSearchResults />}
+      {searchType === 'movies' ? <MovieForm /> : <BookForm />}
     </>
   );
 };

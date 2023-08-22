@@ -20,7 +20,7 @@ import {
   StyledBodyRow,
   StyledCircularProgress,
   StyledCount,
-} from './BooksField.styles';
+} from './BooksTable.styles';
 import { TablePaginationActions } from '../../organisms/TablePaginationActions/TablePaginationActions';
 import { EnhancedTableHead } from '../../organisms/EnhancedTableHead/EnhancedTableHead';
 
@@ -28,7 +28,7 @@ import { EnhancedTableHead } from '../../organisms/EnhancedTableHead/EnhancedTab
 This component renders a table for the books based on the 'searchValue' prop passed by the parent.
 */
 
-export const BooksField = ({ searchValue }: any) => {
+export const BooksTable = ({ searchValue }: any) => {
   // States used for the pagination
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);

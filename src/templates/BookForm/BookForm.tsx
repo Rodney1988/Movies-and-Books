@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { BooksField } from '../BooksField/BooksField';
+import { BooksTable } from '../BooksTable/BooksTable';
 import {
   SearchResultsWrapper,
   StyledButton,
   StyledInputField,
-} from './BookSearchResults.styles';
+} from './BookForm.styles';
 
 /*
 The component below sets up the 'book' search input form and renders cards based on that input.
 */
 
-export const BookSearchResults = () => {
+export const BookForm = () => {
   const [finalSearchInputVal, setFinalSearchInputVal] = useState<string>('');
   const [onChangeVal, setOnChangeVal] = useState<string>('');
   const [searchFieldIsActive, setSearchFieldIsActive] =
@@ -56,7 +56,7 @@ export const BookSearchResults = () => {
           </StyledButton>
         </div>
       </form>
-      {searchFieldIsActive && <BooksField searchValue={finalSearchInputVal} />}
+      {searchFieldIsActive && <BooksTable searchValue={finalSearchInputVal} />}
     </SearchResultsWrapper>
   );
 };
