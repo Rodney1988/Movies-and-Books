@@ -1,7 +1,5 @@
-import styled from '@emotion/styled';
-import { ImageProps, TMDBSearchResult } from '../../types/types';
+import { TMDBSearchResult } from '../../types/types';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { truncate } from 'lodash';
 import {
   CardWrapper,
