@@ -11,8 +11,7 @@ import {
 } from '@mui/material';
 import { capitalize, last } from 'lodash';
 import { useState } from 'react';
-import { TablePaginationActions } from '../../api/organisms/TablePaginationActions';
-import { EnhancedTableHead } from '../../api/organisms/EnhancedTableHead';
+
 import { Doc } from '../../types/types';
 import { pluralize } from '../../helpers/pluralize';
 import {
@@ -22,6 +21,8 @@ import {
   StyledCircularProgress,
   StyledCount,
 } from './BooksField.styles';
+import { TablePaginationActions } from '../../organisms/TablePaginationActions/TablePaginationActions';
+import { EnhancedTableHead } from '../../organisms/EnhancedTableHead/EnhancedTableHead';
 
 /*
 This component renders a table for the books based on the 'searchValue' prop passed by the parent.
