@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { Typography } from '@mui/material';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { SearchObjects } from './pages/SearchObjects/SearchObjects';
+import { Details } from './pages/Details/Details';
 // import { Details } from "./pages/Details";
 
 // Set up the React-Query client
@@ -33,8 +34,8 @@ function App() {
           </Typography>
           <Routes>
             <Route path="/" element={<SearchObjects />} />
-            {/* <Route path="/movies/:searchQuery/:id" element={<Details />} />
-            <Route path="/books/:searchQuery/:id" element={<Details />} /> */}
+            <Route path="/movies/:searchQuery/:id" element={<Details />} />
+            <Route path="/books/:searchQuery/:id" element={<Details />} />
           </Routes>
         </QueryClientProvider>
       </BrowserRouter>

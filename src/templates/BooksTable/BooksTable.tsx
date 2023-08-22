@@ -105,7 +105,10 @@ export const BooksTable: React.FC<BooksTableProps> = ({
           key={labelId}
           onClick={() => {
             const docKey = last(row.key.split('/'));
-            return navigate(`/books/${searchValue}/${docKey}`);
+
+            return navigate(`/books/${searchValue}/${docKey}`, {
+              state: { rowData: row as Doc },
+            });
           }}
         >
           <TableCell>{row.title}</TableCell>
