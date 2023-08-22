@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import styled from '@emotion/styled';
 import { useQuery } from 'react-query';
 import { moviesSearch } from '../api/Api';
-import { MoviesField } from './MoviesField';
+import { MoviesField } from './MoviesField/MoviesField';
 
 /*
 The component below sets up the 'movie title' search input and renders a table component based on that input
