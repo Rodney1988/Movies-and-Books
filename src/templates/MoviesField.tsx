@@ -108,7 +108,7 @@ export const MoviesField: React.FC<MoviesFieldProps> = ({
   return (
     <StyledFieldWrapperDiv>
       {searchedMovies.map((movie) => {
-        if (movie.title) {
+        if (movie.title && movie.release_date) {
           const id = movie.id;
           return (
             <CardWrapper
