@@ -8,7 +8,7 @@ import {
   TablePagination,
 } from '@mui/material';
 import { capitalize, last } from 'lodash';
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { ByBookTitle, Doc } from '../../types/types';
 import { pluralize } from '../../helpers/pluralize';
@@ -41,6 +41,10 @@ export const BooksTable: React.FC<BooksTableProps> = ({
   const [orderBy, setOrderBy] = useState('title');
   // Navigate used to jump to 'Details' component on click
   const navigate = useNavigate();
+  const bookDocsArrayMemoized = useMemo(
+    () => searchedBooks.docs || [],
+    [searchedBooks.docs]
+  );
 
   function descendingComparator(a: any, b: any, orderBy: any) {
     if (b[orderBy] < a[orderBy]) {
@@ -52,11 +56,11 @@ export const BooksTable: React.FC<BooksTableProps> = ({
     return 0;
   }
 
-  function getComparator(order: any, orderBy: any) {
+  const getComparatorMemoized = useCallback((order: any, orderBy: any) => {
     return order === 'desc'
       ? (a: any, b: any) => descendingComparator(a, b, orderBy)
       : (a: any, b: any) => -descendingComparator(a, b, orderBy);
-  }
+  }, []);
 
   function stableSort(array: Doc[], comparator: any) {
     const stabilizedThis = array.map((el: any, index: any) => [el, index]);
@@ -88,43 +92,51 @@ export const BooksTable: React.FC<BooksTableProps> = ({
     setPage(0);
   };
 
-  const bookDocsArray = searchedBooks.docs || [];
+  // Memoize the result of stableSort
+  const bookDocsArraySorteableMemoized = useMemo(() => {
+    return stableSort(
+      bookDocsArrayMemoized,
+      getComparatorMemoized(order, orderBy)
+    ).map((row, index) => {
+      const labelId = `enhanced-table-checkbox-${index}`;
 
-  const bookDocsArraySorteable = stableSort(
-    bookDocsArray,
-    getComparator(order, orderBy)
-  ).map((row, index) => {
-    const labelId = `enhanced-table-checkbox-${index}`;
-
-    return (
-      <StyledBodyRow
-        key={labelId}
-        onClick={() => {
-          const docKey = last(row.key.split('/'));
-          return navigate(`/books/${searchValue}/${docKey}`);
-        }}
-      >
-        <TableCell>{row.title}</TableCell>
-        <TableCell>{formatMultipleValues(row.author_name)}</TableCell>
-        <AdditionalCellNarrow>
-          {formatMultipleValues(row.contributor)}
-        </AdditionalCellNarrow>
-        <AdditionalCellNarrow>{row.first_publish_year}</AdditionalCellNarrow>
-        <AdditionalCellNarrow>
-          {formatMultipleValues(row.language)}
-        </AdditionalCellNarrow>
-        <AdditionalCellNarrow>
-          {capitalize(row.ebook_access)}
-        </AdditionalCellNarrow>
-        <AdditionalCell>{formatMultipleValues(row.id_amazon)}</AdditionalCell>
-        <AdditionalCell>{formatMultipleValues(row.subject)}</AdditionalCell>
-        <AdditionalCell>{row.time}</AdditionalCell>
-      </StyledBodyRow>
-    );
-  });
+      return (
+        <StyledBodyRow
+          key={labelId}
+          onClick={() => {
+            const docKey = last(row.key.split('/'));
+            return navigate(`/books/${searchValue}/${docKey}`);
+          }}
+        >
+          <TableCell>{row.title}</TableCell>
+          <TableCell>{formatMultipleValues(row.author_name)}</TableCell>
+          <AdditionalCellNarrow>
+            {formatMultipleValues(row.contributor)}
+          </AdditionalCellNarrow>
+          <AdditionalCellNarrow>{row.first_publish_year}</AdditionalCellNarrow>
+          <AdditionalCellNarrow>
+            {formatMultipleValues(row.language)}
+          </AdditionalCellNarrow>
+          <AdditionalCellNarrow>
+            {capitalize(row.ebook_access)}
+          </AdditionalCellNarrow>
+          <AdditionalCell>{formatMultipleValues(row.id_amazon)}</AdditionalCell>
+          <AdditionalCell>{formatMultipleValues(row.subject)}</AdditionalCell>
+          <AdditionalCell>{row.time}</AdditionalCell>
+        </StyledBodyRow>
+      );
+    });
+  }, [
+    bookDocsArrayMemoized,
+    getComparatorMemoized,
+    order,
+    orderBy,
+    navigate,
+    searchValue,
+  ]);
 
   // Slicing logic to avoid too many rows to be rendered at once, the others get paginated
-  const slicedDocs = bookDocsArraySorteable.slice(
+  const slicedDocs = bookDocsArraySorteableMemoized.slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
@@ -153,7 +165,7 @@ export const BooksTable: React.FC<BooksTableProps> = ({
           rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
           component="div"
           colSpan={1}
-          count={bookDocsArray ? bookDocsArray.length : 0}
+          count={bookDocsArrayMemoized ? bookDocsArrayMemoized.length : 0}
           rowsPerPage={rowsPerPage}
           page={page}
           SelectProps={{
