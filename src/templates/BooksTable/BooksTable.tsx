@@ -16,7 +16,6 @@ import {
   AdditionalCell,
   AdditionalCellNarrow,
   StyledBodyRow,
-  StyledCircularProgress,
   StyledCount,
 } from './BooksTable.styles';
 import { TablePaginationActions } from '../../organisms/TablePaginationActions/TablePaginationActions';
