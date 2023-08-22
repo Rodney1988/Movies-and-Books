@@ -1,8 +1,4 @@
-import { Paper, Typography } from '@mui/material';
-import { capitalize } from 'lodash';
-import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
-import { getBooksByTitles, moviesSearch } from '../../api/Api';
 
 import { Doc } from '../../types/types';
 import { BookDetails } from '../../templates/BookDetails/BookDetails';
