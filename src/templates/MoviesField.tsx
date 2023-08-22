@@ -29,8 +29,11 @@ const CardWrapper = styled.div<ImageProps>`
   background: ${({ src, fallBack }) => `url('${src ? src : fallBack}')`};
   height: 525px;
   :hover {
+    .content {
+      transform: translateY(-70px);
+    }
     .sub-content {
-      transform: translateY(0px);
+      transform: translateY(-5px);
     }
   }
 `;
@@ -61,11 +64,14 @@ const DateSpan = styled.span`
 
 const Content = styled.div`
   padding: 1em;
-  border: 5px solid blue;
+  border: 1px solid blue;
+  height: 175px;
+  transition: transform 0.3s ease-in-out;
 `;
 
 const Title = styled.h1`
   font-weight: bold;
+  transition: transform 0.3s ease-in-out;
 `;
 
 const SubContent = styled.div`
@@ -102,8 +108,8 @@ export const MoviesField: React.FC<MoviesFieldProps> = ({
                     {movie.release_date}
                   </DateSpan>
                 </Header>
-                <Content>
-                  <Title className="title">
+                <Content className="content">
+                  <Title>
                     {movie.title
                       ? truncate(movie.title, { length: 45 })
                       : 'This movie has no title...'}
