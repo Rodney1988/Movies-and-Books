@@ -12,6 +12,7 @@ import {
   SubContent,
   Title,
 } from './MovieCards.styles';
+import { useNavigate } from 'react-router-dom';
 
 interface MovieCardsProps {
   searchedMovies: TMDBSearchResult[];
@@ -22,6 +23,7 @@ export const MovieCards: React.FC<MovieCardsProps> = ({
   searchedMovies,
   searchValue,
 }) => {
+  const navigate = useNavigate();
   const fallbackImage =
     'https://media.istockphoto.com/id/540201480/photo/mysterious-unknown-person-in-the-hood-danger-in-darkness.jpg?s=170667a&w=0&k=20&c=SRa6I_Rb_BuTw6vo3OGG6PoSuKJtmaO-CViDjWj-Qkk=';
   return (
@@ -57,7 +59,13 @@ export const MovieCards: React.FC<MovieCardsProps> = ({
                         ? truncate(movie.overview, { length: 200 })
                         : 'Unfortunately this movie has no description...'}
                     </p>
-                    <SeeMoreButton to={`movies/${searchValue}/${id}`}>
+                    <SeeMoreButton
+                      onClick={() => {
+                        navigate(`movies/${searchValue}/${id}`, {
+                          state: { singleMovie: movie as TMDBSearchResult },
+                        });
+                      }}
+                    >
                       See more
                     </SeeMoreButton>
                   </SubContent>

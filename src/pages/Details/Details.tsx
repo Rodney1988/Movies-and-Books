@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-import { Doc } from '../../types/types';
+import { Doc, TMDBSearchResult } from '../../types/types';
 import { BookDetails } from '../../templates/BookDetails/BookDetails';
 import { MovieDetails } from '../../templates/MovieDetails/MovieDetails';
 
@@ -18,11 +18,13 @@ export const Details = () => {
     searchValue = searchValue.replaceAll('%20', ' ');
   }
   const bookRowData = locState?.rowData as Doc;
+  const movieData = locState?.singleMovie as TMDBSearchResult;
 
+  console.log('MOVIE DATA', movieData);
   if (detailType === 'books') {
     return <BookDetails rowState={bookRowData} />;
   } else if (detailType === 'movies') {
-    return <MovieDetails />;
+    return <MovieDetails movieState={movieData} />;
   } else {
     return <></>;
   }

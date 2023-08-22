@@ -1,19 +1,3 @@
-export interface UserRating {
-  numeric_description_only: number;
-  description: string;
-  rating: string;
-  numeric_rating_only: number;
-}
-
-export interface ReleaseDate {
-  URL: string;
-  NAME: string;
-}
-
-export interface Summary {
-  'Full Cast': string;
-  plot: string;
-}
 export interface TMDBSearchResult {
   adult: boolean;
   backdrop_path?: string;

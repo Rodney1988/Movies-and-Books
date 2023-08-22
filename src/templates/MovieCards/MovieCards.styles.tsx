@@ -75,8 +75,10 @@ export const StyledCircularProgress = styled(CircularProgress)`
   margin-top: 100px;
 `;
 
-export const SeeMoreButton = styled(Link)`
+export const SeeMoreButton = styled.button`
   display: block;
+  background: transparent;
+  border: none;
   width: 100px;
   margin: 2em auto 1em;
   text-align: center;
