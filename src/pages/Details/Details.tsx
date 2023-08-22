@@ -1,5 +1,5 @@
 import { Paper, Typography } from '@mui/material';
-import { capitalize, last } from 'lodash';
+import { capitalize } from 'lodash';
 import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
 import { getBooksByTitles, moviesSearch } from '../../api/Api';
