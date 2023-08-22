@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BooksField } from '../BooksField';
+import { BooksField } from '../BooksField/BooksField';
 import {
   SearchResultsWrapper,
   StyledButton,

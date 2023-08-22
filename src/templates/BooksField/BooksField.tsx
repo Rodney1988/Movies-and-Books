@@ -1,24 +1,27 @@
-import CircularProgress from '@mui/material/CircularProgress';
-import styled from '@emotion/styled';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import { getBooksByTitles } from '../api/Api';
+import { getBooksByTitles } from '../../api/Api';
 import {
   Table,
   TableBody,
   TableContainer,
-  TableRow,
   Paper,
   TableCell,
   TablePagination,
-  Typography,
 } from '@mui/material';
 import { capitalize, last } from 'lodash';
 import { useState } from 'react';
-import { TablePaginationActions } from '../api/organisms/TablePaginationActions';
-import { EnhancedTableHead } from '../api/organisms/EnhancedTableHead';
-import { Doc } from '../types/types';
-import { pluralize } from '../helpers/pluralize';
+import { TablePaginationActions } from '../../api/organisms/TablePaginationActions';
+import { EnhancedTableHead } from '../../api/organisms/EnhancedTableHead';
+import { Doc } from '../../types/types';
+import { pluralize } from '../../helpers/pluralize';
+import {
+  AdditionalCell,
+  AdditionalCellNarrow,
+  StyledBodyRow,
+  StyledCircularProgress,
+  StyledCount,
+} from './BooksField.styles';
 
 /*
 This component renders a table for the books based on the 'searchValue' prop passed by the parent.
@@ -182,9 +185,9 @@ export const BooksField = ({ searchValue }: any) => {
   );
 
   return (
-    <StyledTableWrapper>
+    <div>
       {bookData?.numFound ? finalBookData : <pre>No book data found</pre>}
-    </StyledTableWrapper>
+    </div>
   );
 };
 
@@ -193,34 +196,3 @@ const formatMultipleValues = (valueArray?: string[]) => {
     return <div key={string + i}>{string}</div>;
   });
 };
-
-export const StyledCircularProgress = styled(CircularProgress)`
-  margin-top: 100px;
-`;
-const StyledTableWrapper = styled.div``;
-
-const StyledCount = styled(Typography)`
-  color: #494947;
-  margin: 5px 5px 10px 5px;
-`;
-
-const StyledBodyRow = styled(TableRow)`
-  :hover {
-    cursor: pointer;
-    background-color: rgb(242 236 236 / 78%);
-  }
-`;
-
-const AdditionalCell = styled(TableCell)`
-  border-right: 0.5px white solid;
-  @media only screen and (max-width: 1520px) {
-    display: none;
-  }
-`;
-
-const AdditionalCellNarrow = styled(TableCell)`
-  border-right: 0.5px white solid;
-  @media only screen and (max-width: 769px) {
-    display: none;
-  }
-`;

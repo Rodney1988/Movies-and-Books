@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MovieSearchResults } from '../templates/MovieSearchResults';
+import { MovieSearchResults } from '../templates/MovieSearchResults/MovieSearchResults';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { BookSearchResults } from '../templates/BookSearchResults/BookSearchResults';
 

@@ -1,11 +1,14 @@
-import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 
 import CircularProgress from '@mui/material/CircularProgress';
-import styled from '@emotion/styled';
 import { useQuery } from 'react-query';
-import { moviesSearch } from '../api/Api';
-import { MoviesField } from './MoviesField/MoviesField';
+import { moviesSearch } from '../../api/Api';
+import { MoviesField } from '../MoviesField/MoviesField';
+import {
+  SearchResultsWrapper,
+  StyledButton,
+  StyledInputField,
+} from './MovieSearchResults.styles';
 
 /*
 The component below sets up the 'movie title' search input and renders a table component based on that input
@@ -84,25 +87,3 @@ export const MovieSearchResults = () => {
     </SearchResultsWrapper>
   );
 };
-
-const StyledButton = styled(Button)`
-  margin-top: 15px;
-  background-color: #78ba00;
-  :hover {
-    background-color: #adba00;
-  }
-`;
-
-const StyledInputField = styled(TextField)`
-  width: 250px;
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-  }
-`;
-
-export const SearchResultsWrapper = styled.div`
-  margin: 15px 15px 15px 5px;
-`;
