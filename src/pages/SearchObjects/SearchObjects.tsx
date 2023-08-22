@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { MovieSearchResults } from '../templates/MovieSearchResults/MovieSearchResults';
+import { MovieSearchResults } from '../../templates/MovieSearchResults/MovieSearchResults';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { BookSearchResults } from '../templates/BookSearchResults/BookSearchResults';
+import { BookSearchResults } from '../../templates/BookSearchResults/BookSearchResults';
 
 /*
 The component below is just just acts as a fork to split between movies and books depending on the user's 

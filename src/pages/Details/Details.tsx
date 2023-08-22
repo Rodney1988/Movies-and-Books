@@ -1,12 +1,11 @@
-import styled from '@emotion/styled';
 import { Paper, Typography } from '@mui/material';
 import { capitalize, last } from 'lodash';
 import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
-import { getBooksByTitles, moviesSearch } from '../api/Api';
+import { getBooksByTitles, moviesSearch } from '../../api/Api';
 
-import { ImageProps, TMDBSearchResult } from '../types/types';
-import { StyledCircularProgress } from '../templates/MoviesField/MoviesField.styles';
+import { ImageProps, TMDBSearchResult } from '../../types/types';
+import { StyledCircularProgress } from '../../templates/MoviesField/MoviesField.styles';
 
 /*
 The component below runs the details page of an object when clicking on books or movies. 
@@ -121,26 +120,3 @@ export const Details = () => {
   //     )
   // }
 };
-
-const StyledDiv = styled.div<ImageProps>`
-  background: url(${(props) => props.src}) center/cover no-repeat;
-  height: 800px;
-  @media only screen and (max-width: 600px) {
-    max-height: 450px;
-  }
-`;
-
-const StyledDetailTitle = styled(Typography)`
-  color: #292728;
-  margin: 30px 0 0 5px;
-`;
-export const StyledPaperDetails = styled(Paper)`
-  color: #292728;
-  margin-top: 15px;
-  margin-left: 5px;
-  width: 100%;
-  max-width: 650px;
-  @media only screen and (max-width: 600px) {
-    max-width: 250px;
-  }
-`;
