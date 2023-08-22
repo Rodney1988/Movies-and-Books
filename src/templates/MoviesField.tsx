@@ -21,48 +21,19 @@ const StyledFieldWrapperDiv = styled.div`
 const CardWrapper = styled.div<ImageProps>`
   position: relative;
   overflow: hidden;
-  float: left;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
   width: 30%;
   min-width: 300px;
   margin: 10px;
   background: ${({ src, fallBack }) => `url('${src ? src : fallBack}')`};
   height: 525px;
+  :hover {
+    .sub-content {
+      transform: translateY(0px);
+    }
+  }
 `;
-
-// export const CardOverlay = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: flex-end;
-//   background: linear-gradient(
-//     0deg,
-//     rgb(34, 35, 38) 9%,
-//     rgba(33, 34, 37, 0.5) 42%,
-//     rgba(34, 35, 38, 0) 156%
-//   );
-//   height: 100%;
-//   width: 100%;
-//   h3,
-//   p {
-//     color: #ffffff;
-//     margin-left: 20px;
-//   }
-
-//   p {
-//     font-weight: bold;
-//   }
-
-//   pre {
-//     font-family: 'opensans-bold', sans-serif;
-//     font-size: 10px;
-//     color: #58a795;
-//     margin: 0;
-//     margin: 0 0 10px 20px;
-//     font-weight: bold;
-//   }
-//   :hover {
-//     opacity: 0.6;
-//   }
-// `;
 
 const OverlayDiv = styled.div`
   display: flex;
@@ -74,7 +45,11 @@ const OverlayDiv = styled.div`
 `;
 
 const Header = styled.div`
+  position: absolute;
+  top: 0;
   color: #fff;
+  margin-top: 5px;
+  font-weight: 400;
 `;
 
 const DateSpan = styled.span`
@@ -85,17 +60,18 @@ const DateSpan = styled.span`
 `;
 
 const Content = styled.div`
-  position: absolute;
-  height: 100%;
-  color: #fff;
   padding: 1em;
   border: 5px solid blue;
 `;
 
 const Title = styled.h1`
-  margin-top: 10px;
-  font-family: 'Open Sans', sans-serif;
   font-weight: bold;
+`;
+
+const SubContent = styled.div`
+  border: 1px dotted yellow;
+  transform: translateY(200px);
+  transition: transform 0.3s ease-in-out;
 `;
 
 export const MoviesField: React.FC<MoviesFieldProps> = ({
@@ -121,25 +97,27 @@ export const MoviesField: React.FC<MoviesFieldProps> = ({
               fallBack={fallbackImage}
             >
               <OverlayDiv>
+                <Header>
+                  <DateSpan className="release-date">
+                    {movie.release_date}
+                  </DateSpan>
+                </Header>
                 <Content>
-                  <Header>
-                    <DateSpan className="release-date">
-                      {movie.release_date}
-                    </DateSpan>
-                  </Header>
                   <Title className="title">
                     {movie.title
-                      ? truncate(movie.title, { length: 60 })
+                      ? truncate(movie.title, { length: 45 })
                       : 'This movie has no title...'}
                   </Title>
-                  <p className="text">
-                    {movie.overview
-                      ? truncate(movie.overview, { length: 200 })
-                      : 'Unfortunately this movie has no description...'}
-                  </p>
-                  <Link to={`movies/${searchValue}/${id}`} className="button">
-                    See more
-                  </Link>
+                  <SubContent className="sub-content">
+                    <p className="text">
+                      {movie.overview
+                        ? truncate(movie.overview, { length: 200 })
+                        : 'Unfortunately this movie has no description...'}
+                    </p>
+                    <Link to={`movies/${searchValue}/${id}`} className="button">
+                      See more
+                    </Link>
+                  </SubContent>
                 </Content>
               </OverlayDiv>
             </CardWrapper>
