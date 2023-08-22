@@ -18,6 +18,7 @@ import { useState } from 'react';
 import { TablePaginationActions } from '../api/organisms/TablePaginationActions';
 import { EnhancedTableHead } from '../api/organisms/EnhancedTableHead';
 import { Doc } from '../types/types';
+import { pluralize } from '../helpers/pluralize';
 
 /*
 This component renders a table for the books based on the 'searchValue' prop passed by the parent.
@@ -142,7 +143,9 @@ export const BooksField = ({ searchValue }: any) => {
 
   const finalBookData = (
     <>
-      <StyledCount>{bookData?.numFound} books found</StyledCount>
+      <StyledCount>
+        {bookData?.numFound} {pluralize('book', bookData?.numFound)} found
+      </StyledCount>
       <Paper>
         <TableContainer>
           <Table>
