@@ -20,6 +20,12 @@ const ClapperContainer = styled.div`
   max-width: 650px;
   border-radius: 15px;
   position: relative;
+  :hover {
+    & > div {
+      animation: ${openAnimation} 1s linear;
+      animation-iteration-count: 3, infinite;
+    }
+  }
 `;
 
 const ClapperPiece = styled.div`
@@ -35,8 +41,6 @@ const ClapperPiece = styled.div`
   position: absolute;
   top: 0;
   border-radius: 15px;
-  animation: ${openAnimation} 1s linear;
-  animation-iteration-count: 3, infinite;
   transform-origin: left;
 `;
 
