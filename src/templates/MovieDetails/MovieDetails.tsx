@@ -5,10 +5,13 @@ import { StyledCenterChildren } from './MovieDetails.styled';
 
 const openAnimation = keyframes`
   0%, 100% {
-    transform: rotate(0deg);
+    transform: translateY(0) rotate(0deg);
+  }
+  25%, 75% {
+    transform: translateY(0) rotate(-40deg);
   }
   50% {
-    transform: rotate(-40deg);
+    transform: translateY(0) rotate(-40deg);
   }
 `;
 
@@ -36,7 +39,7 @@ const ClapperPiece = styled.div`
     #fff 10%,
     #fff 20%
   );
-  height: 50px;
+  height: 70px;
   width: 660px;
   position: absolute;
   top: 0;
