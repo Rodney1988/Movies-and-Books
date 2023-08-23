@@ -4,8 +4,11 @@ import { TMDBSearchResult } from '../../types/types';
 import { StyledCenterChildren } from './MovieDetails.styled';
 
 const openAnimation = keyframes`
-  to {
-    transform: rotate(-80deg);
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-40deg);
   }
 `;
 
@@ -32,12 +35,9 @@ const ClapperPiece = styled.div`
   position: absolute;
   top: 0;
   border-radius: 15px;
-  animation-name: ${openAnimation};
+  animation: ${openAnimation} 1s linear;
+  animation-iteration-count: 3, infinite;
   transform-origin: left;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
 `;
 
 const Clapperboard = () => (
