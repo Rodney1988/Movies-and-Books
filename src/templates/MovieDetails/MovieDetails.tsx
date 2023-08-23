@@ -3,12 +3,6 @@ import styled from '@emotion/styled';
 import { TMDBSearchResult } from '../../types/types';
 import { StyledCenterChildren } from './MovieDetails.styled';
 
-const openAnimation = keyframes`
-  25%, 75% {
-    transform: translateY(0) rotate(-40deg);
-  }
-`;
-
 const ClapperContainer = styled.div`
   background-color: #111;
   height: 100%;
@@ -17,10 +11,10 @@ const ClapperContainer = styled.div`
   max-width: 650px;
   border-radius: 15px;
   position: relative;
+  transition: transform 1s ease-in-out;
   :hover {
     & > div {
-      animation: ${openAnimation} 1s linear;
-      animation-iteration-count: 1, infinite;
+      transform: rotate(-40deg);
     }
   }
 `;
@@ -38,6 +32,7 @@ const ClapperPiece = styled.div`
   position: absolute;
   top: 0;
   border-radius: 15px;
+  transition: transform 0.5s ease-in-out;
   transform-origin: left;
 `;
 
