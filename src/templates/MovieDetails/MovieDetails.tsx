@@ -1,73 +1,59 @@
+import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
 import { TMDBSearchResult } from '../../types/types';
-import {
-  Overlay,
-  StyledCenterChildren,
-  StyledDetailTitle,
-  StyledPaperDetails,
-} from './MovieDetails.styled';
+import { StyledCenterChildren } from './MovieDetails.styled';
 
-// /*
-// The component below runs the details page of the movie.
-// */
+const openAnimation = keyframes`
+  to {
+    transform: rotate(-80deg);
+  }
+`;
+
+const ClapperContainer = styled.div`
+  background-color: #111;
+  height: 100%;
+  min-height: 500px;
+  width: 100%;
+  max-width: 650px;
+  border-radius: 15px;
+  position: relative;
+`;
+
+const ClapperPiece = styled.div`
+  background: repeating-linear-gradient(
+    135deg,
+    #111 0%,
+    #111 10%,
+    #fff 10%,
+    #fff 20%
+  );
+  height: 50px;
+  width: 660px;
+  position: absolute;
+  top: 0;
+  border-radius: 15px;
+  animation-name: ${openAnimation};
+  transform-origin: left;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+`;
+
+const Clapperboard = () => (
+  <ClapperContainer>
+    <ClapperPiece />
+  </ClapperContainer>
+);
+
 export const MovieDetails = ({
   movieState,
 }: {
   movieState: TMDBSearchResult;
 }) => {
-  console.log('downmost!!', movieState);
   return (
-    <div>
-      <StyledCenterChildren>
-        <StyledDetailTitle variant="h5">
-          Details about the movie '{movieState.title}'
-        </StyledDetailTitle>
-      </StyledCenterChildren>
-      <StyledCenterChildren>
-        <StyledPaperDetails square>
-          <div style={{ padding: '10px' }}>
-            {movieState.title && (
-              <div style={{ margin: '2px' }}>
-                {<b>{'Title'}</b>} - {movieState.title}
-              </div>
-            )}
-            {movieState.original_language && (
-              <div style={{ margin: '2px' }}>
-                {<b>{'Original Language'}</b>} -{' '}
-                {movieState.original_language.toUpperCase()}
-              </div>
-            )}
-            {movieState.overview && (
-              <div style={{ margin: '2px' }}>
-                {<b>{'Plot'}</b>} - {movieState.overview}
-              </div>
-            )}
-            {movieState.release_date && (
-              <div style={{ margin: '2px' }}>
-                {<b>{'Release'}</b>} - {movieState.release_date}
-              </div>
-            )}
-            {movieState.genre_ids && (
-              <div style={{ margin: '2px' }}>
-                {<b>{'Genres'}</b>} - {movieState.genre_ids}
-              </div>
-            )}
-            {movieState.popularity && (
-              <div style={{ margin: '2px' }}>
-                {<b>{'TMDB Popularity'}</b>} - {movieState.popularity}
-              </div>
-            )}
-            {movieState.vote_average && (
-              <div style={{ margin: '2px' }}>
-                {<b>{'Voting average:'}</b>} - {movieState.vote_average}
-              </div>
-            )}
-            <div style={{ margin: '2px' }}>
-              {<b>{'Age recommendation'}</b>} -{' '}
-              {movieState.adult ? 'Only for adults' : 'For everyone'}
-            </div>
-          </div>
-        </StyledPaperDetails>
-      </StyledCenterChildren>
-    </div>
+    <StyledCenterChildren>
+      <Clapperboard />
+    </StyledCenterChildren>
   );
 };
