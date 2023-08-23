@@ -19,8 +19,6 @@ export const Details = () => {
   }
   const bookRowData = locState?.rowData as Doc;
   const movieData = locState?.singleMovie as TMDBSearchResult;
-
-  console.log('MOVIE DATA', movieData);
   if (detailType === 'books') {
     return <BookDetails rowState={bookRowData} />;
   } else if (detailType === 'movies') {
