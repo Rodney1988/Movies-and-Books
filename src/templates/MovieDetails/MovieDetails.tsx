@@ -4,13 +4,7 @@ import { TMDBSearchResult } from '../../types/types';
 import { StyledCenterChildren } from './MovieDetails.styled';
 
 const openAnimation = keyframes`
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
   25%, 75% {
-    transform: translateY(0) rotate(-40deg);
-  }
-  50% {
     transform: translateY(0) rotate(-40deg);
   }
 `;
