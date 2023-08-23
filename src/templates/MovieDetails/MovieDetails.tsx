@@ -26,14 +26,14 @@ const ClapperContainer = styled.div`
   :hover {
     & > div {
       animation: ${openAnimation} 1s linear;
-      animation-iteration-count: 3, infinite;
+      animation-iteration-count: 1, infinite;
     }
   }
 `;
 
 const ClapperPiece = styled.div`
   background: repeating-linear-gradient(
-    135deg,
+    45deg,
     #111 0%,
     #111 10%,
     #fff 10%,
@@ -47,9 +47,11 @@ const ClapperPiece = styled.div`
   transform-origin: left;
 `;
 
-const Clapperboard = () => (
+const Clapperboard = ({ children }: any) => (
   <ClapperContainer>
+    <div style={{}}></div>
     <ClapperPiece />
+    {children}
   </ClapperContainer>
 );
 
@@ -60,7 +62,22 @@ export const MovieDetails = ({
 }) => {
   return (
     <StyledCenterChildren>
-      <Clapperboard />
+      <Clapperboard>
+        <BottomClapperPiece />
+      </Clapperboard>
     </StyledCenterChildren>
   );
 };
+
+const BottomClapperPiece = styled.section`
+  background: repeating-linear-gradient(
+    120deg,
+    #111 0%,
+    #111 10%,
+    #fff 10%,
+    #fff 20%
+  );
+  height: 70px;
+  width: 660px;
+  border-radius: 15px;
+`;
