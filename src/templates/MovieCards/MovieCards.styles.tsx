@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { ImageProps } from '../../types/types';
-import { Link } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 
 export const StyledFieldWrapperDiv = styled.div`

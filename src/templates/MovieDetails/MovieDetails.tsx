@@ -4,6 +4,10 @@ import {
   StyledCenterChildrenDiv,
   StyledCenterChildrenSection,
 } from './MovieDetails.styled';
+import { mapGenres } from '../../helpers/mapGenres';
+import { CircularProgress } from '@mui/material';
+import { singleMovieSearch } from '../../api/Api';
+import { useQuery } from 'react-query';
 
 const Clapperboard = ({ children }: any) => (
   <StyledClapperContainer>
@@ -12,62 +16,35 @@ const Clapperboard = ({ children }: any) => (
   </StyledClapperContainer>
 );
 
-function mapGenres(genresArray: number[]): string[] {
-  const newGenresArray = genresArray.map((id) => {
-    switch (id) {
-      case 28:
-        return 'Action';
-      case 12:
-        return 'Adventure';
-      case 16:
-        return 'Animation';
-      case 35:
-        return 'Comedy';
-      case 80:
-        return 'Crime';
-      case 99:
-        return 'Documentary';
-      case 18:
-        return 'Drama';
-      case 10751:
-        return 'Family';
-      case 14:
-        return 'Fantasy';
-      case 36:
-        return 'History';
-      case 27:
-        return 'Horror';
-      case 10402:
-        return 'Music';
-      case 9648:
-        return 'Mistery';
-      case 10749:
-        return 'Romance';
-      case 878:
-        return 'SciFi';
-      case 10770:
-        return 'TV Movie';
-      case 53:
-        return 'Thriller';
-      case 10752:
-        return 'War';
-      case 37:
-        return 'Western';
-      default:
-        return 'Unknown';
-    }
-  });
-  return newGenresArray;
-}
-
 export const MovieDetails = ({
   movieState,
 }: {
   movieState: TMDBSearchResult;
 }) => {
+  const { data, isLoading, isError, error } = useQuery(
+    ['specificMovie', movieState.id],
+    () => singleMovieSearch(movieState.id)
+  );
+
+  if (isLoading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (isError) {
+    const issue: Error | null = error as Error;
+    return <pre>Error with fetching the books query: {issue.message}</pre>;
+  }
+
+  if (!data) {
+    return <pre>Something went wrong</pre>;
+  }
   const genresArray = mapGenres(movieState.genre_ids);
   const movieUrl = `https://image.tmdb.org/t/p/original/${movieState.poster_path}`;
-  console.log(movieState);
+  console.log('data', data);
   return (
     <StyledCenterChildrenDiv>
       <Clapperboard>
@@ -90,31 +67,34 @@ export const MovieDetails = ({
             </CellOneRowOne>
             <CellTwoRowOne>
               <StyledCellContainer>
+                <pre>{`Status: ${data.status}`}</pre>
                 <pre>{`Release: ${movieState.release_date}`}</pre>
                 <pre>{`Original language: ${movieState.original_language.toUpperCase()}`}</pre>
                 <pre>{`TMDB Popularity: ${Math.round(
                   movieState.popularity
                 )}`}</pre>
                 <pre>{`Rating: ${movieState.vote_average} / 10`}</pre>
+                {<pre>Genres: {genresArray.join(', ')}</pre>}
+                <pre>{`Revenue: $${data.revenue}`}</pre>
               </StyledCellContainer>
             </CellTwoRowOne>
             <StyledHr number={2} />
             <CellOneRowTwo>
               <StyledCellContainer>
+                <pre>{data.tagline}</pre>
                 {
                   <pre>
                     {movieState.adult
-                      ? 'Only for adults'
-                      : 'Available for all ages'}
+                      ? 'Only for adults!'
+                      : 'Available for all ages!'}
                   </pre>
                 }
-                {<pre>Genres: {genresArray.join(', ')}</pre>}
               </StyledCellContainer>
             </CellOneRowTwo>
             <StyledHr number={4} />
             <CellOneRowThree>
               <StyledCellContainer>
-                {`Description: ${movieState.overview}`}
+                {`${movieState.overview}`}
               </StyledCellContainer>
             </CellOneRowThree>
           </StyledGridContainer>
@@ -125,6 +105,7 @@ export const MovieDetails = ({
 };
 
 const StyledCellContainer = styled.section`
+  margin-bottom: 20px;
   margin-left: 15px;
   margin-right: 5px;
 `;
@@ -154,8 +135,8 @@ const CellOneRowOne = styled.section<ImageProps>`
   grid-column: 1 / 2;
   grid-row: 1;
   width: 100%;
-  min-height: 100px;
-  border: 1px solid blue;
+  min-height: 175px;
+  // border: 1px solid blue;
   background-image: ${({ src }) => `url('${src}')`};
   background-size: cover;
 `;
@@ -181,7 +162,7 @@ const CellOneRowThree = styled.section`
 const StyledVerticalDivisor = styled.section`
   position: absolute;
   right: -15px;
-  height: 108%;
+  height: 105%;
   top: 0;
   margin: 0 15px 0 15px;
   border: 4px solid white;
@@ -198,6 +179,7 @@ const StyledClapperContainer = styled.div`
   border-radius: 15px;
   position: relative;
   transition: transform 1s ease-in-out;
+  overflow: auto;
   :hover {
     & > div {
       transform: rotate(-40deg);
