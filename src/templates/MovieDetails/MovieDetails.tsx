@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { TMDBSearchResult } from '../../types/types';
+import { RowNumber, TMDBSearchResult } from '../../types/types';
 import {
   StyledCenterChildrenDiv,
   StyledCenterChildrenSection,
@@ -43,10 +43,14 @@ export const MovieDetails = ({
                 <pre>{`Original language: ${movieState.original_language.toUpperCase()}`}</pre>
                 <pre>{`TMDB Popularity: ${Math.round(
                   movieState.popularity
-                )}%`}</pre>
+                )}`}</pre>
               </StyledCellContainer>
             </CellTwoRowOne>
-            <StyledHr />
+            {/* First row Divisor */}
+            <StyledHr number={2} />
+            {/* First row Divisor */}
+            <CellOneRowTwo>{`Description: ${movieState.overview}`}</CellOneRowTwo>
+            <StyledHr number={4} />
           </StyledGridContainer>
         </StyledCenterChildrenSection>
       </Clapperboard>
@@ -59,9 +63,9 @@ const StyledCellContainer = styled.section`
   margin-right: 5px;
 `;
 
-const StyledHr = styled.hr`
+const StyledHr = styled.hr<RowNumber>`
   width: 100%;
-  grid-row: 2;
+  grid-row: ${({ number }) => `${number}`};
   grid-column: 1 / 3;
   border: 2px solid white;
   transform: translateY(-2px);
@@ -96,14 +100,20 @@ const CellTwoRowOne = styled.section`
   border: 2px solid yellow;
 `;
 
+const CellOneRowTwo = styled.section`
+  display: flex;
+  grid-column: 1 / 3;
+  border: 2px solid red;
+`;
+
 const StyledVerticalDivisor = styled.section`
   position: absolute;
   right: -15px;
-  height: 105%;
+  height: 110%;
   top: 0;
   margin: 0 15px 0 15px;
   border: 3px solid white;
-  transform: translateY(3px);
+  transform: translateY(-2px);
 `;
 
 const StyledClapperContainer = styled.div`

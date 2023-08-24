@@ -20,6 +20,10 @@ export type ImageProps = {
   fallBack: string;
 };
 
+export type RowNumber = {
+  number: number;
+};
+
 export interface ByBookTitle {
   numFound: number;
   start: number;
