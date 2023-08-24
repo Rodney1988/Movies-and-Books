@@ -32,10 +32,19 @@ export const MovieDetails = ({
         <StyledCenterChildrenSection>
           <StyledGridContainer>
             <CellOneRowOne>
-              <h2>{movieState.title}</h2>
+              <StyledCellContainer>
+                <h2>{movieState.title}</h2>
+                <StyledVerticalDivisor></StyledVerticalDivisor>
+              </StyledCellContainer>
             </CellOneRowOne>
             <CellTwoRowOne>
-              <p>{`Original language: ${movieState.original_language.toUpperCase()}`}</p>
+              <StyledCellContainer>
+                <pre>{`Release: ${movieState.release_date}`}</pre>
+                <pre>{`Original language: ${movieState.original_language.toUpperCase()}`}</pre>
+                <pre>{`TMDB Popularity: ${Math.round(
+                  movieState.popularity
+                )}%`}</pre>
+              </StyledCellContainer>
             </CellTwoRowOne>
             <StyledHr />
           </StyledGridContainer>
@@ -45,11 +54,17 @@ export const MovieDetails = ({
   );
 };
 
+const StyledCellContainer = styled.section`
+  margin-left: 15px;
+  margin-right: 5px;
+`;
+
 const StyledHr = styled.hr`
   width: 100%;
   grid-row: 2;
   grid-column: 1 / 3;
   border: 2px solid white;
+  transform: translateY(-2px);
 `;
 
 const StyledGridContainer = styled.section`
@@ -57,9 +72,9 @@ const StyledGridContainer = styled.section`
   grid-template-columns: repeat(2);
   gap: 0px;
   color: white;
+  font-family: monospace;
   width: 85%;
   gap: 0px;
-  border: 1px dashed blue;
 `;
 
 const CellOneRowOne = styled.section`
@@ -81,19 +96,11 @@ const CellTwoRowOne = styled.section`
   border: 2px solid yellow;
 `;
 
-// const CellThreeRowOne = styled.section`
-//   display: flex;
-//   position: relative;
-//   grid-column: 3 / 3;
-//   grid-row: 1;
-//   width: 100%;
-//   border: 2px solid yellow;
-// `;
-
 const StyledVerticalDivisor = styled.section`
   position: absolute;
   right: -15px;
-  height: 100%;
+  height: 105%;
+  top: 0;
   margin: 0 15px 0 15px;
   border: 3px solid white;
   transform: translateY(3px);
