@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
 import { TMDBSearchResult } from '../../types/types';
-import { StyledCenterChildren } from './MovieDetails.styled';
+import {
+  StyledCenterChildrenDiv,
+  StyledCenterChildrenSection,
+} from './MovieDetails.styled';
 
-const StyledClapperboard = ({ children }: any) => (
+const Clapperboard = ({ children }: any) => (
   <StyledClapperContainer>
     <StyledClapperPiece />
     {children}
@@ -14,9 +17,10 @@ export const MovieDetails = ({
 }: {
   movieState: TMDBSearchResult;
 }) => {
+  console.log(movieState);
   return (
-    <StyledCenterChildren>
-      <StyledClapperboard>
+    <StyledCenterChildrenDiv>
+      <Clapperboard>
         <section style={{ position: 'absolute' }}>
           <StyledTriangle>
             <CircleOne />
@@ -25,10 +29,34 @@ export const MovieDetails = ({
           </StyledTriangle>
         </section>
         <StyledStyledClapperPieceBottom />
-      </StyledClapperboard>
-    </StyledCenterChildren>
+        <StyledCenterChildrenSection>
+          <StyledContentSection>
+            <h3>Movie Title: {movieState.title}</h3>
+            <StyledDivisor />
+
+            <h3>Hello</h3>
+            <hr />
+          </StyledContentSection>
+        </StyledCenterChildrenSection>
+      </Clapperboard>
+    </StyledCenterChildrenDiv>
   );
 };
+
+const StyledDivisor = styled.section`
+  width: 22px;
+  height: 22px;
+  height: 100%;
+
+  border: 2px solid white;
+`;
+
+const StyledContentSection = styled.section`
+  color: white;
+  border: 1px dotted white;
+  width: 85%;
+  height: 100%;
+`;
 
 const StyledClapperContainer = styled.div`
   background-color: #111;
