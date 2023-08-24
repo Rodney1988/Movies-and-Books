@@ -50,7 +50,13 @@ export const MovieDetails = ({
   if (data?.videos?.results?.length > 0) {
     videosAreAvailable = true;
   }
-
+  let youtubeVideoObj;
+  if (videosAreAvailable) {
+    youtubeVideoObj = data.videos.results.find((video) => {
+      return video.site === 'YouTube';
+    });
+  }
+  console.log('youtubeVideoObj', youtubeVideoObj);
   return (
     <StyledCenterChildrenDiv>
       <Clapperboard>
@@ -95,9 +101,9 @@ export const MovieDetails = ({
               </StyledCellContainer>
             </CellOneRowTwo>
             <CellTwoRowTwo>
-              {videosAreAvailable ? (
+              {youtubeVideoObj ? (
                 <ReactPlayer
-                  url={`https://www.youtube.com/watch?v=${data.videos.results[0].key}`}
+                  url={`https://www.youtube.com/watch?v=${youtubeVideoObj?.key}`}
                   height={150}
                   width={200}
                 />
