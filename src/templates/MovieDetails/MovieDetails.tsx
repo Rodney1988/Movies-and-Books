@@ -64,6 +64,7 @@ const StyledClapperPiece = styled.div`
   transform: translateY(-15px);
   transition: transform 0.5s ease-in-out;
   transform-origin: left;
+  box-shadow: 0 4px 2px -2px #5a434354;
 `;
 
 const StyledStyledClapperPieceBottom = styled.section`
@@ -78,15 +79,17 @@ const StyledStyledClapperPieceBottom = styled.section`
   width: 100%;
   max-width: 660px;
   border-top-right-radius: 15px;
+  box-shadow: 0 4px 2px -2px #302b2beb;
 `;
 
 const StyledTriangle = styled.section`
-  transform: translate(0, -4px);
+  transform: translate(0, -3px);
   position: relative;
   width: 130px;
   height: 98px;
   border-radius: 15px 100% 5px 5px;
   background-color: #372f2e;
+  box-shadow: 0 4px 8px black;
 `;
 
 const CircleOne = styled.section`
