@@ -30,32 +30,73 @@ export const MovieDetails = ({
         </section>
         <StyledStyledClapperPieceBottom />
         <StyledCenterChildrenSection>
-          <StyledContentSection>
-            <h3>Movie Title: {movieState.title}</h3>
-            <StyledDivisor />
-
-            <h3>Hello</h3>
-            <hr />
-          </StyledContentSection>
+          <StyledGridContainer>
+            <CellOneRowOne>
+              <h2>{movieState.title}</h2>
+            </CellOneRowOne>
+            <CellTwoRowOne>
+              <p>{`Original language: ${movieState.original_language.toUpperCase()}`}</p>
+            </CellTwoRowOne>
+            <StyledHr />
+          </StyledGridContainer>
         </StyledCenterChildrenSection>
       </Clapperboard>
     </StyledCenterChildrenDiv>
   );
 };
 
-const StyledDivisor = styled.section`
-  width: 22px;
-  height: 22px;
-  height: 100%;
-
+const StyledHr = styled.hr`
+  width: 100%;
+  grid-row: 2;
+  grid-column: 1 / 3;
   border: 2px solid white;
 `;
 
-const StyledContentSection = styled.section`
+const StyledGridContainer = styled.section`
+  display: grid;
+  grid-template-columns: repeat(2);
+  gap: 0px;
   color: white;
-  border: 1px dotted white;
   width: 85%;
+  gap: 0px;
+  border: 1px dashed blue;
+`;
+
+const CellOneRowOne = styled.section`
+  position: relative;
+  display: flex;
+  grid-column: 1 / 2;
+  grid-row: 1;
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid blue;
+`;
+
+const CellTwoRowOne = styled.section`
+  display: flex;
+  position: relative;
+  grid-column: 2 / 2;
+  grid-row: 1;
+  width: 100%;
+  border: 2px solid yellow;
+`;
+
+// const CellThreeRowOne = styled.section`
+//   display: flex;
+//   position: relative;
+//   grid-column: 3 / 3;
+//   grid-row: 1;
+//   width: 100%;
+//   border: 2px solid yellow;
+// `;
+
+const StyledVerticalDivisor = styled.section`
+  position: absolute;
+  right: -15px;
   height: 100%;
+  margin: 0 15px 0 15px;
+  border: 3px solid white;
+  transform: translateY(3px);
 `;
 
 const StyledClapperContainer = styled.div`
