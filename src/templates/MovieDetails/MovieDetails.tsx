@@ -55,12 +55,13 @@ const StyledClapperPiece = styled.div`
     #fff 20%
   );
 
-  height: 94px;
+  height: 65px;
   width: 100%;
   max-width: 660px;
   position: absolute;
   top: 0;
   border-radius: 15px;
+  transform: translateY(-15px);
   transition: transform 0.5s ease-in-out;
   transform-origin: left;
 `;
@@ -76,7 +77,7 @@ const StyledStyledClapperPieceBottom = styled.section`
   height: 94px;
   width: 100%;
   max-width: 660px;
-  border-radius: 15px;
+  border-top-right-radius: 15px;
 `;
 
 const StyledTriangle = styled.section`
