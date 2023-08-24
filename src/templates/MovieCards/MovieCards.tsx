@@ -26,6 +26,9 @@ export const MovieCards: React.FC<MovieCardsProps> = ({
   const navigate = useNavigate();
   const fallbackImage =
     'https://media.istockphoto.com/id/540201480/photo/mysterious-unknown-person-in-the-hood-danger-in-darkness.jpg?s=170667a&w=0&k=20&c=SRa6I_Rb_BuTw6vo3OGG6PoSuKJtmaO-CViDjWj-Qkk=';
+  if (searchedMovies.length === 0) {
+    return <pre>No movie data found</pre>;
+  }
   return (
     <StyledFieldWrapperDiv>
       {searchedMovies.map((movie) => {
