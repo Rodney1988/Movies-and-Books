@@ -96,6 +96,7 @@ const CircleOne = styled.section`
   height: 22px;
   border-radius: 99px;
   background: gray;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
 `;
 
 const CircleTwo = styled.section`
@@ -106,6 +107,7 @@ const CircleTwo = styled.section`
   height: 22px;
   border-radius: 99px;
   background: gray;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
 `;
 
 const CircleThree = styled.section`
@@ -116,4 +118,5 @@ const CircleThree = styled.section`
   height: 22px;
   border-radius: 99px;
   background: gray;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
 `;
