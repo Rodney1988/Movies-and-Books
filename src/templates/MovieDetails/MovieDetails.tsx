@@ -103,7 +103,6 @@ export const MovieDetails = ({
               <StyledCellContainer>
                 {
                   <pre>
-                    Availability:{' '}
                     {movieState.adult
                       ? 'Only for adults'
                       : 'Available for all ages'}
