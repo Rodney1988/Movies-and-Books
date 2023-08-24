@@ -60,13 +60,12 @@ export const MovieDetails = ({
           {/* {Actual content begins here} */}
           <StyledGridContainer>
             <CellOneRowOne src={movieUrl}>
-              <StyledCellContainer>
-                <h2>{movieState.title}</h2>
-                <StyledVerticalDivisor />
-              </StyledCellContainer>
+              <StyledVerticalDivisor />
             </CellOneRowOne>
             <CellTwoRowOne>
               <StyledCellContainer>
+                <h2>{movieState.title}</h2>
+                <h4>{data.tagline}</h4>
                 <pre>{`Status: ${data.status}`}</pre>
                 <pre>{`Release: ${movieState.release_date}`}</pre>
                 <pre>{`Original language: ${movieState.original_language.toUpperCase()}`}</pre>
@@ -81,7 +80,6 @@ export const MovieDetails = ({
             <StyledHr number={2} />
             <CellOneRowTwo>
               <StyledCellContainer>
-                <pre>{data.tagline}</pre>
                 {
                   <pre>
                     {movieState.adult
@@ -105,7 +103,7 @@ export const MovieDetails = ({
 };
 
 const StyledCellContainer = styled.section`
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   margin-left: 15px;
   margin-right: 5px;
 `;
@@ -135,7 +133,7 @@ const CellOneRowOne = styled.section<ImageProps>`
   grid-column: 1 / 2;
   grid-row: 1;
   width: 100%;
-  min-height: 175px;
+  min-height: 160px;
   // border: 1px solid blue;
   background-image: ${({ src }) => `url('${src}')`};
   background-size: cover;
@@ -157,12 +155,15 @@ const CellOneRowTwo = styled.section`
 const CellOneRowThree = styled.section`
   display: flex;
   grid-column: 1 / 3;
+  :last-child {
+    margin-bottom: 20px;
+  }
 `;
 
 const StyledVerticalDivisor = styled.section`
   position: absolute;
   right: -15px;
-  height: 105%;
+  height: 103%;
   top: 0;
   margin: 0 15px 0 15px;
   border: 4px solid white;
@@ -179,7 +180,6 @@ const StyledClapperContainer = styled.div`
   border-radius: 15px;
   position: relative;
   transition: transform 1s ease-in-out;
-  overflow: auto;
   :hover {
     & > div {
       transform: rotate(-40deg);
