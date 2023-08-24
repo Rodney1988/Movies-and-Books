@@ -8,6 +8,7 @@ import { mapGenres } from '../../helpers/mapGenres';
 import { CircularProgress } from '@mui/material';
 import { singleMovieSearch } from '../../api/Api';
 import { useQuery } from 'react-query';
+import ReactPlayer from 'react-player/youtube';
 
 const Clapperboard = ({ children }: any) => (
   <StyledClapperContainer>
@@ -44,7 +45,12 @@ export const MovieDetails = ({
   }
   const genresArray = mapGenres(movieState.genre_ids);
   const movieUrl = `https://image.tmdb.org/t/p/original/${movieState.poster_path}`;
-  console.log('data', data);
+
+  let videosAreAvailable = false;
+  if (data?.videos?.results?.length > 0) {
+    videosAreAvailable = true;
+  }
+
   return (
     <StyledCenterChildrenDiv>
       <Clapperboard>
@@ -59,9 +65,7 @@ export const MovieDetails = ({
         <StyledCenterChildrenSection>
           {/* {Actual content begins here} */}
           <StyledGridContainer>
-            <CellOneRowOne src={movieUrl}>
-              <StyledVerticalDivisor />
-            </CellOneRowOne>
+            <CellOneRowOne src={movieUrl}></CellOneRowOne>
             <CellTwoRowOne>
               <StyledCellContainer>
                 <h2>{movieState.title}</h2>
@@ -73,8 +77,6 @@ export const MovieDetails = ({
                   movieState.popularity
                 )}`}</pre>
                 <pre>{`Rating: ${movieState.vote_average} / 10`}</pre>
-                {<pre>Genres: {genresArray.join(', ')}</pre>}
-                <pre>{`Revenue: $${data.revenue}`}</pre>
               </StyledCellContainer>
             </CellTwoRowOne>
             <StyledHr number={2} />
@@ -87,8 +89,22 @@ export const MovieDetails = ({
                       : 'Available for all ages!'}
                   </pre>
                 }
+                {<pre>Genres: {genresArray.join(', ')}</pre>}
+                <pre>{`Butget: $${data.budget}`}</pre>
+                <pre>{`Revenue: $${data.revenue}`}</pre>
               </StyledCellContainer>
             </CellOneRowTwo>
+            <CellTwoRowTwo>
+              {videosAreAvailable ? (
+                <ReactPlayer
+                  url={`https://www.youtube.com/watch?v=${data.videos.results[0].key}`}
+                  height={150}
+                  width={200}
+                />
+              ) : (
+                <pre>No videos available</pre>
+              )}
+            </CellTwoRowTwo>
             <StyledHr number={4} />
             <CellOneRowThree>
               <StyledCellContainer>
@@ -149,7 +165,12 @@ const CellTwoRowOne = styled.section`
 
 const CellOneRowTwo = styled.section`
   display: flex;
-  grid-column: 1 / 3;
+  grid-column: 1 / 1;
+`;
+
+const CellTwoRowTwo = styled.section`
+  display: flex;
+  grid-column: 2 / 3;
 `;
 
 const CellOneRowThree = styled.section`
@@ -160,16 +181,16 @@ const CellOneRowThree = styled.section`
   }
 `;
 
-const StyledVerticalDivisor = styled.section`
-  position: absolute;
-  right: -15px;
-  height: 103%;
-  top: 0;
-  margin: 0 15px 0 15px;
-  border: 4px solid white;
-  border-radius: 20px;
-  transform: translateY(-7px);
-`;
+// const StyledVerticalDivisor = styled.section`
+//   position: absolute;
+//   right: -15px;
+//   height: 105%;
+//   top: 0;
+//   margin: 0 15px 0 15px;
+//   border: 4px solid white;
+//   border-radius: 20px;
+//   transform: translateY(-7px);
+// `;
 
 const StyledClapperContainer = styled.div`
   background-color: #111;
