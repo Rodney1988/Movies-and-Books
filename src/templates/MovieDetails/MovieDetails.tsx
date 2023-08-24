@@ -90,8 +90,8 @@ export const MovieDetails = ({
                   </pre>
                 }
                 {<pre>Genres: {genresArray.join(', ')}</pre>}
-                <pre>{`Butget: $${data.budget}`}</pre>
-                <pre>{`Revenue: $${data.revenue}`}</pre>
+                <pre>{`Butget: $${data.budget.toLocaleString()}`}</pre>
+                <pre>{`Revenue: $${data.revenue.toLocaleString()}`}</pre>
               </StyledCellContainer>
             </CellOneRowTwo>
             <CellTwoRowTwo>
