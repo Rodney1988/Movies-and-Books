@@ -2,6 +2,34 @@ import styled from '@emotion/styled';
 import { TMDBSearchResult } from '../../types/types';
 import { StyledCenterChildren } from './MovieDetails.styled';
 
+const StyledClapperboard = ({ children }: any) => (
+  <StyledClapperContainer>
+    <StyledClapperPiece />
+    {children}
+  </StyledClapperContainer>
+);
+
+export const MovieDetails = ({
+  movieState,
+}: {
+  movieState: TMDBSearchResult;
+}) => {
+  return (
+    <StyledCenterChildren>
+      <StyledClapperboard>
+        <section style={{ position: 'absolute' }}>
+          <StyledTriangle>
+            <CircleOne />
+            <CircleTwo />
+            <CircleThree />
+          </StyledTriangle>
+        </section>
+        <StyledStyledClapperPieceBottom />
+      </StyledClapperboard>
+    </StyledCenterChildren>
+  );
+};
+
 const StyledClapperContainer = styled.div`
   background-color: #111;
   height: 100%;
@@ -36,34 +64,6 @@ const StyledClapperPiece = styled.div`
   transition: transform 0.5s ease-in-out;
   transform-origin: left;
 `;
-
-const StyledClapperboard = ({ children }: any) => (
-  <StyledClapperContainer>
-    <StyledClapperPiece />
-    {children}
-  </StyledClapperContainer>
-);
-
-export const MovieDetails = ({
-  movieState,
-}: {
-  movieState: TMDBSearchResult;
-}) => {
-  return (
-    <StyledCenterChildren>
-      <StyledClapperboard>
-        <section style={{ position: 'absolute' }}>
-          <StyledTriangle>
-            <CircleOne />
-            <CircleTwo />
-            <CircleThree />
-          </StyledTriangle>
-        </section>
-        <StyledStyledClapperPieceBottom />
-      </StyledClapperboard>
-    </StyledCenterChildren>
-  );
-};
 
 const StyledStyledClapperPieceBottom = styled.section`
   background: repeating-linear-gradient(
