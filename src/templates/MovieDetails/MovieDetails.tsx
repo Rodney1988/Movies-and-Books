@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { RowNumber, TMDBSearchResult } from '../../types/types';
+import { ImageProps, RowNumber, TMDBSearchResult } from '../../types/types';
 import {
   StyledCenterChildrenDiv,
   StyledCenterChildrenSection,
@@ -66,6 +66,8 @@ export const MovieDetails = ({
   movieState: TMDBSearchResult;
 }) => {
   const genresArray = mapGenres(movieState.genre_ids);
+  const movieUrl = `https://image.tmdb.org/t/p/original/${movieState.poster_path}`;
+  console.log(movieState);
   return (
     <StyledCenterChildrenDiv>
       <Clapperboard>
@@ -78,11 +80,12 @@ export const MovieDetails = ({
         </section>
         <StyledStyledClapperPieceBottom />
         <StyledCenterChildrenSection>
+          {/* {Actual content begins here} */}
           <StyledGridContainer>
-            <CellOneRowOne>
+            <CellOneRowOne src={movieUrl}>
               <StyledCellContainer>
                 <h2>{movieState.title}</h2>
-                <StyledVerticalDivisor></StyledVerticalDivisor>
+                <StyledVerticalDivisor />
               </StyledCellContainer>
             </CellOneRowOne>
             <CellTwoRowOne>
@@ -96,10 +99,24 @@ export const MovieDetails = ({
               </StyledCellContainer>
             </CellTwoRowOne>
             <StyledHr number={2} />
-            <CellOneRowTwo>{`Description: ${movieState.overview}`}</CellOneRowTwo>
+            <CellOneRowTwo>
+              <StyledCellContainer>
+                {
+                  <pre>
+                    Availability:{' '}
+                    {movieState.adult
+                      ? 'Only for adults'
+                      : 'Available for all ages'}
+                  </pre>
+                }
+                {<pre>Genres: {genresArray.join(', ')}</pre>}
+              </StyledCellContainer>
+            </CellOneRowTwo>
             <StyledHr number={4} />
             <CellOneRowThree>
-              {<pre>Genres: {genresArray.join(', ')}</pre>}
+              <StyledCellContainer>
+                {`Description: ${movieState.overview}`}
+              </StyledCellContainer>
             </CellOneRowThree>
           </StyledGridContainer>
         </StyledCenterChildrenSection>
@@ -115,9 +132,10 @@ const StyledCellContainer = styled.section`
 
 const StyledHr = styled.hr<RowNumber>`
   width: 100%;
-  grid-row: ${({ number }) => `${number}`};
+  grid-row: ${({ number }) => number};
   grid-column: 1 / 3;
-  border: 2px solid white;
+  border: 3px solid white;
+  border-radius: 20px;
   transform: translateY(-2px);
 `;
 
@@ -131,7 +149,7 @@ const StyledGridContainer = styled.section`
   gap: 0px;
 `;
 
-const CellOneRowOne = styled.section`
+const CellOneRowOne = styled.section<ImageProps>`
   position: relative;
   display: flex;
   grid-column: 1 / 2;
@@ -139,6 +157,8 @@ const CellOneRowOne = styled.section`
   width: 100%;
   min-height: 100px;
   border: 1px solid blue;
+  background-image: ${({ src }) => `url('${src}')`};
+  background-size: cover;
 `;
 
 const CellTwoRowOne = styled.section`
@@ -147,29 +167,27 @@ const CellTwoRowOne = styled.section`
   grid-column: 2 / 2;
   grid-row: 1;
   width: 100%;
-  border: 2px solid yellow;
 `;
 
 const CellOneRowTwo = styled.section`
   display: flex;
   grid-column: 1 / 3;
-  border: 2px solid red;
 `;
 
 const CellOneRowThree = styled.section`
   display: flex;
   grid-column: 1 / 3;
-  border: 2px solid pink;
 `;
 
 const StyledVerticalDivisor = styled.section`
   position: absolute;
   right: -15px;
-  height: 110%;
+  height: 108%;
   top: 0;
   margin: 0 15px 0 15px;
-  border: 3px solid white;
-  transform: translateY(-2px);
+  border: 4px solid white;
+  border-radius: 20px;
+  transform: translateY(-7px);
 `;
 
 const StyledClapperContainer = styled.div`

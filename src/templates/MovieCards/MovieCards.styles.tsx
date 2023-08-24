@@ -19,7 +19,7 @@ export const CardWrapper = styled.div<ImageProps>`
   width: 30%;
   min-width: 300px;
   margin: 10px;
-  background: ${({ src, fallBack }) => `url('${src ? src : fallBack}')`};
+  background: ${({ src }) => `url('${src}')`};
   height: 525px;
   :hover {
     .content {

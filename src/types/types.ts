@@ -17,7 +17,6 @@ export interface TMDBSearchResult {
 
 export type ImageProps = {
   src?: string;
-  fallBack: string;
 };
 
 export type RowNumber = {
