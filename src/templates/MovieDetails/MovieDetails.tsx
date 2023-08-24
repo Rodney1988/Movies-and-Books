@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { TMDBSearchResult } from '../../types/types';
 import { StyledCenterChildren } from './MovieDetails.styled';
 
-const ClapperContainer = styled.div`
+const StyledClapperContainer = styled.div`
   background-color: #111;
   height: 100%;
   min-height: 500px;
@@ -18,16 +18,18 @@ const ClapperContainer = styled.div`
   }
 `;
 
-const ClapperPiece = styled.div`
+const StyledClapperPiece = styled.div`
   background: repeating-linear-gradient(
-    45deg,
+    120deg,
     #111 0%,
     #111 10%,
     #fff 10%,
     #fff 20%
   );
-  height: 70px;
-  width: 660px;
+
+  height: 94px;
+  width: 100%;
+  max-width: 660px;
   position: absolute;
   top: 0;
   border-radius: 15px;
@@ -35,12 +37,11 @@ const ClapperPiece = styled.div`
   transform-origin: left;
 `;
 
-const Clapperboard = ({ children }: any) => (
-  <ClapperContainer>
-    <div style={{}}></div>
-    <ClapperPiece />
+const StyledClapperboard = ({ children }: any) => (
+  <StyledClapperContainer>
+    <StyledClapperPiece />
     {children}
-  </ClapperContainer>
+  </StyledClapperContainer>
 );
 
 export const MovieDetails = ({
@@ -50,22 +51,69 @@ export const MovieDetails = ({
 }) => {
   return (
     <StyledCenterChildren>
-      <Clapperboard>
-        <BottomClapperPiece />
-      </Clapperboard>
+      <StyledClapperboard>
+        <section style={{ position: 'absolute' }}>
+          <StyledTriangle>
+            <CircleOne />
+            <CircleTwo />
+            <CircleThree />
+          </StyledTriangle>
+        </section>
+        <StyledStyledClapperPieceBottom />
+      </StyledClapperboard>
     </StyledCenterChildren>
   );
 };
 
-const BottomClapperPiece = styled.section`
+const StyledStyledClapperPieceBottom = styled.section`
   background: repeating-linear-gradient(
-    120deg,
+    45deg,
     #111 0%,
     #111 10%,
     #fff 10%,
     #fff 20%
   );
-  height: 70px;
-  width: 660px;
+  height: 94px;
+  width: 100%;
+  max-width: 660px;
   border-radius: 15px;
+`;
+
+const StyledTriangle = styled.section`
+  transform: translate(0, -4px);
+  position: relative;
+  width: 130px;
+  height: 98px;
+  border-radius: 15px 100% 5px 5px;
+  background-color: #372f2e;
+`;
+
+const CircleOne = styled.section`
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 99px;
+  background: gray;
+`;
+
+const CircleTwo = styled.section`
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 99px;
+  background: gray;
+`;
+
+const CircleThree = styled.section`
+  position: absolute;
+  bottom: 6px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 99px;
+  background: gray;
 `;
