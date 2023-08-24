@@ -1,4 +1,3 @@
-import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { TMDBSearchResult } from '../../types/types';
 import { StyledCenterChildren } from './MovieDetails.styled';
