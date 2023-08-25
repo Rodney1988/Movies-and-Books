@@ -1,79 +1,96 @@
+import React from 'react';
+import styled from '@emotion/styled';
 import { Doc } from '../../types/types';
-import { capitalize } from 'lodash';
-import { StyledPaperDetails } from './BookDetails.styled';
+
+interface Open {
+  isOpen: boolean;
+}
 
 export const BookDetails = ({ rowState }: { rowState: Doc }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const handleCoverClick = () => {
+    setIsOpen(!isOpen);
+  };
+  console.log(isOpen);
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-    >
-      <StyledPaperDetails square>
-        <div style={{ padding: '10px' }}>
-          {rowState.title && (
-            <div style={{ margin: '2px' }}>
-              {<b>{'Title'}</b>} - {rowState.title}
-            </div>
-          )}
-          {rowState.author_name && (
-            <div style={{ margin: '2px' }}>
-              {<b>{'Author(s)'}</b>} - {rowState.author_name.join(', ')}
-            </div>
-          )}
-          {rowState.contributor && (
-            <div style={{ margin: '2px' }}>
-              {<b>{'Contributors'}</b>} - {rowState.contributor.join(' ')}
-            </div>
-          )}
-          {rowState.first_publish_year && (
-            <div style={{ margin: '2px' }}>
-              {<b>{'First Published'}</b>} - {rowState.first_publish_year}
-            </div>
-          )}
-          {rowState.first_sentence && (
-            <div style={{ margin: '2px' }}>
-              {<b>{'First Sentences'}</b>} - {rowState.first_sentence.join(' ')}
-            </div>
-          )}
-          {rowState.ebook_access && (
-            <div style={{ margin: '2px' }}>
-              {<b>{'E-Book Access'}</b>} - {capitalize(rowState.ebook_access)}
-            </div>
-          )}
-          {rowState.ebook_count_i > 0 && (
-            <div style={{ margin: '2px' }}>
-              {<b>{'E-Book Count'}</b>} - {rowState.ebook_count_i}
-            </div>
-          )}
-          {rowState.edition_count > 0 && (
-            <div style={{ margin: '2px' }}>
-              {<b>{'Edition Count'}</b>} - {rowState.edition_count}
-            </div>
-          )}
-          {rowState.language && (
-            <div style={{ margin: '2px' }}>
-              {<b>{'Language(s)'}</b>} - {rowState.language.join(', ')}
-            </div>
-          )}
-          {rowState.subject && (
-            <div style={{ margin: '2px' }}>
-              {<b>{'Subject'}</b>} - {rowState.subject.join(', ')}
-            </div>
-          )}
-          {rowState.id_amazon && (
-            <div style={{ margin: '2px' }}>
-              {<b>{'Amazon IDs'}</b>} - {rowState.id_amazon.join(', ')}
-            </div>
-          )}
-          {rowState.key && (
-            <div style={{ margin: '2px' }}>
-              {<b>{'Key'}</b>} - {rowState.key}
-            </div>
-          )}
-        </div>
-      </StyledPaperDetails>
-    </div>
+    <CenterWrapper>
+      <BookWrapper onClick={handleCoverClick}>
+        <FrontCoverWrapper onClick={handleCoverClick} isOpen={isOpen}>
+          <h2>{rowState.title}</h2>
+          <h3>By {rowState.author_name}</h3>
+          <BackCoverYellow isOpen={isOpen} />
+        </FrontCoverWrapper>
+        <ContentWrapper>
+          <h3>Hi !!</h3>
+        </ContentWrapper>
+      </BookWrapper>
+    </CenterWrapper>
   );
 };
+
+const CenterWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const BookWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  min-height: 475px;
+  height: 100%;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  background: #c7af8a; //paper color
+  margin-top: 50px;
+  perspective: 1000px;
+  color: black;
+  :hover {
+    cursor: pointer;
+  }
+  @media only screen and (max-width: 600px) {
+    max-width: 250px;
+  }
+`;
+
+const FrontCoverWrapper = styled.div<{ isOpen: boolean }>`
+  position: absolute;
+  width: 95%;
+  height: 100%;
+  left: 20px;
+  transform: ${(props) =>
+    props.isOpen ? 'rotateY(-170deg)' : 'rotateY(-15deg)'};
+  transform-style: preserve-3d;
+  transform-origin: left;
+  transition: transform 0.6s;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  background: green;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const BackCoverYellow = styled.div<Open>`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: yellow;
+  transform-style: preserve-3d;
+  transform-origin: left;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  transform: translateZ(-1px);
+`;
+
+const ContentWrapper = styled.div`
+  height: 100%;
+  width: 100%;
+  font-size: 22px;
+  left: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
