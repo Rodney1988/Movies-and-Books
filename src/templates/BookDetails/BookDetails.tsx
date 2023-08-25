@@ -39,8 +39,6 @@ const CenterWrapper = styled.div`
 
 const FrontContentWrapper = styled.div`
   display: flex;
-  // margin-top: 100%;
-  // margin-bottom: 100%;
   flex-direction: column;
   justify-content: center;
   padding: 25px;
@@ -78,13 +76,17 @@ const FrontCoverWrapper = styled.div<{ isOpen: boolean }>`
   transform-style: preserve-3d;
   transform-origin: left;
   transition: transform 0.6s;
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
-  background-color: white; /* Leather base color */
-  background: linear-gradient(45deg, gray 25%, transparent 25%) 0 0 / 1px 1px,
-    linear-gradient(-45deg, gray 25%, transparent 25%) 0 0 / 1px 1px,
-    linear-gradient(45deg, transparent 75%, gray 75%) 0 0 / 1px 1px,
-    linear-gradient(-45deg, transparent 75%, gray 75%) 0 0 / 1px 1px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background: #896952;
+  text-shadow: -1px -1px #a0785a;
+  font-weight: normal;
+  box-shadow: 0px -10px 10px -5px rgba(0, 0, 0, 0.5),
+    0px 10px 10px -5px rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.1) 0px -50px 136px -28px inset;
+  font-family: cursive;
   :hover {
     cursor: pointer;
   }
@@ -98,8 +100,10 @@ const BackCoverBrown = styled.div<Open>`
   background: #3d2427;
   transform-style: preserve-3d;
   transform-origin: left;
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
   transform: translateZ(-1px);
 `;
 
