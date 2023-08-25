@@ -14,7 +14,11 @@ import {
 The component below sets up the 'movie title' search input and renders a list of cards based on that input
 */
 
-export const MovieForm = () => {
+export const MovieForm = ({
+  searchIsSelected,
+}: {
+  searchIsSelected: boolean;
+}) => {
   const [finalSearchInputVal, setFinalSearchInputVal] = useState('');
   const [onChangeVal, setOnChangeVal] = useState('');
   const [searchFieldIsActive, setSearchFieldIsActive] = useState(false);
@@ -73,7 +77,7 @@ export const MovieForm = () => {
         <div>
           <StyledButton
             variant="contained"
-            disabled={valueIsEmpty}
+            disabled={valueIsEmpty && !searchIsSelected}
             type="submit"
           >
             Search

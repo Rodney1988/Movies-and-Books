@@ -13,7 +13,11 @@ import { useQuery } from 'react-query';
 The component below sets up the 'book' search input form and renders cards based on that input.
 */
 
-export const BookForm = () => {
+export const BookForm = ({
+  searchIsSelected,
+}: {
+  searchIsSelected: boolean;
+}) => {
   const [finalSearchInputVal, setFinalSearchInputVal] = useState<string>('');
   const [onChangeVal, setOnChangeVal] = useState<string>('');
   const [searchFieldIsActive, setSearchFieldIsActive] =
@@ -49,8 +53,10 @@ export const BookForm = () => {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      setFinalSearchInputVal(onChangeVal);
+      const inputValue = (event.target as HTMLInputElement).value;
+      setOnChangeVal(inputValue);
       setSearchFieldIsActive(true);
+      setFinalSearchInputVal(inputValue);
     }
   };
 
@@ -75,7 +81,7 @@ export const BookForm = () => {
           <StyledButton
             variant="contained"
             type="submit"
-            disabled={valueIsEmpty}
+            disabled={valueIsEmpty && !searchIsSelected}
           >
             Search
           </StyledButton>
