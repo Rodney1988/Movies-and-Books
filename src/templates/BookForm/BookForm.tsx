@@ -43,7 +43,8 @@ export const BookForm = ({
     return <pre>Error with fetching the books query: {issue.message}</pre>;
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setFinalSearchInputVal(onChangeVal);
     setSearchFieldIsActive(true);
   };
@@ -53,10 +54,8 @@ export const BookForm = ({
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      const inputValue = (event.target as HTMLInputElement).value;
-      setOnChangeVal(inputValue);
+      setFinalSearchInputVal(onChangeVal);
       setSearchFieldIsActive(true);
-      setFinalSearchInputVal(inputValue);
     }
   };
 
