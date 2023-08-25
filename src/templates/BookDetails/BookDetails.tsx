@@ -1,10 +1,8 @@
-import styled from '@emotion/styled';
 import { Doc } from '../../types/types';
-import { Paper, Typography } from '@mui/material';
 import { capitalize } from 'lodash';
+import { StyledPaperDetails } from './BookDetails.styled';
 
 export const BookDetails = ({ rowState }: { rowState: Doc }) => {
-  console.log(rowState, 'ROWSTAAAAATE');
   return (
     <div
       style={{
@@ -79,18 +77,3 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
     </div>
   );
 };
-
-export const StyledDetailTitle = styled(Typography)`
-  color: #292728;
-  margin: 30px 0 0 5px;
-`;
-export const StyledPaperDetails = styled(Paper)`
-  color: #292728;
-  margin-top: 15px;
-  margin-left: 5px;
-  width: 100%;
-  max-width: 650px;
-  @media only screen and (max-width: 600px) {
-    max-width: 250px;
-  }
-`;
