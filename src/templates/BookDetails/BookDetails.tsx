@@ -12,14 +12,17 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
   const handleCoverClick = () => {
     setIsOpen(!isOpen);
   };
-  console.log(isOpen);
+  console.log(rowState);
   return (
     <CenterWrapper>
       <BookWrapper onClick={handleCoverClick}>
         <FrontCoverWrapper onClick={handleCoverClick} isOpen={isOpen}>
-          <h2>{rowState.title}</h2>
-          <h3>By {rowState.author_name}</h3>
-          <BackCoverYellow isOpen={isOpen} />
+          <FrontContentWrapper>
+            <h2>{rowState.title}</h2>
+            <h3>By {rowState.author_name}</h3>
+          </FrontContentWrapper>
+          {/* <p>{rowState.}</p> */}
+          <BackCoverBrown isOpen={isOpen} />
         </FrontCoverWrapper>
         <ContentWrapper>
           <h3>Hi !!</h3>
@@ -34,10 +37,20 @@ const CenterWrapper = styled.div`
   justify-content: center;
 `;
 
+const FrontContentWrapper = styled.div`
+  display: flex;
+  // margin-top: 100%;
+  // margin-bottom: 100%;
+  flex-direction: column;
+  justify-content: center;
+  padding: 25px;
+  height: 100%;
+`;
+
 const BookWrapper = styled.div`
   position: relative;
   width: 100%;
-  max-width: 450px;
+  max-width: 400px;
   min-height: 475px;
   height: 100%;
   border-top-right-radius: 2px;
@@ -55,6 +68,7 @@ const BookWrapper = styled.div`
 `;
 
 const FrontCoverWrapper = styled.div<{ isOpen: boolean }>`
+  color: white;
   position: absolute;
   width: 95%;
   height: 100%;
@@ -66,18 +80,22 @@ const FrontCoverWrapper = styled.div<{ isOpen: boolean }>`
   transition: transform 0.6s;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
-  background: green;
+  background-color: white; /* Leather base color */
+  background: linear-gradient(45deg, gray 25%, transparent 25%) 0 0 / 1px 1px,
+    linear-gradient(-45deg, gray 25%, transparent 25%) 0 0 / 1px 1px,
+    linear-gradient(45deg, transparent 75%, gray 75%) 0 0 / 1px 1px,
+    linear-gradient(-45deg, transparent 75%, gray 75%) 0 0 / 1px 1px;
   :hover {
     cursor: pointer;
   }
 `;
 
-const BackCoverYellow = styled.div<Open>`
+const BackCoverBrown = styled.div<Open>`
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
-  background: yellow;
+  background: #3d2427;
   transform-style: preserve-3d;
   transform-origin: left;
   border-top-right-radius: 2px;
