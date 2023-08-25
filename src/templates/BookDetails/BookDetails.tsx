@@ -18,8 +18,20 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
       <BookWrapper onClick={handleCoverClick}>
         <FrontCoverWrapper onClick={handleCoverClick} isOpen={isOpen}>
           <FrontContentWrapper>
-            <h2>{rowState.title}</h2>
-            <h3>By {rowState.author_name}</h3>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                border: '2px dashed white',
+                height: '100%',
+                margin: '7px',
+                padding: '15px',
+              }}
+            >
+              <h2>{rowState.title}</h2>
+              <h3>By {rowState.author_name}</h3>
+            </div>
           </FrontContentWrapper>
           {/* <p>{rowState.}</p> */}
           <BackCoverBrown isOpen={isOpen} />
@@ -40,8 +52,7 @@ const CenterWrapper = styled.div`
 const FrontContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 25px;
+  justify-content: center !important;
   height: 100%;
 `;
 
