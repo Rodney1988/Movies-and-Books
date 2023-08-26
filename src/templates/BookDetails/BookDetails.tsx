@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Doc } from '../../types/types';
+import { pluralize } from '../../helpers/pluralize';
+const leatherLocalUrl = require('../../assets/book_leather.png');
+const leatherDarkLocalUrl = require('../../assets/book_leather_dark.png');
 
 interface Open {
   isOpen: boolean;
@@ -26,8 +29,8 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
             bottom: '0',
             top: '0',
             left: '0',
-            backgroundColor: '#3E2822',
-            boxShadow: ' inset 0 0 15px #ffd70030',
+            background: `url("${leatherDarkLocalUrl}")`,
+            boxShadow: ' inset 0 0 15px #000000a1',
           }}
         />
         <FrontCover onClick={handleCoverClick} isOpen={isOpen}>
@@ -37,22 +40,34 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                border: '2px dashed white',
                 height: '100%',
                 margin: '7px',
                 padding: '25px',
               }}
             >
               <h2>{rowState.title}</h2>
-              <h3>By {rowState.author_name}</h3>
+              <h3>By {rowState.author_name.join(', ')}</h3>
             </div>
           </FrontContentWrapper>
-          {/* <p>{rowState.}</p> */}
           <BackCoverBrown isOpen={isOpen} />
         </FrontCover>
-        <ContentWrapper>
-          <h3>Hi !!</h3>
-        </ContentWrapper>
+        <InsideWrapper>
+          <ContentWrapper>
+            <h3>{rowState.title}</h3>
+            <p>
+              {rowState.title} was written by {rowState.author_name} in{' '}
+              {rowState.publish_date.join('-')}.
+            </p>
+            <h5>Fun facts:</h5>
+            <p>
+              Available {pluralize('language', rowState.language.length)}:{' '}
+              {rowState.language.join(', ')}
+              <br />
+              {pluralize('Publisher', rowState.publisher.length)}:{' '}
+              {rowState.publisher.join(', ')}
+            </p>
+          </ContentWrapper>
+        </InsideWrapper>
       </BookWrapper>
     </CenterWrapper>
   );
@@ -100,7 +115,7 @@ const FrontCover = styled.div<{ isOpen: boolean }>`
   height: 100%;
   left: 49px;
   transform: ${({ isOpen }) =>
-    isOpen ? 'rotateY(-170deg)' : 'rotateY(-5deg)'};
+    isOpen ? 'rotateY(-160deg)' : 'rotateY(-5deg)'};
   transform-style: preserve-3d;
   transform-origin: left;
   transition: transform 0.6s;
@@ -108,7 +123,8 @@ const FrontCover = styled.div<{ isOpen: boolean }>`
   border-bottom-left-radius: 2px;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
-  background: #3E2822;
+  backgroundColor: brown;
+  background: url("${leatherLocalUrl}");
   box-shadow: ${({ isOpen }) =>
     isOpen
       ? `0px -10px 10px -5px rgba(0, 0, 0, 0.5),
@@ -127,7 +143,7 @@ const BackCoverBrown = styled.div<Open>`
   top: 0;
   width: 100%;
   height: 100%;
-  background: #3d2427;
+  background: url('${leatherLocalUrl}');
   transform-style: preserve-3d;
   transform-origin: left;
   border-top-left-radius: 2px;
@@ -137,12 +153,27 @@ const BackCoverBrown = styled.div<Open>`
   transform: translateZ(-1px);
 `;
 
-const ContentWrapper = styled.div`
+const InsideWrapper = styled.div`
+  font-family: cursive;
   height: 100%;
   width: 100%;
+  max-width: 400px;
   font-size: 22px;
   left: 5%;
   display: flex;
-  align-items: center;
   justify-content: center;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 75px;
+  & > h3,
+  h5 {
+    margin: 15px 0px;
+    text-decoration: underline;
+  }
+  & > p {
+    margin: 5px 0px;
+  }
 `;

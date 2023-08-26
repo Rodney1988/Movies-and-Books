@@ -53,7 +53,7 @@ export const EnhancedTableHead = ({ order, orderBy, onRequestSort }) => {
             direction={orderBy === 'first_publish_year' ? order : 'asc'}
             onClick={createSortHandler('first_publish_year')}
           >
-            {<b>First Publish (sorteable)</b>}
+            {<b>First Publish</b>}
             {orderBy === 'first_publish_year' ? (
               <StyledSpan>
                 {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
