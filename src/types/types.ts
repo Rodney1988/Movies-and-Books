@@ -23,6 +23,10 @@ export type RowNumber = {
   number: number;
 };
 
+export interface Open {
+  isOpen: boolean;
+}
+
 export interface ByBookTitle {
   numFound: number;
   start: number;
