@@ -6,7 +6,7 @@ The project is meant to send requests to two different APIs in order to obtain i
 The API's used were:
 
 -   [Open API](https://openlibrary.org/developers/api) for book data.
--   [IMDbOT](https://github.com/SpEcHiDe/IMDbOT) for movie data.
+-   [TMDB](https://www.themoviedb.org/) for movie data.
 
 ## Available Scripts and steps
 
