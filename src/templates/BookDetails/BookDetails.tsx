@@ -16,7 +16,21 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
   return (
     <CenterWrapper>
       <BookWrapper onClick={handleCoverClick}>
-        <FrontCoverWrapper onClick={handleCoverClick} isOpen={isOpen}>
+        {/* The left border of the book had to be done in inline styles */}
+        <div
+          style={{
+            position: 'absolute',
+            width: '50px', // Must be similar to the left attribute of front cover
+            borderTopLeftRadius: '3px',
+            borderBottomLeftRadius: '3px',
+            bottom: '0',
+            top: '0',
+            left: '0',
+            backgroundColor: '#7a5f4b',
+            boxShadow: ' inset 0 0 15px brown',
+          }}
+        />
+        <FrontCover onClick={handleCoverClick} isOpen={isOpen}>
           <FrontContentWrapper>
             <div
               style={{
@@ -26,7 +40,7 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
                 border: '2px dashed white',
                 height: '100%',
                 margin: '7px',
-                padding: '15px',
+                padding: '25px',
               }}
             >
               <h2>{rowState.title}</h2>
@@ -35,7 +49,7 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
           </FrontContentWrapper>
           {/* <p>{rowState.}</p> */}
           <BackCoverBrown isOpen={isOpen} />
-        </FrontCoverWrapper>
+        </FrontCover>
         <ContentWrapper>
           <h3>Hi !!</h3>
         </ContentWrapper>
@@ -59,14 +73,17 @@ const FrontContentWrapper = styled.div`
 const BookWrapper = styled.div`
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   min-height: 475px;
   height: 100%;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
-  background: #c7af8a; //paper color
+  background: #d4c6b0; //paper color
   margin-top: 50px;
-  perspective: 1000px;
+  box-shadow: 0px -10px 10px -5px rgba(0, 0, 0, 0.25),
+    0px 10px 10px -5px rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.1) 0px -50px 136px -28px inset;
+  perspective: 8000px;
   color: black;
   :hover {
     cursor: pointer;
@@ -76,14 +93,14 @@ const BookWrapper = styled.div`
   }
 `;
 
-const FrontCoverWrapper = styled.div<{ isOpen: boolean }>`
+const FrontCover = styled.div<{ isOpen: boolean }>`
   color: white;
   position: absolute;
-  width: 95%;
+  width: 89%;
   height: 100%;
-  left: 20px;
-  transform: ${(props) =>
-    props.isOpen ? 'rotateY(-170deg)' : 'rotateY(-15deg)'};
+  left: 49px;
+  transform: ${({ isOpen }) =>
+    isOpen ? 'rotateY(-170deg)' : 'rotateY(-5deg)'};
   transform-style: preserve-3d;
   transform-origin: left;
   transition: transform 0.6s;
@@ -92,11 +109,13 @@ const FrontCoverWrapper = styled.div<{ isOpen: boolean }>`
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
   background: #896952;
-  text-shadow: -1px -1px #a0785a;
+  box-shadow: ${({ isOpen }) =>
+    isOpen
+      ? `0px -10px 10px -5px rgba(0, 0, 0, 0.5),
+      0px 10px 10px -5px rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.1) 0px -50px 136px -28px inset;`
+      : ``} 
   font-weight: normal;
-  box-shadow: 0px -10px 10px -5px rgba(0, 0, 0, 0.5),
-    0px 10px 10px -5px rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0.1) 0px -50px 136px -28px inset;
   font-family: cursive;
   :hover {
     cursor: pointer;
