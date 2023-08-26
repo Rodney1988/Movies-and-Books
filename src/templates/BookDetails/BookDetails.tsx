@@ -26,8 +26,8 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
             bottom: '0',
             top: '0',
             left: '0',
-            backgroundColor: '#7a5f4b',
-            boxShadow: ' inset 0 0 15px brown',
+            backgroundColor: '#3E2822',
+            boxShadow: ' inset 0 0 15px #ffd70030',
           }}
         />
         <FrontCover onClick={handleCoverClick} isOpen={isOpen}>
@@ -108,7 +108,7 @@ const FrontCover = styled.div<{ isOpen: boolean }>`
   border-bottom-left-radius: 2px;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
-  background: #896952;
+  background: #3E2822;
   box-shadow: ${({ isOpen }) =>
     isOpen
       ? `0px -10px 10px -5px rgba(0, 0, 0, 0.5),
