@@ -30,7 +30,7 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
             top: '0',
             left: '0',
             background: `url("${leatherDarkLocalUrl}")`,
-            boxShadow: ' inset 0 0 15px #000000a1',
+            boxShadow: 'inset 0 0 15px #000000a1',
           }}
         />
         <FrontCover onClick={handleCoverClick} isOpen={isOpen}>
@@ -49,7 +49,7 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
               <h3>By {rowState.author_name.join(', ')}</h3>
             </div>
           </FrontContentWrapper>
-          <BackCoverBrown isOpen={isOpen} />
+          <BackCover isOpen={isOpen} />
         </FrontCover>
         <InsideWrapper>
           <ContentWrapper>
@@ -138,7 +138,7 @@ const FrontCover = styled.div<{ isOpen: boolean }>`
   }
 `;
 
-const BackCoverBrown = styled.div<Open>`
+const BackCover = styled.div<Open>`
   position: absolute;
   top: 0;
   width: 100%;
@@ -150,6 +150,7 @@ const BackCoverBrown = styled.div<Open>`
   border-bottom-left-radius: 2px;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
+  box-shadow: 15px 0 15px rgb(0 0 0 / 22%) inset;
   transform: translateZ(-1px);
 `;
 
