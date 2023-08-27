@@ -40,11 +40,11 @@ export const BooksTable = () => {
 
   const [searchParams] = useSearchParams();
 
-  const searchQuery = searchParams.get('searchQuery') || '';
+  const searchBooksQuery = searchParams.get('searchBooksQuery') || '';
 
   const { data, isLoading, isError, error } = useQuery(
-    ['moviesQuery', searchQuery],
-    () => getBooksByTitles(searchQuery)
+    ['moviesQuery', searchBooksQuery],
+    () => getBooksByTitles(searchBooksQuery)
   );
 
   if (isLoading) {
@@ -79,8 +79,8 @@ export const BooksTable = () => {
   }
 
   function stableSort(array: Doc[], comparator: any) {
-    const stabilizedThis = array.map((el: any, index: any) => [el, index]);
-    stabilizedThis.sort((a: any, b: any) => {
+    const stabilizedThis = array?.map((el: any, index: any) => [el, index]);
+    stabilizedThis?.sort((a: any, b: any) => {
       const order = comparator(a[0], b[0]);
       if (order !== 0) return order;
       return a[1] - b[1];

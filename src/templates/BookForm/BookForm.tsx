@@ -19,11 +19,11 @@ export const BookForm = ({
   const [searchParams, setSearchParams] = useSearchParams();
   const [onChangeVal, setOnChangeVal] = useState<string>('');
 
-  const searchQuery = searchParams.get('searchQuery') || '';
+  const searchBooksQuery = searchParams.get('searchBooksQuery') || '';
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Update URL parameter with search value
-    setSearchParams({ searchQuery: onChangeVal });
+    setSearchParams({ searchBooksQuery: onChangeVal });
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOnChangeVal(event.target.value);
@@ -32,7 +32,7 @@ export const BookForm = ({
     if (event.key === 'Enter') {
       event.preventDefault();
       // Update URL parameter with search value
-      setSearchParams({ searchQuery: onChangeVal });
+      setSearchParams({ searchBooksQuery: onChangeVal });
     }
   };
 
@@ -63,7 +63,7 @@ export const BookForm = ({
           </StyledButton>
         </div>
       </form>
-      {!!searchQuery && <BooksTable />}
+      {!!searchBooksQuery && <BooksTable />}
     </SearchResultsWrapper>
   );
 };

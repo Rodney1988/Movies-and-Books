@@ -35,7 +35,7 @@ function App() {
           <Routes>
             <Route path="/" element={<SearchObjects />} />
             <Route path="/movies/:searchQuery/:id" element={<Details />} />
-            <Route path="/books/:searchQuery/:id" element={<Details />} />
+            <Route path="/books/:searchBooksQuery/:id" element={<Details />} />
           </Routes>
         </QueryClientProvider>
       </BrowserRouter>
