@@ -44,12 +44,7 @@ export const BooksTable = () => {
 
   const { data, isLoading, isError, error } = useQuery(
     ['moviesQuery', searchQuery],
-    () => getBooksByTitles(searchQuery),
-    {
-      enabled: !!searchQuery, // Only runs the query when this is true
-      keepPreviousData: true,
-      staleTime: 60000000,
-    }
+    () => getBooksByTitles(searchQuery)
   );
 
   if (isLoading) {
