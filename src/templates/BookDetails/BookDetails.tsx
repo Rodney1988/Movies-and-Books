@@ -10,7 +10,8 @@ import {
   StyledFrontStyledContentWrapper,
   StyledInsideWrapper,
 } from './BookDetails.styled';
-import { CustomBackButton } from '../../atoms/CustomBackButton/CustomBackButton';
+import { CustomButton } from '../../atoms/CustomButton/CustomButton';
+import { To } from 'react-router-dom';
 
 const leatherDarkLocalUrl = require('../../assets/book_leather_dark.png');
 
@@ -22,7 +23,10 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
   };
   return (
     <>
-      <CustomBackButton />
+      <div style={{ display: 'flex' }}>
+        <CustomButton content={'Back to Table'} navigateTo={-1 as To} />
+        <CustomButton content={'To Home'} navigateTo={'/' as To} />
+      </div>
       <StyledCenterWrapper>
         <StyledBookWrapper onClick={handleCoverClick}>
           {/* The left border of the book had to be done in inline styles */}
