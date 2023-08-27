@@ -36,8 +36,7 @@ export const BookForm = ({
     }
   };
 
-  const valueIsEmpty = onChangeVal === '';
-
+  const buttonIsDisabled = !searchIsSelected;
   return (
     <SearchResultsWrapper>
       <form onSubmit={handleSubmit}>
@@ -57,7 +56,7 @@ export const BookForm = ({
           <StyledButton
             variant="contained"
             type="submit"
-            disabled={valueIsEmpty && !searchIsSelected}
+            disabled={buttonIsDisabled}
           >
             Search
           </StyledButton>

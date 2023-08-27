@@ -12,7 +12,16 @@ selected dropdown.
 export const SearchObjects = () => {
   const [searchType, setSearchType] = useState('');
   const [, setSearchParams] = useSearchParams();
+  console.log('searchtype', searchType);
+  let formElement;
 
+  if (searchType === 'movies') {
+    formElement = <MovieForm searchIsSelected={!!searchType} />;
+  } else if (searchType === 'books') {
+    formElement = <BookForm searchIsSelected={!!searchType} />;
+  } else {
+    formElement = <BookForm searchIsSelected={false} />;
+  }
   return (
     <>
       <FormControl sx={{ margin: '25px 0 0 5px', width: '200px' }}>
@@ -30,11 +39,7 @@ export const SearchObjects = () => {
           <MenuItem value={'books'}>Books</MenuItem>
         </Select>
       </FormControl>
-      {searchType === 'movies' ? (
-        <MovieForm searchIsSelected={!!searchType} />
-      ) : (
-        <BookForm searchIsSelected={!!searchType} />
-      )}
+      {formElement}
     </>
   );
 };

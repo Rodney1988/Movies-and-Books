@@ -63,7 +63,10 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
               <h3>{rowState?.title}</h3>
               <p>
                 {rowState?.title} was written by {rowState?.author_name} in{' '}
-                {rowState?.publish_date.join('-')}.
+                {rowState?.publish_date
+                  ? rowState?.publish_date.join('-')
+                  : 'an unknown time'}
+                .
               </p>
               <h5>Fun facts:</h5>
               <p>
