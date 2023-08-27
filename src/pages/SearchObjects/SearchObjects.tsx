@@ -12,7 +12,6 @@ selected dropdown.
 export const SearchObjects = () => {
   const [searchType, setSearchType] = useState('');
   const [, setSearchParams] = useSearchParams();
-  console.log('searchtype', searchType);
   let formElement;
 
   if (searchType === 'movies') {

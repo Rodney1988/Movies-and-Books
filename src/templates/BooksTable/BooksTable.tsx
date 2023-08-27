@@ -24,6 +24,7 @@ import { EnhancedTableHead } from '../../organisms/EnhancedTableHead/EnhancedTab
 import { useQuery } from 'react-query';
 import { getBooksByTitles } from '../../api/Api';
 import { formatMultipleValues } from '../../helpers/formatMultipleValues';
+import { useSortedAndSlicedDocsMemoized } from '../../hooks/useSortedAndSlicedDocsMemoized';
 
 /*
 This component renders a table for the books based on the URL Param searh value.
@@ -48,6 +49,14 @@ export const BooksTable = () => {
     () => getBooksByTitles(searchBooksQuery)
   );
 
+  const sortedAndSlicedDocs = useSortedAndSlicedDocsMemoized(
+    data,
+    order,
+    orderBy,
+    page,
+    rowsPerPage
+  );
+
   if (isLoading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -62,32 +71,6 @@ export const BooksTable = () => {
   }
 
   if (!data) return <></>;
-
-  function descendingComparator(a: any, b: any, orderBy: any) {
-    if (b[orderBy] < a[orderBy]) {
-      return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-      return 1;
-    }
-    return 0;
-  }
-
-  function getComparator(order: any, orderBy: any) {
-    return order === 'desc'
-      ? (a: any, b: any) => descendingComparator(a, b, orderBy)
-      : (a: any, b: any) => -descendingComparator(a, b, orderBy);
-  }
-
-  function stableSort(array: Doc[], comparator: any) {
-    const stabilizedThis = array?.map((el: any, index: any) => [el, index]);
-    stabilizedThis?.sort((a: any, b: any) => {
-      const order = comparator(a[0], b[0]);
-      if (order !== 0) return order;
-      return a[1] - b[1];
-    });
-    return stabilizedThis.map((el: any) => el[0]);
-  }
 
   const handleRequestSort = (property: string) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -109,47 +92,6 @@ export const BooksTable = () => {
     setPage(0);
   };
 
-  const bookDocsArraySorteable = stableSort(
-    data.docs,
-    getComparator(order, orderBy)
-  ).map((row, index) => {
-    const labelId = `enhanced-table-checkbox-${index}`;
-    return (
-      <StyledBodyRow
-        key={labelId}
-        onClick={() => {
-          const docKey = last(row.key.split('/'));
-
-          return navigate(`/books/${searchParams}/${docKey}`, {
-            state: { rowData: row as Doc },
-          });
-        }}
-      >
-        <TableCell>{row.title}</TableCell>
-        <TableCell>{formatMultipleValues(row.author_name)}</TableCell>
-        <AdditionalCellNarrow>
-          {formatMultipleValues(row.contributor)}
-        </AdditionalCellNarrow>
-        <AdditionalCellNarrow>{row.first_publish_year}</AdditionalCellNarrow>
-        <AdditionalCellNarrow>
-          {formatMultipleValues(row.language)}
-        </AdditionalCellNarrow>
-        <AdditionalCellNarrow>
-          {capitalize(row.ebook_access)}
-        </AdditionalCellNarrow>
-        <AdditionalCell>{formatMultipleValues(row.id_amazon)}</AdditionalCell>
-        <AdditionalCell>{formatMultipleValues(row.subject)}</AdditionalCell>
-        <AdditionalCell>{row.time}</AdditionalCell>
-      </StyledBodyRow>
-    );
-  });
-
-  // Slicing logic to avoid too many rows to be rendered at once, the others get paginated
-  const slicedDocs = bookDocsArraySorteable.slice(
-    page * rowsPerPage,
-    page * rowsPerPage + rowsPerPage
-  );
-
   const finalBookData = (
     <>
       <StyledCount>
@@ -164,8 +106,39 @@ export const BooksTable = () => {
               onRequestSort={handleRequestSort}
             />
             <TableBody>
-              {/* Here is the where the sliced doc objects might get sliced */}
-              {rowsPerPage > 0 && slicedDocs}
+              {sortedAndSlicedDocs.map((row, index) => (
+                <StyledBodyRow
+                  key={index}
+                  onClick={() => {
+                    const docKey = last(row.key.split('/'));
+                    navigate(`/books/${searchParams}/${docKey}`, {
+                      state: { rowData: row as Doc },
+                    });
+                  }}
+                >
+                  <TableCell>{row.title}</TableCell>
+                  <TableCell>{formatMultipleValues(row.author_name)}</TableCell>
+                  <AdditionalCellNarrow>
+                    {formatMultipleValues(row.contributor)}
+                  </AdditionalCellNarrow>
+                  <AdditionalCellNarrow>
+                    {row.first_publish_year}
+                  </AdditionalCellNarrow>
+                  <AdditionalCellNarrow>
+                    {formatMultipleValues(row.language)}
+                  </AdditionalCellNarrow>
+                  <AdditionalCellNarrow>
+                    {capitalize(row.ebook_access)}
+                  </AdditionalCellNarrow>
+                  <AdditionalCell>
+                    {formatMultipleValues(row.id_amazon)}
+                  </AdditionalCell>
+                  <AdditionalCell>
+                    {formatMultipleValues(row.subject)}
+                  </AdditionalCell>
+                  <AdditionalCell>{row.time}</AdditionalCell>
+                </StyledBodyRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
@@ -189,6 +162,7 @@ export const BooksTable = () => {
       </Paper>
     </>
   );
+
   return (
     <div>{data?.numFound ? finalBookData : <pre>No book data found</pre>}</div>
   );
