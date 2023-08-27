@@ -23,6 +23,7 @@ import { TablePaginationActions } from '../../organisms/TablePaginationActions/T
 import { EnhancedTableHead } from '../../organisms/EnhancedTableHead/EnhancedTableHead';
 import { useQuery } from 'react-query';
 import { getBooksByTitles } from '../../api/Api';
+import { formatMultipleValues } from '../../helpers/formatMultipleValues';
 
 /*
 This component renders a table for the books based on the URL Param searh value.
@@ -191,10 +192,4 @@ export const BooksTable = () => {
   return (
     <div>{data?.numFound ? finalBookData : <pre>No book data found</pre>}</div>
   );
-};
-
-const formatMultipleValues = (valueArray?: string[]) => {
-  return valueArray?.map((string, i) => {
-    return <div key={string + i}>{string}</div>;
-  });
 };

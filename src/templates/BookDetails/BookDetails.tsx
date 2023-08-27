@@ -10,12 +10,11 @@ import {
   StyledFrontStyledContentWrapper,
   StyledInsideWrapper,
 } from './BookDetails.styled';
-import { useNavigate } from 'react-router-dom';
+import { CustomBackButton } from '../../atoms/CustomBackButton/CustomBackButton';
 
 const leatherDarkLocalUrl = require('../../assets/book_leather_dark.png');
 
 export const BookDetails = ({ rowState }: { rowState: Doc }) => {
-  const navigate = useNavigate();
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleCoverClick = () => {
@@ -23,7 +22,7 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
   };
   return (
     <>
-      <button onClick={() => navigate(-1)}>Go Back</button>
+      <CustomBackButton />
       <StyledCenterWrapper>
         <StyledBookWrapper onClick={handleCoverClick}>
           {/* The left border of the book had to be done in inline styles */}
