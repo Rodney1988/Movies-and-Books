@@ -23,6 +23,8 @@ import { CircularProgress } from '@mui/material';
 import { singleMovieSearch } from '../../api/Api';
 import { useQuery } from 'react-query';
 import ReactPlayer from 'react-player/youtube';
+import { CustomButton } from '../../atoms/CustomButton/CustomButton';
+import { To } from 'react-router-dom';
 
 const Clapperboard = ({ children }: any) => (
   <StyledClapperContainer>
@@ -71,68 +73,75 @@ export const MovieDetails = ({
     });
   }
   return (
-    <StyledCenterChildrenDiv>
-      <Clapperboard>
-        <section style={{ position: 'absolute' }}>
-          <StyledTriangle>
-            <CircleOne />
-            <CircleTwo />
-            <CircleThree />
-          </StyledTriangle>
-        </section>
-        <StyledStyledClapperPieceBottom />
-        <StyledCenterChildrenSection>
-          {/* {Actual content begins here} */}
-          <StyledGridContainer>
-            <CellOneRowOne src={movieUrl}></CellOneRowOne>
-            <CellTwoRowOne>
-              <StyledCellContainer>
-                <h2>{movieState.title}</h2>
-                <h4>{data.tagline}</h4>
-                <pre>{`Status: ${data.status}`}</pre>
-                <pre>{`Release: ${movieState.release_date}`}</pre>
-                <pre>{`Original language: ${movieState.original_language.toUpperCase()}`}</pre>
-                <pre>{`TMDB Popularity: ${Math.round(
-                  movieState.popularity
-                )}`}</pre>
-                <pre>{`Rating: ${movieState.vote_average} / 10`}</pre>
-              </StyledCellContainer>
-            </CellTwoRowOne>
-            <StyledHr number={2} />
-            <CellOneRowTwo>
-              <StyledCellContainer>
-                {
-                  <pre>
-                    {movieState.adult
-                      ? 'Only for adults!'
-                      : 'Available for all ages!'}
-                  </pre>
-                }
-                {<pre>Genres: {genresArray.join(', ')}</pre>}
-                <pre>{`Butget: $${data.budget.toLocaleString()}`}</pre>
-                <pre>{`Revenue: $${data.revenue.toLocaleString()}`}</pre>
-              </StyledCellContainer>
-            </CellOneRowTwo>
-            <CellTwoRowTwo>
-              {youtubeVideoObj ? (
-                <ReactPlayer
-                  url={`https://www.youtube.com/watch?v=${youtubeVideoObj?.key}`}
-                  height={150}
-                  width={200}
-                />
-              ) : (
-                <pre>No videos available</pre>
-              )}
-            </CellTwoRowTwo>
-            <StyledHr number={4} />
-            <CellOneRowThree>
-              <StyledCellContainer>
-                {`${movieState.overview}`}
-              </StyledCellContainer>
-            </CellOneRowThree>
-          </StyledGridContainer>
-        </StyledCenterChildrenSection>
-      </Clapperboard>
-    </StyledCenterChildrenDiv>
+    <>
+      {' '}
+      <div style={{ display: 'flex' }}>
+        <CustomButton content={'Back to Movies'} navigateTo={-1 as To} />
+        <CustomButton content={'To Home'} navigateTo={'/' as To} />
+      </div>
+      <StyledCenterChildrenDiv>
+        <Clapperboard>
+          <section style={{ position: 'absolute' }}>
+            <StyledTriangle>
+              <CircleOne />
+              <CircleTwo />
+              <CircleThree />
+            </StyledTriangle>
+          </section>
+          <StyledStyledClapperPieceBottom />
+          <StyledCenterChildrenSection>
+            {/* {Actual content begins here} */}
+            <StyledGridContainer>
+              <CellOneRowOne src={movieUrl}></CellOneRowOne>
+              <CellTwoRowOne>
+                <StyledCellContainer>
+                  <h2>{movieState.title}</h2>
+                  <h4>{data.tagline}</h4>
+                  <pre>{`Status: ${data.status}`}</pre>
+                  <pre>{`Release: ${movieState.release_date}`}</pre>
+                  <pre>{`Original language: ${movieState.original_language.toUpperCase()}`}</pre>
+                  <pre>{`TMDB Popularity: ${Math.round(
+                    movieState.popularity
+                  )}`}</pre>
+                  <pre>{`Rating: ${movieState.vote_average} / 10`}</pre>
+                </StyledCellContainer>
+              </CellTwoRowOne>
+              <StyledHr number={2} />
+              <CellOneRowTwo>
+                <StyledCellContainer>
+                  {
+                    <pre>
+                      {movieState.adult
+                        ? 'Only for adults!'
+                        : 'Available for all ages!'}
+                    </pre>
+                  }
+                  {<pre>Genres: {genresArray.join(', ')}</pre>}
+                  <pre>{`Butget: $${data.budget.toLocaleString()}`}</pre>
+                  <pre>{`Revenue: $${data.revenue.toLocaleString()}`}</pre>
+                </StyledCellContainer>
+              </CellOneRowTwo>
+              <CellTwoRowTwo>
+                {youtubeVideoObj ? (
+                  <ReactPlayer
+                    url={`https://www.youtube.com/watch?v=${youtubeVideoObj?.key}`}
+                    height={150}
+                    width={200}
+                  />
+                ) : (
+                  <pre>No videos available</pre>
+                )}
+              </CellTwoRowTwo>
+              <StyledHr number={4} />
+              <CellOneRowThree>
+                <StyledCellContainer>
+                  {`${movieState.overview}`}
+                </StyledCellContainer>
+              </CellOneRowThree>
+            </StyledGridContainer>
+          </StyledCenterChildrenSection>
+        </Clapperboard>
+      </StyledCenterChildrenDiv>
+    </>
   );
 };
