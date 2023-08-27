@@ -98,6 +98,7 @@ export const StyledContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 75px;
+  margin-bottom: 15px;
   & > h3,
   h5 {
     margin: 15px 0px;
