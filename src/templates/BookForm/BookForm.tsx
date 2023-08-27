@@ -8,7 +8,7 @@ import {
 import { useSearchParams } from 'react-router-dom';
 
 /*
-The component below sets up the 'book' search input form and renders cards based on that input.
+The component below sets up the 'book' search input form and provides BooksTable the particular form query.
 */
 
 export const BookForm = ({
