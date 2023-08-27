@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Table,
   TableBody,
@@ -6,11 +6,12 @@ import {
   Paper,
   TableCell,
   TablePagination,
+  CircularProgress,
 } from '@mui/material';
 import { capitalize, last } from 'lodash';
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 
-import { ByBookTitle, Doc } from '../../types/types';
+import { Doc } from '../../types/types';
 import { pluralize } from '../../helpers/pluralize';
 import {
   AdditionalCell,
@@ -20,19 +21,16 @@ import {
 } from './BooksTable.styles';
 import { TablePaginationActions } from '../../organisms/TablePaginationActions/TablePaginationActions';
 import { EnhancedTableHead } from '../../organisms/EnhancedTableHead/EnhancedTableHead';
+import { useQuery } from 'react-query';
+import { getBooksByTitles } from '../../api/Api';
+import { formatMultipleValues } from '../../helpers/formatMultipleValues';
+import { useSortedAndSlicedDocsMemoized } from '../../hooks/useSortedAndSlicedDocsMemoized';
 
 /*
-This component renders a table for the books based on the 'searchValue' prop passed by the parent.
+This component renders a table for the books based on the URL Param searh value.
 */
-interface BooksTableProps {
-  searchedBooks: ByBookTitle;
-  searchValue: string;
-}
 
-export const BooksTable: React.FC<BooksTableProps> = ({
-  searchedBooks,
-  searchValue,
-}) => {
+export const BooksTable = () => {
   // States used for the pagination
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
@@ -41,36 +39,38 @@ export const BooksTable: React.FC<BooksTableProps> = ({
   const [orderBy, setOrderBy] = useState('title');
   // Navigate used to jump to 'Details' component on click
   const navigate = useNavigate();
-  const bookDocsArrayMemoized = useMemo(
-    () => searchedBooks.docs || [],
-    [searchedBooks.docs]
+
+  const [searchParams] = useSearchParams();
+
+  const searchBooksQuery = searchParams.get('searchBooksQuery') || '';
+
+  const { data, isLoading, isError, error } = useQuery(
+    ['moviesQuery', searchBooksQuery],
+    () => getBooksByTitles(searchBooksQuery)
   );
 
-  function descendingComparator(a: any, b: any, orderBy: any) {
-    if (b[orderBy] < a[orderBy]) {
-      return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-      return 1;
-    }
-    return 0;
+  const sortedAndSlicedDocs = useSortedAndSlicedDocsMemoized(
+    data,
+    order,
+    orderBy,
+    page,
+    rowsPerPage
+  );
+
+  if (isLoading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </div>
+    );
   }
 
-  const getComparatorMemoized = useCallback((order: any, orderBy: any) => {
-    return order === 'desc'
-      ? (a: any, b: any) => descendingComparator(a, b, orderBy)
-      : (a: any, b: any) => -descendingComparator(a, b, orderBy);
-  }, []);
-
-  function stableSort(array: Doc[], comparator: any) {
-    const stabilizedThis = array.map((el: any, index: any) => [el, index]);
-    stabilizedThis.sort((a: any, b: any) => {
-      const order = comparator(a[0], b[0]);
-      if (order !== 0) return order;
-      return a[1] - b[1];
-    });
-    return stabilizedThis.map((el: any) => el[0]);
+  if (isError) {
+    const issue: Error | null = error as Error;
+    return <pre>Error with fetching the books query: {issue.message}</pre>;
   }
+
+  if (!data) return <></>;
 
   const handleRequestSort = (property: string) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -92,63 +92,10 @@ export const BooksTable: React.FC<BooksTableProps> = ({
     setPage(0);
   };
 
-  // Memoize the result of stableSort
-  const bookDocsArraySorteableMemoized = useMemo(() => {
-    return stableSort(
-      bookDocsArrayMemoized,
-      getComparatorMemoized(order, orderBy)
-    ).map((row, index) => {
-      const labelId = `enhanced-table-checkbox-${index}`;
-
-      return (
-        <StyledBodyRow
-          key={labelId}
-          onClick={() => {
-            const docKey = last(row.key.split('/'));
-
-            return navigate(`/books/${searchValue}/${docKey}`, {
-              state: { rowData: row as Doc },
-            });
-          }}
-        >
-          <TableCell>{row.title}</TableCell>
-          <TableCell>{formatMultipleValues(row.author_name)}</TableCell>
-          <AdditionalCellNarrow>
-            {formatMultipleValues(row.contributor)}
-          </AdditionalCellNarrow>
-          <AdditionalCellNarrow>{row.first_publish_year}</AdditionalCellNarrow>
-          <AdditionalCellNarrow>
-            {formatMultipleValues(row.language)}
-          </AdditionalCellNarrow>
-          <AdditionalCellNarrow>
-            {capitalize(row.ebook_access)}
-          </AdditionalCellNarrow>
-          <AdditionalCell>{formatMultipleValues(row.id_amazon)}</AdditionalCell>
-          <AdditionalCell>{formatMultipleValues(row.subject)}</AdditionalCell>
-          <AdditionalCell>{row.time}</AdditionalCell>
-        </StyledBodyRow>
-      );
-    });
-  }, [
-    bookDocsArrayMemoized,
-    getComparatorMemoized,
-    order,
-    orderBy,
-    navigate,
-    searchValue,
-  ]);
-
-  // Slicing logic to avoid too many rows to be rendered at once, the others get paginated
-  const slicedDocs = bookDocsArraySorteableMemoized.slice(
-    page * rowsPerPage,
-    page * rowsPerPage + rowsPerPage
-  );
-
   const finalBookData = (
     <>
       <StyledCount>
-        {searchedBooks.numFound} {pluralize('book', searchedBooks.numFound)}{' '}
-        found
+        {data?.numFound} {pluralize('book', data?.numFound)} found
       </StyledCount>
       <Paper>
         <TableContainer>
@@ -159,8 +106,39 @@ export const BooksTable: React.FC<BooksTableProps> = ({
               onRequestSort={handleRequestSort}
             />
             <TableBody>
-              {/* Here is the where the sliced doc objects might get sliced */}
-              {rowsPerPage > 0 && slicedDocs}
+              {sortedAndSlicedDocs.map((row, index) => (
+                <StyledBodyRow
+                  key={index}
+                  onClick={() => {
+                    const docKey = last(row.key.split('/'));
+                    navigate(`/books/${searchParams}/${docKey}`, {
+                      state: { rowData: row as Doc },
+                    });
+                  }}
+                >
+                  <TableCell>{row.title}</TableCell>
+                  <TableCell>{formatMultipleValues(row.author_name)}</TableCell>
+                  <AdditionalCellNarrow>
+                    {formatMultipleValues(row.contributor)}
+                  </AdditionalCellNarrow>
+                  <AdditionalCellNarrow>
+                    {row.first_publish_year}
+                  </AdditionalCellNarrow>
+                  <AdditionalCellNarrow>
+                    {formatMultipleValues(row.language)}
+                  </AdditionalCellNarrow>
+                  <AdditionalCellNarrow>
+                    {capitalize(row.ebook_access)}
+                  </AdditionalCellNarrow>
+                  <AdditionalCell>
+                    {formatMultipleValues(row.id_amazon)}
+                  </AdditionalCell>
+                  <AdditionalCell>
+                    {formatMultipleValues(row.subject)}
+                  </AdditionalCell>
+                  <AdditionalCell>{row.time}</AdditionalCell>
+                </StyledBodyRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
@@ -168,7 +146,7 @@ export const BooksTable: React.FC<BooksTableProps> = ({
           rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
           component="div"
           colSpan={1}
-          count={bookDocsArrayMemoized ? bookDocsArrayMemoized.length : 0}
+          count={data ? data.docs.length : 0}
           rowsPerPage={rowsPerPage}
           page={page}
           SelectProps={{
@@ -186,14 +164,6 @@ export const BooksTable: React.FC<BooksTableProps> = ({
   );
 
   return (
-    <div>
-      {searchedBooks.numFound ? finalBookData : <pre>No book data found</pre>}
-    </div>
+    <div>{data?.numFound ? finalBookData : <pre>No book data found</pre>}</div>
   );
-};
-
-const formatMultipleValues = (valueArray?: string[]) => {
-  return valueArray?.map((string, i) => {
-    return <div key={string + i}>{string}</div>;
-  });
 };

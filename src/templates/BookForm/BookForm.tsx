@@ -5,12 +5,10 @@ import {
   StyledButton,
   StyledInputField,
 } from './BookForm.styles';
-import { getBooksByTitles } from '../../api/Api';
-import { CircularProgress } from '@mui/material';
-import { useQuery } from 'react-query';
+import { useSearchParams } from 'react-router-dom';
 
 /*
-The component below sets up the 'book' search input form and renders cards based on that input.
+The component below sets up the 'book' search input form and provides BooksTable the particular form query.
 */
 
 export const BookForm = ({
@@ -18,35 +16,14 @@ export const BookForm = ({
 }: {
   searchIsSelected: boolean;
 }) => {
-  const [finalSearchInputVal, setFinalSearchInputVal] = useState<string>('');
+  const [searchParams, setSearchParams] = useSearchParams();
   const [onChangeVal, setOnChangeVal] = useState<string>('');
-  const [searchFieldIsActive, setSearchFieldIsActive] =
-    useState<boolean>(false);
-  const { data, isLoading, isError, error } = useQuery(
-    ['moviesQuery', finalSearchInputVal],
-    () => getBooksByTitles(finalSearchInputVal),
-    {
-      enabled: searchFieldIsActive, // Only runs the query when searchFieldIsActive is true
-    }
-  );
 
-  if (isLoading) {
-    return (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <CircularProgress />
-      </div>
-    );
-  }
-
-  if (isError) {
-    const issue: Error | null = error as Error;
-    return <pre>Error with fetching the books query: {issue.message}</pre>;
-  }
-
+  const searchBooksQuery = searchParams.get('searchBooksQuery') || '';
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFinalSearchInputVal(onChangeVal);
-    setSearchFieldIsActive(true);
+    // Update URL parameter with search value
+    setSearchParams({ searchBooksQuery: onChangeVal });
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOnChangeVal(event.target.value);
@@ -54,13 +31,11 @@ export const BookForm = ({
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      setFinalSearchInputVal(onChangeVal);
-      setSearchFieldIsActive(true);
+      setSearchParams({ searchBooksQuery: onChangeVal });
     }
   };
 
-  const valueIsEmpty = onChangeVal === '';
-
+  const buttonIsDisabled = !searchIsSelected;
   return (
     <SearchResultsWrapper>
       <form onSubmit={handleSubmit}>
@@ -80,15 +55,13 @@ export const BookForm = ({
           <StyledButton
             variant="contained"
             type="submit"
-            disabled={valueIsEmpty && !searchIsSelected}
+            disabled={buttonIsDisabled}
           >
             Search
           </StyledButton>
         </div>
       </form>
-      {searchFieldIsActive && data && (
-        <BooksTable searchedBooks={data} searchValue={finalSearchInputVal} />
-      )}
+      {!!searchBooksQuery && <BooksTable />}
     </SearchResultsWrapper>
   );
 };
