@@ -1,5 +1,4 @@
 import { TMDBSearchResult } from '../../types/types';
-import React from 'react';
 import { truncate } from 'lodash';
 import {
   CardWrapper,
