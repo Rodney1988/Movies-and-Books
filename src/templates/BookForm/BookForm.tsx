@@ -11,11 +11,7 @@ import { useSearchParams } from 'react-router-dom';
 The component below sets up the 'book' search input form and provides BooksTable the particular form query.
 */
 
-export const BookForm = ({
-  searchIsSelected,
-}: {
-  searchIsSelected: boolean;
-}) => {
+export const BookForm = ({ searchType }: { searchType: string }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [onChangeVal, setOnChangeVal] = useState<string>('');
 
@@ -23,7 +19,7 @@ export const BookForm = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Update URL parameter with search value
-    setSearchParams({ searchBooksQuery: onChangeVal });
+    setSearchParams({ searchType, searchBooksQuery: onChangeVal });
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOnChangeVal(event.target.value);
@@ -35,7 +31,7 @@ export const BookForm = ({
     }
   };
 
-  const buttonIsDisabled = !searchIsSelected;
+  const buttonIsDisabled = !!!searchType;
   return (
     <SearchResultsWrapper>
       <form onSubmit={handleSubmit}>
