@@ -98,7 +98,7 @@ export const MovieDetails = ({
                   <h2>{movieState.title}</h2>
                   <h4>{data.tagline}</h4>
                   <pre>{`Status: ${data.status}`}</pre>
-                  <pre>{`Release: ${movieState.release_date}`}</pre>
+                  <pre>{`Release: ${movieState.release_date.split(', ')}`}</pre>
                   <pre>{`Original language: ${movieState.original_language.toUpperCase()}`}</pre>
                   <pre>{`TMDB Popularity: ${Math.round(
                     movieState.popularity

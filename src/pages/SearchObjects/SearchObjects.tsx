@@ -17,7 +17,7 @@ export const SearchObjects = () => {
   let formElement;
 
   if (searchTypeParam === 'movies') {
-    formElement = <MovieForm searchIsSelected={!!searchType} />;
+    formElement = <MovieForm searchType={searchType} />;
   } else if (searchTypeParam === 'books') {
     formElement = <BookForm searchType={searchType} />;
   }

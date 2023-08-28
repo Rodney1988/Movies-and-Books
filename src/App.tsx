@@ -34,7 +34,10 @@ function App() {
           </Typography>
           <Routes>
             <Route path="/" element={<SearchObjects />} />
-            <Route path="/movies/:searchQuery/:id" element={<Details />} />
+            <Route
+              path="/movies/:searchMoviesQuery/:id"
+              element={<Details />}
+            />
             <Route path="/books/:searchBooksQuery/:id" element={<Details />} />
           </Routes>
         </QueryClientProvider>

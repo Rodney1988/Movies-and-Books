@@ -16,6 +16,7 @@ export const BookForm = ({ searchType }: { searchType: string }) => {
   const [onChangeVal, setOnChangeVal] = useState<string>('');
 
   const searchBooksQuery = searchParams.get('searchBooksQuery') || '';
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Update URL parameter with search value

@@ -12,25 +12,42 @@ import {
   SubContent,
   Title,
 } from './MovieCards.styles';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { moviesSearch } from '../../api/Api';
+import { CircularProgress } from '@mui/material';
 
-interface MovieCardsProps {
-  searchedMovies: TMDBSearchResult[];
-  searchValue: string;
-}
-
-export const MovieCards: React.FC<MovieCardsProps> = ({
-  searchedMovies,
-  searchValue,
-}) => {
+export const MovieCards = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-  if (searchedMovies.length === 0) {
-    return <pre>No movie data found</pre>;
+  const searchMoviesQuery = searchParams.get('searchMoviesQuery') || '';
+
+  const { data, isLoading, isError, error } = useQuery(
+    ['moviesQuery', searchMoviesQuery],
+    () => moviesSearch(searchMoviesQuery)
+  );
+
+  if (isLoading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </div>
+    );
   }
+
+  if (isError) {
+    const issue: Error | null = error as Error;
+    return <pre>Error with fetching the movies query: {issue.message}</pre>;
+  }
+
+  if (!data) {
+    return <></>;
+  }
+
   return (
     <StyledFieldWrapperDiv>
-      {searchedMovies.map((movie) => {
+      {data.map((movie) => {
         if (movie.title && movie.release_date && movie.poster_path) {
           const id = movie.id;
           return (
@@ -58,7 +75,7 @@ export const MovieCards: React.FC<MovieCardsProps> = ({
                     </p>
                     <SeeMoreButton
                       onClick={() => {
-                        navigate(`movies/${searchValue}/${id}`, {
+                        navigate(`movies/${searchParams}/${id}`, {
                           state: { singleMovie: movie as TMDBSearchResult },
                         });
                       }}

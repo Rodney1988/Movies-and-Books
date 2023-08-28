@@ -45,7 +45,7 @@ export const BooksTable = () => {
   const searchBooksQuery = searchParams.get('searchBooksQuery') || '';
 
   const { data, isLoading, isError, error } = useQuery(
-    ['moviesQuery', searchBooksQuery],
+    ['booksQuery', searchBooksQuery],
     () => getBooksByTitles(searchBooksQuery)
   );
 
@@ -70,7 +70,9 @@ export const BooksTable = () => {
     return <pre>Error with fetching the books query: {issue.message}</pre>;
   }
 
-  if (!data) return <></>;
+  if (!data) {
+    return <></>;
+  }
 
   const handleRequestSort = (property: string) => {
     const isAsc = orderBy === property && order === 'asc';
