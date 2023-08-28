@@ -64,9 +64,9 @@ export const StyledFrontCover = styled.div<{ isOpen: boolean }>`
     isOpen
       ? `0px -10px 10px -5px rgba(0, 0, 0, 0.5),
       0px 10px 10px -5px rgba(0, 0, 0, 0.5),
-      -5px 0 5px -5px black,
+      -5px 0 5px -5px #000000d1,
       rgba(0, 0, 0, 0.1) 0px -50px 136px -28px inset;`
-      : `-5px 0 5px -5px #000000d1;`} 
+      : `-5px 0 5px -5px #00000078;`} 
   font-weight: normal;
   font-family: cursive;
   :hover {
