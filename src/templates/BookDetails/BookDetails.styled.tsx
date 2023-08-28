@@ -69,7 +69,7 @@ export const StyledFrontCover = styled.div<{ isOpen: boolean }>`
       rgba(0, 0, 0, 0.1) 0px -50px 136px -28px inset;`
       : `-5px 0 5px -5px #00000078, 5px 0 5px -2px rgba(0, 0, 0, 0.5);`} 
   font-weight: normal;
-  font-family: cursive;
+  font-family: 'Courgette', cursive;
   :hover {
     cursor: pointer;
   }
@@ -92,7 +92,7 @@ export const StyledBackCover = styled.div<Open>`
 `;
 
 export const StyledInsideWrapper = styled.div`
-  font-family: cursive;
+  font-family: 'Courgette', cursive;
   height: 100%;
   width: 100%;
   max-width: 400px;
