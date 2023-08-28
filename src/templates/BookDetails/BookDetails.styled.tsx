@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Open } from '../../types/types';
 const leatherLocalUrl = require('../../assets/book_leather.png');
+const cornerUrl = require('../../assets/gold_corner.png');
 
 export const StyledCenterWrapper = styled.div`
   display: flex;
@@ -114,4 +115,15 @@ export const StyledContentWrapper = styled.div`
   & > p {
     margin: 5px 0px;
   }
+`;
+
+export const StyledCorner = styled.div`
+  position: absolute;
+  right: -2.5px;
+  top: 0;
+  width: 30%;
+  height: 30%;
+  background-image: url('${cornerUrl}');
+  background-size: contain;
+  background-repeat: no-repeat;
 `;
