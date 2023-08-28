@@ -9,6 +9,7 @@ import {
   StyledFrontCover,
   StyledFrontStyledContentWrapper,
   StyledInsideWrapper,
+  StyledMoreInfoP,
 } from './BookDetails.styled';
 import { CustomButton } from '../../atoms/CustomButton/CustomButton';
 import { To } from 'react-router-dom';
@@ -57,6 +58,7 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
               >
                 <h2>{rowState?.title}</h2>
                 <h3>By {rowState?.author_name?.join(', ')}</h3>
+                <StyledMoreInfoP>{`More Information →`}</StyledMoreInfoP>
               </div>
             </StyledFrontStyledContentWrapper>
             <StyledBackCover isOpen={isOpen} />

@@ -14,6 +14,12 @@ export const StyledFrontStyledContentWrapper = styled.div`
   height: 100%;
 `;
 
+export const StyledMoreInfoP = styled.p`
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+`;
+
 export const StyledBookWrapper = styled.div`
   position: relative;
   width: 100%;
