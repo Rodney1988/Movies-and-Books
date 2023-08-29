@@ -28,6 +28,9 @@ export const CardWrapper = styled.div<ImageProps>`
       transform: translateY(-5px);
     }
   }
+  @media only screen and (max-width: 970px) {
+    transform: translateX(-10px);
+  }
 `;
 
 export const OverlayDiv = styled.div`
