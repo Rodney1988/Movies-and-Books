@@ -1,4 +1,4 @@
-# Assignment testing IMDB and OPEN API
+# Testing TMDB and OPEN API
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 The project is meant to send requests to two different APIs in order to obtain information about different books and movies.
