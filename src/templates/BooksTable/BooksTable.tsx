@@ -120,11 +120,11 @@ export const BooksTable = () => {
                 >
                   <TableCell>{row.title}</TableCell>
                   <TableCell>{formatMultipleValues(row.author_name)}</TableCell>
+                  <TableCell>{row.first_publish_year}</TableCell>
                   <AdditionalCellNarrow>
-                    {formatMultipleValues(row.contributor)}
-                  </AdditionalCellNarrow>
-                  <AdditionalCellNarrow>
-                    {row.first_publish_year}
+                    {formatMultipleValues(
+                      row.contributor ? row.contributor : ['(none)']
+                    )}
                   </AdditionalCellNarrow>
                   <AdditionalCellNarrow>
                     {formatMultipleValues(row.language)}

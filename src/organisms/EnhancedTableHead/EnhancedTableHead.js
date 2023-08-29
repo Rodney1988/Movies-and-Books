@@ -40,10 +40,7 @@ export const EnhancedTableHead = ({ order, orderBy, onRequestSort }) => {
         <StyledHeaderCell>
           <b>Author</b>
         </StyledHeaderCell>
-        <AdditionalHeaderCellNarrow>
-          <b>Contributors</b>
-        </AdditionalHeaderCellNarrow>
-        <AdditionalHeaderCellNarrow
+        <StyledHeaderCell
           key="first_publish_year"
           sortDirection={orderBy === 'first_publish_year' ? order : false}
           onClick={createSortHandler('first_publish_year')}
@@ -60,6 +57,9 @@ export const EnhancedTableHead = ({ order, orderBy, onRequestSort }) => {
               </StyledSpan>
             ) : null}
           </TableSortLabel>
+        </StyledHeaderCell>
+        <AdditionalHeaderCellNarrow>
+          <b>Contributors</b>
         </AdditionalHeaderCellNarrow>
         <AdditionalHeaderCellNarrow>
           <b>Languages</b>
