@@ -1,10 +1,9 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Typography } from '@mui/material';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { SearchObjects } from './pages/SearchObjects/SearchObjects';
 import { Details } from './pages/Details/Details';
-// import { Details } from "./pages/Details";
+import { NavBar } from './templates/NavBar/Navbar';
 
 // Set up the React-Query client
 const queryClient = new QueryClient({
@@ -22,16 +21,7 @@ function App() {
     <div>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <Typography
-            variant="h3"
-            sx={{
-              color: '#494947',
-              fontFamily: 'Open Sans',
-              marginLeft: '5px',
-            }}
-          >
-            Movies - Books Explorer
-          </Typography>
+          <NavBar />
           <Routes>
             <Route path="/" element={<SearchObjects />} />
             <Route

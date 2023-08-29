@@ -75,9 +75,8 @@ export const MovieDetails = ({
   return (
     <>
       {' '}
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', marginTop: '10px', marginLeft: '15px' }}>
         <CustomButton content={'Back to Movies'} navigateTo={-1 as To} />
-        <CustomButton content={'To Home'} navigateTo={'/' as To} />
       </div>
       <StyledCenterChildrenDiv>
         <Clapperboard>

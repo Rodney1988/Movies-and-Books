@@ -25,9 +25,8 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
   };
   return (
     <>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', marginTop: '10px', marginLeft: '15px' }}>
         <CustomButton content={'Back to Table'} navigateTo={-1 as To} />
-        <CustomButton content={'To Home'} navigateTo={'/' as To} />
       </div>
       <StyledCenterWrapper>
         <StyledBookWrapper onClick={handleCoverClick}>
