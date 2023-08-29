@@ -22,7 +22,7 @@ export const CardWrapper = styled.div<ImageProps>`
   height: 525px;
   :hover {
     .content {
-      transform: translateY(-70px);
+      transform: translateY(-95px);
     }
     .sub-content {
       transform: translateY(-5px);

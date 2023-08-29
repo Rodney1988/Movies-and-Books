@@ -63,13 +63,13 @@ export const MovieCards = () => {
                 <Content className="content">
                   <Title>
                     {movie.title
-                      ? truncate(movie.title, { length: 45 })
+                      ? truncate(movie.title, { length: 25 })
                       : 'This movie has no title...'}
                   </Title>
                   <SubContent className="sub-content">
                     <p className="text">
                       {movie.overview
-                        ? truncate(movie.overview, { length: 200 })
+                        ? truncate(movie.overview, { length: 150 })
                         : 'Unfortunately this movie has no description...'}
                     </p>
                     <SeeMoreButton
