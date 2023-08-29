@@ -99,7 +99,7 @@ export const BooksTable = () => {
       <StyledCount>
         {data?.numFound} {pluralize('book', data?.numFound)} found
       </StyledCount>
-      <Paper>
+      <Paper sx={{ marginLeft: '10px' }}>
         <TableContainer>
           <Table>
             <EnhancedTableHead
