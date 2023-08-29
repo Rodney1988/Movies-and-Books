@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { SearchObjects } from './pages/SearchObjects/SearchObjects';
 import { Details } from './pages/Details/Details';
-import { NavBar } from './templates/NavBar/Navbar';
+import { NavBar } from './templates/NavBar/NavBar';
 
 // Set up the React-Query client
 const queryClient = new QueryClient({
