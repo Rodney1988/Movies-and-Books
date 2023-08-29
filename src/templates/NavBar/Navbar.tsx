@@ -55,8 +55,8 @@ export const NavBar = () => {
           </NavLinkStyled>
         </NavMenuItem>
         <NavMenuItem>
-          <NavLinkStyled to="/about" aria-label="About">
-            About
+          <NavLinkStyled to="/login" aria-label="Login">
+            Login
           </NavLinkStyled>
         </NavMenuItem>
       </NavMenu>

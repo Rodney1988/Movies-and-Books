@@ -26,9 +26,9 @@ export const BookForm = ({ searchType }: { searchType: string }) => {
     setOnChangeVal(event.target.value);
   };
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && searchType) {
       event.preventDefault();
-      setSearchParams({ searchBooksQuery: onChangeVal });
+      setSearchParams({ searchType, searchBooksQuery: onChangeVal });
     }
   };
 
