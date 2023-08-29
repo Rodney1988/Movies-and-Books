@@ -6,13 +6,15 @@ const cornerUrl = require('../../assets/gold_corner.png');
 export const StyledCenterWrapper = styled.div`
   display: flex;
   justify-content: center;
+  padding: 15px;
 `;
 
-export const StyledFrontStyledContentWrapper = styled.div`
+export const StyledFrontContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center !important;
   height: 100%;
+  translatex: ;
 `;
 
 export const StyledMoreInfoP = styled.p`
@@ -40,7 +42,8 @@ export const StyledBookWrapper = styled.div`
     cursor: pointer;
   }
   @media only screen and (max-width: 600px) {
-    max-width: 250px;
+    max-width: 280px;
+    transform: translateX(-12px);
   }
 `;
 

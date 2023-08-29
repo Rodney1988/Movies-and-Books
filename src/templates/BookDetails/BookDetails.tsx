@@ -7,7 +7,7 @@ import {
   StyledCenterWrapper,
   StyledContentWrapper,
   StyledFrontCover,
-  StyledFrontStyledContentWrapper,
+  StyledFrontContentWrapper,
   StyledInsideWrapper,
   StyledMoreInfoP,
   StyledCorner,
@@ -25,7 +25,13 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
   };
   return (
     <>
-      <div style={{ display: 'flex', marginTop: '10px', marginLeft: '15px' }}>
+      <div
+        style={{
+          display: 'flex',
+          marginTop: '10px',
+          marginLeft: '15px',
+        }}
+      >
         <CustomButton content={'Back to Table'} navigateTo={-1 as To} />
       </div>
       <StyledCenterWrapper>
@@ -45,7 +51,7 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
             }}
           />
           <StyledFrontCover onClick={handleCoverClick} isOpen={isOpen}>
-            <StyledFrontStyledContentWrapper>
+            <StyledFrontContentWrapper>
               <div
                 style={{
                   display: 'flex',
@@ -61,7 +67,7 @@ export const BookDetails = ({ rowState }: { rowState: Doc }) => {
                 <h3>By {rowState?.author_name?.join(', ')}</h3>
                 <StyledMoreInfoP>{`More Information →`}</StyledMoreInfoP>
               </div>
-            </StyledFrontStyledContentWrapper>
+            </StyledFrontContentWrapper>
             <StyledBackCover isOpen={isOpen} />
           </StyledFrontCover>
           <StyledInsideWrapper>
