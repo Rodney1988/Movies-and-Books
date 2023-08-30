@@ -66,6 +66,7 @@ export const MovieDetails = ({
       return video.site === 'YouTube';
     });
   }
+  console.log(movieState);
   return (
     <>
       <div style={{ display: 'flex', marginTop: '10px', marginLeft: '15px' }}>
@@ -142,20 +143,18 @@ export const MovieDetails = ({
 
 export const StyledTopSection = styled.section`
   display: flex;
-  justify-content: space-evenly;
   margin: 5px 0 20px 0;
 `;
 
 export const StyledMidSection = styled.section`
   display: flex;
-  justify-content: space-evenly;
   margin: 5px 0 20px 0;
 `;
 
 export const StyledBotSection = styled.section`
   display: flex;
-  justify-content: space-evenly;
-  // margin: 5px 0 20px 0;
+  margin-left: 20px;
+  width: 100%;
 `;
 
 export const StyledMainSectionContainer = styled.section`
@@ -174,30 +173,38 @@ export const StyledInfoSection = styled.section`
   max-height: 300px;
   padding-left: 20px;
   overflow: scroll;
+  width: 50%;
   h4 {
     font-style: italic;
+  }
+  @media only screen and (max-width: 440px) {
+    width: 100%;
   }
 `;
 
 export const StyledImageSection = styled.section<ImageProps>`
-  border: 2px dashed red;
-
   width: 40%;
   background-image: ${({ src }) => `url('${src}')`};
   background-size: cover;
   @media only screen and (max-width: 440px) {
-    display: none;
+    width: 35%;
+    margin-right: 20px;
   }
 `;
 
 export const StyledSubInfoSection = styled.section`
   color: white;
+  width: 50%;
   max-height: 500px;
-  padding-left: 20px;
   overflow: scroll;
+  padding-left: 20px;
+  @media only screen and (max-width: 360px) {
+    width: 100%;
+  }
 `;
 
 export const StyledVideoSection = styled.section`
+  // width: 10%;
   @media only screen and (max-width: 445px) {
     padding-right: 10px;
   }
@@ -207,6 +214,7 @@ export const StyledVideoSection = styled.section`
 `;
 
 export const StyledDescriptionSection = styled.section`
-  padding: 20px;
+  padding: 0 0 20px 0;
+  width: 90%;
   overflow: scroll;
 `;
