@@ -19,10 +19,6 @@ export type ImageProps = {
   src?: string;
 };
 
-export type RowNumber = {
-  number: number;
-};
-
 export interface Open {
   isOpen: boolean;
 }

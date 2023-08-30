@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ImageProps, RowNumber } from '../../types/types';
+import { ImageProps } from '../../types/types';
 
 export const StyledCenterChildrenDiv = styled.div`
   display: flex;
@@ -13,68 +13,66 @@ export const StyledCenterChildrenSection = styled.section`
   margin-top: 15px;
 `;
 
-export const StyledCellContainer = styled.section`
-  margin-bottom: 5px;
-  margin-left: 15px;
-  margin-right: 5px;
-`;
+// export const StyledCellContainer = styled.section`
+//   margin-bottom: 5px;
+//   margin-left: 15px;
+//   margin-right: 5px;
+// `;
 
-export const StyledHr = styled.hr<RowNumber>`
-  width: 100%;
-  grid-row: ${({ number }) => number};
-  grid-column: 1 / 3;
+export const StyledHr = styled.hr`
+  width: 90%;
   border: 3px solid white;
   border-radius: 20px;
-  transform: translateY(-2px);
+  transform: translateY(-12px);
 `;
 
-export const StyledGridContainer = styled.section`
-  display: grid;
-  grid-template-columns: repeat(2);
-  gap: 0px;
-  color: white;
-  font-family: monospace;
-  width: 85%;
-  gap: 0px;
-`;
+// export const StyledGridContainer = styled.section`
+//   display: grid;
+//   grid-template-columns: repeat(2);
+//   gap: 0px;
+//   color: white;
+//   font-family: monospace;
+//   width: 85%;
+//   gap: 0px;
+// `;
 
-export const CellOneRowOne = styled.section<ImageProps>`
-  position: relative;
-  display: flex;
-  grid-column: 1 / 2;
-  grid-row: 1;
-  width: 100%;
-  min-height: 160px;
-  // border: 1px solid blue;
-  background-image: ${({ src }) => `url('${src}')`};
-  background-size: cover;
-`;
+// export const CellOneRowOne = styled.section<ImageProps>`
+//   position: relative;
+//   display: flex;
+//   grid-column: 1 / 2;
+//   grid-row: 1;
+//   width: 100%;
+//   min-height: 160px;
+//   // border: 1px solid blue;
+//   background-image: ${({ src }) => `url('${src}')`};
+//   background-size: cover;
+// `;
 
-export const CellTwoRowOne = styled.section`
-  display: flex;
-  position: relative;
-  grid-column: 2 / 2;
-  grid-row: 1;
-  width: 100%;
-`;
+// export const CellTwoRowOne = styled.section`
+//   display: flex;
+//   position: relative;
+//   grid-column: 2 / 2;
+//   grid-row: 1;
+//   width: 100%;
+// `;
 
-export const CellOneRowTwo = styled.section`
-  display: flex;
-  grid-column: 1 / 1;
-`;
+// export const CellOneRowTwo = styled.section`
+//   display: flex;
+//   grid-column: 1 / 1;
+// `;
 
-export const CellTwoRowTwo = styled.section`
-  display: flex;
-  grid-column: 2 / 3;
-`;
+// export const CellTwoRowTwo = styled.section`
+//   display: flex;
+//   grid-column: 2 / 3;
+// `;
 
-export const CellOneRowThree = styled.section`
-  display: flex;
-  grid-column: 1 / 3;
-  :last-child {
-    margin-bottom: 20px;
-  }
-`;
+// export const CellOneRowThree = styled.section`
+//   display: flex;
+//   grid-column: 1 / 3;
+//   :last-child {
+//     margin-bottom: 20px;
+//   }
+// `;
 
 // export const StyledVerticalDivisor = styled.section`
 //   position: absolute;
