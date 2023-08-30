@@ -13,77 +13,12 @@ export const StyledCenterChildrenSection = styled.section`
   margin-top: 15px;
 `;
 
-// export const StyledCellContainer = styled.section`
-//   margin-bottom: 5px;
-//   margin-left: 15px;
-//   margin-right: 5px;
-// `;
-
 export const StyledHr = styled.hr`
   width: 90%;
   border: 3px solid white;
   border-radius: 20px;
   transform: translateY(-12px);
 `;
-
-// export const StyledGridContainer = styled.section`
-//   display: grid;
-//   grid-template-columns: repeat(2);
-//   gap: 0px;
-//   color: white;
-//   font-family: monospace;
-//   width: 85%;
-//   gap: 0px;
-// `;
-
-// export const CellOneRowOne = styled.section<ImageProps>`
-//   position: relative;
-//   display: flex;
-//   grid-column: 1 / 2;
-//   grid-row: 1;
-//   width: 100%;
-//   min-height: 160px;
-//   // border: 1px solid blue;
-//   background-image: ${({ src }) => `url('${src}')`};
-//   background-size: cover;
-// `;
-
-// export const CellTwoRowOne = styled.section`
-//   display: flex;
-//   position: relative;
-//   grid-column: 2 / 2;
-//   grid-row: 1;
-//   width: 100%;
-// `;
-
-// export const CellOneRowTwo = styled.section`
-//   display: flex;
-//   grid-column: 1 / 1;
-// `;
-
-// export const CellTwoRowTwo = styled.section`
-//   display: flex;
-//   grid-column: 2 / 3;
-// `;
-
-// export const CellOneRowThree = styled.section`
-//   display: flex;
-//   grid-column: 1 / 3;
-//   :last-child {
-//     margin-bottom: 20px;
-//   }
-// `;
-
-// export const StyledVerticalDivisor = styled.section`
-//   position: absolute;
-//   right: -15px;
-//   height: 105%;
-//   top: 0;
-//   margin: 0 15px 0 15px;
-//   border: 4px solid white;
-//   border-radius: 20px;
-//   transform: translateY(-7px);
-// `;
 
 export const StyledClapperContainer = styled.div`
   background-color: #111;
@@ -178,4 +113,81 @@ export const CircleThree = styled.section`
   border-radius: 99px;
   background: gray;
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+`;
+
+export const StyledTopSection = styled.section`
+  display: flex;
+  margin: 5px 0 20px 0;
+`;
+
+export const StyledMidSection = styled.section`
+  display: flex;
+  margin: 5px 0 20px 0;
+`;
+
+export const StyledBotSection = styled.section`
+  display: flex;
+  margin-left: 20px;
+  width: 100%;
+`;
+
+export const StyledMainSectionContainer = styled.section`
+  font-family: monospace;
+  color: white;
+  height: 100%;
+  width: 100%;
+  pre {
+    margin: 2px 0px;
+    text-wrap: wrap;
+  }
+`;
+export const StyledInfoSection = styled.section`
+  color: white;
+  height: 100%;
+  max-height: 300px;
+  padding-left: 20px;
+  overflow: scroll;
+  width: 50%;
+  h4 {
+    font-style: italic;
+  }
+  @media only screen and (max-width: 440px) {
+    width: 100%;
+  }
+`;
+
+export const StyledImageSection = styled.section<ImageProps>`
+  width: 40%;
+  background-image: ${({ src }) => `url('${src}')`};
+  background-size: cover;
+  @media only screen and (max-width: 440px) {
+    width: 35%;
+    margin-right: 20px;
+  }
+`;
+
+export const StyledSubInfoSection = styled.section`
+  color: white;
+  width: 50%;
+  max-height: 500px;
+  overflow: scroll;
+  padding-left: 20px;
+  @media only screen and (max-width: 360px) {
+    width: 100%;
+  }
+`;
+
+export const StyledVideoSection = styled.section`
+  @media only screen and (max-width: 445px) {
+    padding-right: 10px;
+  }
+  @media only screen and (max-width: 360px) {
+    display: none;
+  }
+`;
+
+export const StyledDescriptionSection = styled.section`
+  padding: 0 0 20px 0;
+  width: 90%;
+  overflow: scroll;
 `;

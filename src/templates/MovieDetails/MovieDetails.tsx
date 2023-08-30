@@ -1,15 +1,24 @@
-import { ImageProps, TMDBSearchResult } from '../../types/types';
+import { TMDBSearchResult } from '../../types/types';
 import {
   CircleOne,
   CircleThree,
   CircleTwo,
+  StyledBotSection,
   StyledCenterChildrenDiv,
   StyledCenterChildrenSection,
   StyledClapperContainer,
   StyledClapperPiece,
+  StyledDescriptionSection,
   StyledHr,
+  StyledImageSection,
+  StyledInfoSection,
+  StyledMainSectionContainer,
+  StyledMidSection,
   StyledStyledClapperPieceBottom,
+  StyledSubInfoSection,
+  StyledTopSection,
   StyledTriangle,
+  StyledVideoSection,
 } from './MovieDetails.styled';
 import { mapGenres } from '../../helpers/mapGenres';
 import { CircularProgress } from '@mui/material';
@@ -18,7 +27,6 @@ import { useQuery } from 'react-query';
 import ReactPlayer from 'react-player/youtube';
 import { CustomButton } from '../../atoms/CustomButton/CustomButton';
 import { To } from 'react-router-dom';
-import styled from '@emotion/styled';
 
 const Clapperboard = ({ children }: any) => (
   <StyledClapperContainer>
@@ -140,81 +148,3 @@ export const MovieDetails = ({
     </>
   );
 };
-
-export const StyledTopSection = styled.section`
-  display: flex;
-  margin: 5px 0 20px 0;
-`;
-
-export const StyledMidSection = styled.section`
-  display: flex;
-  margin: 5px 0 20px 0;
-`;
-
-export const StyledBotSection = styled.section`
-  display: flex;
-  margin-left: 20px;
-  width: 100%;
-`;
-
-export const StyledMainSectionContainer = styled.section`
-  font-family: monospace;
-  color: white;
-  height: 100%;
-  width: 100%;
-  pre {
-    margin: 2px 0px;
-    text-wrap: wrap;
-  }
-`;
-export const StyledInfoSection = styled.section`
-  color: white;
-  height: 100%;
-  max-height: 300px;
-  padding-left: 20px;
-  overflow: scroll;
-  width: 50%;
-  h4 {
-    font-style: italic;
-  }
-  @media only screen and (max-width: 440px) {
-    width: 100%;
-  }
-`;
-
-export const StyledImageSection = styled.section<ImageProps>`
-  width: 40%;
-  background-image: ${({ src }) => `url('${src}')`};
-  background-size: cover;
-  @media only screen and (max-width: 440px) {
-    width: 35%;
-    margin-right: 20px;
-  }
-`;
-
-export const StyledSubInfoSection = styled.section`
-  color: white;
-  width: 50%;
-  max-height: 500px;
-  overflow: scroll;
-  padding-left: 20px;
-  @media only screen and (max-width: 360px) {
-    width: 100%;
-  }
-`;
-
-export const StyledVideoSection = styled.section`
-  // width: 10%;
-  @media only screen and (max-width: 445px) {
-    padding-right: 10px;
-  }
-  @media only screen and (max-width: 360px) {
-    display: none;
-  }
-`;
-
-export const StyledDescriptionSection = styled.section`
-  padding: 0 0 20px 0;
-  width: 90%;
-  overflow: scroll;
-`;
