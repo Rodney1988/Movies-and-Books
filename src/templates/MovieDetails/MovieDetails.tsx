@@ -74,10 +74,14 @@ export const MovieDetails = ({
       return video.site === 'YouTube';
     });
   }
-  console.log(movieState);
   return (
-    <>
-      <div style={{ display: 'flex', marginTop: '10px', marginLeft: '15px' }}>
+    <div style={{ marginBottom: '30px', width: '90%' }}>
+      <div
+        style={{
+          display: 'flex',
+          marginLeft: '15px',
+        }}
+      >
         <CustomButton content={'Back to Movies'} navigateTo={-1 as To} />
       </div>
       <StyledCenterChildrenDiv>
@@ -145,6 +149,6 @@ export const MovieDetails = ({
           </StyledCenterChildrenSection>
         </Clapperboard>
       </StyledCenterChildrenDiv>
-    </>
+    </div>
   );
 };

@@ -4,7 +4,8 @@ import { ImageProps } from '../../types/types';
 export const StyledCenterChildrenDiv = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 75px;
+  margin-top: 55px;
+  // transform: translateX(15px);
 `;
 
 export const StyledCenterChildrenSection = styled.section`
@@ -14,7 +15,7 @@ export const StyledCenterChildrenSection = styled.section`
 `;
 
 export const StyledHr = styled.hr`
-  width: 90%;
+  max-width: 90%;
   border: 3px solid white;
   border-radius: 20px;
   transform: translateY(-12px);
@@ -24,11 +25,19 @@ export const StyledClapperContainer = styled.div`
   background-color: #111;
   height: 100%;
   min-height: 500px;
-  width: 100%;
-  max-width: 650px;
+  max-width: 92%;
   border-radius: 15px;
   position: relative;
   transition: transform 1s ease-in-out;
+  @media only screen and (max-width: 440px) {
+    width: 100%;
+  }
+  @media only screen and (max-width: 540px) {
+    width: 70%;
+  }
+  @media only screen and (min-width: 540px) {
+    width: 40%;
+  }
   :hover {
     & > div {
       transform: rotate(-40deg);
@@ -47,7 +56,6 @@ export const StyledClapperPiece = styled.div`
 
   height: 65px;
   width: 100%;
-  max-width: 660px;
   position: absolute;
   top: 0;
   border-radius: 15px;
@@ -67,7 +75,6 @@ export const StyledStyledClapperPieceBottom = styled.section`
   );
   height: 94px;
   width: 100%;
-  max-width: 660px;
   border-top-right-radius: 15px;
   box-shadow: 0 4px 2px -2px #302b2beb;
 `;

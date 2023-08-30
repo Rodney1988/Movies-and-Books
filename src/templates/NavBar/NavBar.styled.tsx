@@ -7,6 +7,7 @@ export const NavbarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   padding: 15px;
+  width: 100%;
 `;
 
 export const Logo = styled(NavLink)`
