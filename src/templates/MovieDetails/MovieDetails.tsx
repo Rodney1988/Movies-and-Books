@@ -75,11 +75,12 @@ export const MovieDetails = ({
     });
   }
   return (
-    <div style={{ marginBottom: '30px', width: '90%' }}>
+    <div style={{ marginBottom: '10px', width: '100%' }}>
       <div
         style={{
           display: 'flex',
           marginLeft: '15px',
+          marginBottom: '25px',
         }}
       >
         <CustomButton content={'Back to Movies'} navigateTo={-1 as To} />
@@ -105,9 +106,6 @@ export const MovieDetails = ({
                   <pre>{`Status: ${data.status}`}</pre>
                   <pre>{`Release: ${movieState.release_date.split(', ')}`}</pre>
                   <pre>{`OG language: ${movieState.original_language.toUpperCase()}`}</pre>
-                  <pre>{`TMDB Popularity: ${Math.round(
-                    movieState.popularity
-                  )}`}</pre>
                   <pre>{`Rating: ${movieState.vote_average} / 10`}</pre>
                 </StyledInfoSection>
                 <StyledImageSection src={movieImgUrl} />
@@ -117,7 +115,7 @@ export const MovieDetails = ({
               <StyledMidSection>
                 <StyledSubInfoSection>
                   {
-                    <pre>
+                    <pre style={{ fontWeight: 'bold', marginBottom: '15px' }}>
                       {movieState.adult
                         ? 'Only for adults!'
                         : 'Available for all ages!'}
@@ -126,6 +124,17 @@ export const MovieDetails = ({
                   {<pre>Genres: {genresArray.join(', ')}</pre>}
                   <pre>{`Butget: $${data.budget.toLocaleString()}`}</pre>
                   <pre>{`Revenue: $${data.revenue.toLocaleString()}`}</pre>
+                  <pre className="dynamic">{`TMDB popularity: ${Math.round(
+                    movieState.popularity
+                  )}*`}</pre>
+                  <a
+                    href="https://developer.themoviedb.org/docs/popularity-and-trending"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ marginTop: '15px' }}
+                  >
+                    How popularity is measured
+                  </a>
                 </StyledSubInfoSection>
                 <StyledVideoSection>
                   {youtubeVideoObj ? (

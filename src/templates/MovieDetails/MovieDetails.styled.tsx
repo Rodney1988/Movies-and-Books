@@ -4,8 +4,7 @@ import { ImageProps } from '../../types/types';
 export const StyledCenterChildrenDiv = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 55px;
-  // transform: translateX(15px);
+  width: 100%;
 `;
 
 export const StyledCenterChildrenSection = styled.section`
@@ -29,13 +28,16 @@ export const StyledClapperContainer = styled.div`
   border-radius: 15px;
   position: relative;
   transition: transform 1s ease-in-out;
-  @media only screen and (max-width: 440px) {
+  //For smaller screens less than 540px;
+  @media only screen and (max-width: 540px) {
     width: 100%;
   }
-  @media only screen and (max-width: 540px) {
-    width: 70%;
+  //For normal screens
+  @media only screen and (min-width: 768px) {
+    width: 60%;
   }
-  @media only screen and (min-width: 540px) {
+  //For large screens
+  @media only screen and (min-width: 1024px) {
     width: 40%;
   }
   :hover {
@@ -155,6 +157,7 @@ export const StyledInfoSection = styled.section`
   padding-left: 20px;
   overflow: scroll;
   width: 50%;
+  margin-right: 20px;
   h4 {
     font-style: italic;
   }
@@ -171,6 +174,14 @@ export const StyledImageSection = styled.section<ImageProps>`
     width: 35%;
     margin-right: 20px;
   }
+  @media only screen and (max-width: 300px) {
+    display: none;
+  }
+  //For large screens over 1600px;
+  @media only screen and (min-width: 1600px) {
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 `;
 
 export const StyledSubInfoSection = styled.section`
@@ -179,8 +190,18 @@ export const StyledSubInfoSection = styled.section`
   max-height: 500px;
   overflow: scroll;
   padding-left: 20px;
+
   @media only screen and (max-width: 360px) {
     width: 100%;
+  }
+  @media only screen and (max-width: 445px) {
+    width: 100%;
+    a {
+      display: none;
+    }
+    .dynamic {
+      display: none;
+    }
   }
 `;
 
