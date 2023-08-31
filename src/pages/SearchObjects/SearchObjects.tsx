@@ -1,16 +1,50 @@
 import { useEffect, useState } from 'react';
 import { MovieForm } from '../../templates/MovieForm/MovieForm';
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import {
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+} from '@mui/material';
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 import { BookForm } from '../../templates/BookForm/BookForm';
 import { useSearchParams } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 /*
 The component below is just just acts as a fork to split between movies and books depending on the user's 
 selected dropdown.
 */
 
+// Styled Components
+const IntroContainer = styled.div`
+  margin-left: 20px;
+  color: #333333;
+  width: 70%;
+`;
+
+interface ExpandableContentProps {
+  expanded: boolean;
+}
+
+const ExpandableContent = styled.p<ExpandableContentProps>`
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-in-out;
+  opacity: 0;
+  ${({ expanded }) =>
+    expanded &&
+    `
+    max-height: 100px; /* Adjust this value as needed */
+    opacity: 1;
+  `}
+`;
+
 export const SearchObjects = () => {
   const [searchType, setSearchType] = useState('');
+  const [isIntroExpanded, setIsIntroExpanded] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTypeParam = searchParams.get('searchType');
 
@@ -36,11 +70,22 @@ export const SearchObjects = () => {
           I originally built this in app order to have fun styling and handling
           data which coming from different APIs sources (openlibrary and TMDB).
         </p>
-        <p>
+        <IconButton
+          size="small"
+          aria-label="more_info"
+          onClick={() => setIsIntroExpanded(!isIntroExpanded)}
+        >
+          {isIntroExpanded ? (
+            <KeyboardDoubleArrowUpIcon />
+          ) : (
+            <KeyboardDoubleArrowDownIcon />
+          )}
+        </IconButton>
+        <ExpandableContent expanded={isIntroExpanded}>
           This page consists of two pages, the query page and the details page.
           The details page pops up when you select a particular book or movie
           and shows more specific information about the selected book or movie.
-        </p>
+        </ExpandableContent>
         <b>
           <p>Select a category below:</p>
         </b>
@@ -56,7 +101,9 @@ export const SearchObjects = () => {
 
   return (
     <>
-      <div style={{ marginLeft: '20px', color: '#333333', width: '70%' }}>
+      <IntroContainer
+        style={{ marginLeft: '20px', color: '#333333', width: '70%' }}
+      >
         <div style={{ maxWidth: '600px' }}>{intro}</div>
         <FormControl sx={{ width: '200px', marginTop: '15px' }}>
           <InputLabel variant="outlined">Search by...</InputLabel>
@@ -74,7 +121,7 @@ export const SearchObjects = () => {
           </Select>
         </FormControl>
         {formElement}
-      </div>
+      </IntroContainer>
     </>
   );
 };
