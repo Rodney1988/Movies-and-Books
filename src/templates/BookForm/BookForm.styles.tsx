@@ -20,5 +20,5 @@ export const StyledInputField = styled(TextField)`
 `;
 
 export const SearchResultsWrapper = styled.div`
-  margin: 15px 15px 15px 5px;
+  margin: 15px 15px 15px 20px;
 `;

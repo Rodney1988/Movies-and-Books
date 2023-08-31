@@ -25,6 +25,10 @@ const IntroContainer = styled.div`
   width: 70%;
 `;
 
+const StyledFormControlDiv = styled.div`
+  margin-left: 20px;
+`;
+
 interface ExpandableContentProps {
   expanded: boolean;
 }
@@ -61,26 +65,39 @@ export const SearchObjects = () => {
   }
 
   let intro;
-
+  const moreInfos = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="more_info"
+        onClick={() => setIsIntroExpanded(!isIntroExpanded)}
+      >
+        {isIntroExpanded ? (
+          <KeyboardDoubleArrowUpIcon />
+        ) : (
+          <KeyboardDoubleArrowDownIcon />
+        )}
+      </IconButton>
+    </>
+  );
   if (!searchTypeParam) {
     intro = (
       <>
         <h1>Homepage</h1>
-        <p>
-          I originally built this in app order to have fun styling and handling
-          data which coming from different APIs sources (openlibrary and TMDB).
-        </p>
-        <IconButton
-          size="small"
-          aria-label="more_info"
-          onClick={() => setIsIntroExpanded(!isIntroExpanded)}
+        <div
+          style={{
+            display: 'flex',
+            paddingRight: '20px',
+            alignItems: 'center',
+          }}
         >
-          {isIntroExpanded ? (
-            <KeyboardDoubleArrowUpIcon />
-          ) : (
-            <KeyboardDoubleArrowDownIcon />
-          )}
-        </IconButton>
+          <p>
+            I originally built this in app order to have fun styling and
+            handling data which coming from different APIs sources (openlibrary
+            and TMDB).
+          </p>
+          {moreInfos}
+        </div>
         <ExpandableContent expanded={isIntroExpanded}>
           This page consists of two pages, the query page and the details page.
           The details page pops up when you select a particular book or movie
@@ -101,17 +118,16 @@ export const SearchObjects = () => {
 
   return (
     <>
-      <IntroContainer
-        style={{ marginLeft: '20px', color: '#333333', width: '70%' }}
-      >
+      <IntroContainer>
         <div style={{ maxWidth: '600px' }}>{intro}</div>
+      </IntroContainer>
+      <StyledFormControlDiv>
         <FormControl sx={{ width: '200px', marginTop: '15px' }}>
           <InputLabel variant="outlined">Search by...</InputLabel>
           <Select
             value={searchType}
             label="Search by..."
             onChange={(e) => {
-              //remove all params
               setSearchType(e.target.value);
               setSearchParams({ searchType: e.target.value });
             }}
@@ -120,8 +136,8 @@ export const SearchObjects = () => {
             <MenuItem value={'books'}>Books</MenuItem>
           </Select>
         </FormControl>
-        {formElement}
-      </IntroContainer>
+      </StyledFormControlDiv>
+      {formElement}
     </>
   );
 };
