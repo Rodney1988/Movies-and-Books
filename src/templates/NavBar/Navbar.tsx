@@ -33,7 +33,7 @@ export const NavBar = () => {
         {isExpanded && (
           <StyledHamburgerBottom>
             <StyledHamburgerUl>
-              <StyledHamburgerLi style={{ margin: '12px 0' }}>
+              <StyledHamburgerLi>
                 <StyledNavLinkStyled to="/" aria-label="Home">
                   Home
                 </StyledNavLinkStyled>

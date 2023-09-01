@@ -80,7 +80,7 @@ export const MovieDetails = ({
         style={{
           display: 'flex',
           marginLeft: '15px',
-          marginBottom: '25px',
+          marginBottom: '70px',
         }}
       >
         <CustomButton content={'Back to Movies'} navigateTo={-1 as To} />

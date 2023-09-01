@@ -73,4 +73,6 @@ export const StyledHamburgerUl = styled.ul`
   flex-direction: column;
 `;
 
-export const StyledHamburgerLi = styled.li``;
+export const StyledHamburgerLi = styled.li`
+  margin: 12px 0;
+`;
