@@ -1,30 +1,47 @@
+import { useState } from 'react';
+
+import MenuIcon from '@mui/icons-material/Menu';
 import {
-  Logo,
-  NavLinkStyled,
-  NavMenu,
-  NavMenuItem,
-  NavbarContainer,
+  StyledLogo,
+  StyledNavLinkStyled,
+  StyledNavMenu,
+  StyledNavMenuItem,
+  StyledNavbarContainer,
+  StyledHamburgerMenu,
+  StyledHamburgerBottom,
+  StyledHamburgerUl,
+  StyledHamburgerLi,
 } from './NavBar.styled';
 
 export const NavBar = () => {
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+
   return (
-    <NavbarContainer>
-      <Logo to="/" aria-label="Home">
+    <StyledNavbarContainer>
+      <StyledLogo to="/" aria-label="Home">
         Movies & Books
-      </Logo>
-      <NavMenu>
-        <NavMenuItem>
-          <NavLinkStyled to="/" aria-label="Home">
+      </StyledLogo>
+      <StyledNavMenu>
+        <StyledNavMenuItem>
+          <StyledNavLinkStyled to="/" aria-label="Home">
             Home
-          </NavLinkStyled>
-        </NavMenuItem>
-        <NavMenuItem>
-          {/* Incoming Feature
-          <NavLinkStyled to="/login" aria-label="Login">
-            Login
-          </NavLinkStyled> */}
-        </NavMenuItem>
-      </NavMenu>
-    </NavbarContainer>
+          </StyledNavLinkStyled>
+        </StyledNavMenuItem>
+      </StyledNavMenu>
+      <StyledHamburgerMenu onClick={() => setIsExpanded(!isExpanded)}>
+        <MenuIcon />
+        {isExpanded && (
+          <StyledHamburgerBottom>
+            <StyledHamburgerUl>
+              <StyledHamburgerLi style={{ margin: '12px 0' }}>
+                <StyledNavLinkStyled to="/" aria-label="Home">
+                  Home
+                </StyledNavLinkStyled>
+              </StyledHamburgerLi>
+            </StyledHamburgerUl>
+          </StyledHamburgerBottom>
+        )}
+      </StyledHamburgerMenu>
+    </StyledNavbarContainer>
   );
 };
