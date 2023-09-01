@@ -11,40 +11,16 @@ import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 import { BookForm } from '../../templates/BookForm/BookForm';
 import { useSearchParams } from 'react-router-dom';
-import styled from '@emotion/styled';
+import {
+  StyledIntroContainer,
+  StyledExpandableContent,
+  StyledFormControlDiv,
+} from './SearchObjects.styled';
 
 /*
 The component below is just just acts as a fork to split between movies and books depending on the user's 
 selected dropdown.
 */
-
-// Styled Components
-const IntroContainer = styled.div`
-  margin-left: 20px;
-  color: #333333;
-  width: 70%;
-`;
-
-const StyledFormControlDiv = styled.div`
-  margin-left: 20px;
-`;
-
-interface ExpandableContentProps {
-  expanded: boolean;
-}
-
-const ExpandableContent = styled.p<ExpandableContentProps>`
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out, opacity 0.3s ease-in-out;
-  opacity: 0;
-  ${({ expanded }) =>
-    expanded &&
-    `
-    max-height: 100px; /* Adjust this value as needed */
-    opacity: 1;
-  `}
-`;
 
 export const SearchObjects = () => {
   const [searchType, setSearchType] = useState('');
@@ -98,11 +74,11 @@ export const SearchObjects = () => {
           </p>
           {moreInfos}
         </div>
-        <ExpandableContent expanded={isIntroExpanded}>
+        <StyledExpandableContent expanded={isIntroExpanded}>
           This page consists of two pages, the query page and the details page.
           The details page pops up when you select a particular book or movie
           and shows more specific information about the selected book or movie.
-        </ExpandableContent>
+        </StyledExpandableContent>
         <b>
           <p>Select a category below:</p>
         </b>
@@ -118,9 +94,9 @@ export const SearchObjects = () => {
 
   return (
     <>
-      <IntroContainer>
+      <StyledIntroContainer>
         <div style={{ maxWidth: '600px' }}>{intro}</div>
-      </IntroContainer>
+      </StyledIntroContainer>
       <StyledFormControlDiv>
         <FormControl sx={{ width: '200px', marginTop: '15px' }}>
           <InputLabel variant="outlined">Search by...</InputLabel>

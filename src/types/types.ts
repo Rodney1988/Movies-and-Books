@@ -173,3 +173,7 @@ export interface MovieResults {
   published_at: string;
   id: string;
 }
+
+export interface ExpandableContentProps {
+  expanded: boolean;
+}
